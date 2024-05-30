@@ -1,0 +1,36 @@
+---
+import Layout from "@/layouts/Layout.astro";
+import Card from "@/components/Card.astro";
+---
+
+<Layout title="Welcome to cv creator">
+  <main>
+    <h1>create your cv</h1>
+    <p>
+      this tool helps you package your personal data in a commonly used web
+      format (json) and offers you a seleciton of templates for displaying the
+      packaged data.
+    </p>
+
+    <p>
+      the data is yours and will remain only yours. it is not stored anywhere on
+      any of our databases and you are the only one responsible for storing it
+      and keeping it safe.
+    </p>
+
+    <p>you can always select a new template or update your data.</p>
+    <p>
+      if you are not happy with the selection of templates feel free to create
+      your own and publish it in the community hub!
+    </p>
+    <ul role="list" class="link-card-grid">
+      <Card href="/create" title="Create" body="Create a new cv." />
+      <Card href="/edit" title="Edit" body="Edit an existing cv." />
+      <Card
+        href="/themes"
+        title="Themes"
+        body="Explore the community-built themes."
+      />
+    </ul>
+  </main>
+</Layout>
