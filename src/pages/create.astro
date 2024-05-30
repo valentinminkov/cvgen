@@ -1,14 +1,21 @@
 ---
 import Layout from "../layouts/Layout.astro";
+import { Label } from "@/components/ui/label";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
 ---
 
 <Layout title="Welcome to Astro.">
   <main>
     <h1>you can always select a new template or update your data.</h1>
-    <form id="test">
-      <div class="flex p-80">
-        <!-- <Label htmlFor="email">Your email address</Label> -->
-        <p>test</p>
+    <form id="test" class="flex bg-gray-300">
+      <div>
+        <div>
+          <Label htmlFor="email">Your email address</Label>
+          <Input />
+        </div>
+
+        <Button>Submit</Button>
       </div>
     </form>
   </main>
