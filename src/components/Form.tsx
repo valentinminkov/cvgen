@@ -144,9 +144,9 @@ export function InputForm() {
                   </SelectTrigger>
                 </FormControl>
                 <SelectContent>
-                  <SelectItem value="m@example.com">Male</SelectItem>
-                  <SelectItem value="m@google.com">Female</SelectItem>
-                  <SelectItem value="m@support.com">
+                  <SelectItem value="male">Male</SelectItem>
+                  <SelectItem value="female">Female</SelectItem>
+                  <SelectItem value="other">
                     Other
                     {/* To do add enter field for manual entry of gender */}
                   </SelectItem>
