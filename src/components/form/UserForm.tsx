@@ -21,7 +21,9 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { DatePicker } from "@/components/ui/datepicker";
+
+import { DatePicker } from "@/components/form/Datepicker";
+import { CountrySelector } from "@/components/form/CountrySelector";
 
 import { Input } from "@/components/ui/input";
 import { toast } from "@/components/ui/use-toast";
@@ -105,7 +107,7 @@ export function InputForm() {
           name="aboutMe"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>About </FormLabel>
+              <FormLabel>About</FormLabel>
               <FormControl>
                 <Input
                   placeholder="Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nulla qui rem necessitatibus porro eveniet commodi officiis nam, quam atque quisquam non illo similique laudantium eius beatae quibusdam consequuntur explicabo error."
@@ -298,15 +300,14 @@ export function InputForm() {
             </FormItem>
           )}
         />
+
         <FormField
           control={form.control}
           name="country"
           render={({ field }) => (
             <FormItem>
               <FormLabel>Country</FormLabel>
-              <FormControl>
-                <Input placeholder="Germany" {...field} />
-              </FormControl>
+              <CountrySelector field={field} placeholder="Select" />
               <FormDescription></FormDescription>
               <FormMessage />
             </FormItem>

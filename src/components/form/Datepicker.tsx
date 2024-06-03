@@ -12,7 +12,7 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from "@/components/ui/popover";
-import { FormControl } from "./form";
+import { FormControl } from "../ui/form";
 import type { ControllerRenderProps } from "react-hook-form";
 
 interface Props {
