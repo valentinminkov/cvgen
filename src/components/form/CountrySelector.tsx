@@ -9,7 +9,8 @@ import {
 } from "@/components/ui/select";
 import { FormControl } from "@/components/ui/form";
 import type { ControllerRenderProps } from "react-hook-form";
-import countriesList from "@/config/countries";
+import { continentWithCountries } from "@/config/countries";
+import { SelectGroup, SelectLabel } from "@radix-ui/react-select";
 
 interface Props {
   field: ControllerRenderProps<any, any>;
@@ -17,7 +18,6 @@ interface Props {
 }
 
 export function CountrySelector({ field, placeholder = "Select" }: Props) {
-  console.log(countriesList);
   return (
     <Select onValueChange={field.onChange} defaultValue={field.value}>
       <FormControl>
@@ -26,12 +26,16 @@ export function CountrySelector({ field, placeholder = "Select" }: Props) {
         </SelectTrigger>
       </FormControl>
       <SelectContent>
-        <SelectItem value="m@example.com">German</SelectItem>
-        <SelectItem value="m@google.com">Not german</SelectItem>
-        <SelectItem value="m@support.com">
-          Other
-          {/* To do expand functionality */}
-        </SelectItem>
+        {continentWithCountries.map(({ continent, countries }) => (
+          <SelectGroup>
+            <SelectLabel> {continent}</SelectLabel>
+            {countries.map((country) => (
+              <SelectItem value={country.toLowerCase().replace(" ", "_")}>
+                {country}
+              </SelectItem>
+            ))}
+          </SelectGroup>
+        ))}
       </SelectContent>
     </Select>
   );
