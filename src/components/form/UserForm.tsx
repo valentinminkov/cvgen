@@ -2,8 +2,7 @@
 
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
-import { string, z } from "zod";
-
+import { z } from "zod";
 import { Button } from "@/components/ui/button";
 import {
   Form,
@@ -21,11 +20,11 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-
 import { DatePicker } from "@/components/form/Datepicker";
 import { CountrySelector } from "@/components/form/CountrySelector";
-
 import { Input } from "@/components/ui/input";
+import { Textarea } from "@/components/ui/textarea";
+import { nationalities } from "@/config/nationalities";
 import { toast } from "@/components/ui/use-toast";
 
 const FormSchema = z.object({
@@ -109,7 +108,7 @@ export function InputForm() {
             <FormItem>
               <FormLabel>About</FormLabel>
               <FormControl>
-                <Input
+                <Textarea
                   placeholder="Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nulla qui rem necessitatibus porro eveniet commodi officiis nam, quam atque quisquam non illo similique laudantium eius beatae quibusdam consequuntur explicabo error."
                   {...field}
                 />
@@ -173,12 +172,9 @@ export function InputForm() {
                   </SelectTrigger>
                 </FormControl>
                 <SelectContent>
-                  <SelectItem value="m@example.com">German</SelectItem>
-                  <SelectItem value="m@google.com">Not german</SelectItem>
-                  <SelectItem value="m@support.com">
-                    Other
-                    {/* To do expand functionality */}
-                  </SelectItem>
+                  {nationalities.map((nationality) => (
+                    <SelectItem value={nationality}>{nationality}</SelectItem>
+                  ))}
                 </SelectContent>
               </Select>
 
