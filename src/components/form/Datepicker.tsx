@@ -26,20 +26,22 @@ export function DatePicker({ placeholder, field }: Props) {
     <Popover>
       <PopoverTrigger asChild>
         <FormControl>
-          <Button
-            variant={"outline"}
-            className={cn(
-              "w-[240px] pl-3 text-left font-normal",
-              !field.value && "text-muted-foreground"
-            )}
-          >
-            {field.value ? (
-              format(field.value, "PPP")
-            ) : (
-              <span>{placeholder ?? "Pick a date"}</span>
-            )}
-            <CalendarIcon className="ml-auto h-4 w-4 opacity-50" />
-          </Button>
+          <div>
+            <Button
+              variant={"outline"}
+              className={cn(
+                "w-[240px] pl-3 text-left font-normal",
+                !field.value && "text-muted-foreground"
+              )}
+            >
+              {field.value ? (
+                format(field.value, "PPP")
+              ) : (
+                <span>{placeholder ?? "Pick a date"}</span>
+              )}
+              <CalendarIcon className="ml-auto h-4 w-4 opacity-50" />
+            </Button>
+          </div>
         </FormControl>
       </PopoverTrigger>
       <PopoverContent className="w-auto p-0" align="start">
