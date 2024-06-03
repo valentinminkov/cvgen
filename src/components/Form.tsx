@@ -21,6 +21,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import { DatePicker } from "@/components/ui/datepicker";
 
 import { Input } from "@/components/ui/input";
 import { toast } from "@/components/ui/use-toast";
@@ -33,7 +34,7 @@ const FormSchema = z.object({
     message: "",
   }),
   aboutMe: z.string().optional(),
-  dateOfBirth: z.string().date(),
+  dateOfBirth: z.date(),
   gender: z.string(),
   nationality: z.string(),
   email: z.string().min(2, {
@@ -123,7 +124,7 @@ export function InputForm() {
             <FormItem>
               <FormLabel>Date of birth</FormLabel>
               <FormControl>
-                <Input placeholder="01/08/1935" {...field} />
+                <DatePicker placeholder="01/08/1935" field={field} />
               </FormControl>
               <FormDescription></FormDescription>
               <FormMessage />
