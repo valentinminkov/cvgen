@@ -26,6 +26,8 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { nationalities } from "@/config/nationalities";
 import { toast } from "@/components/ui/use-toast";
+import { useStore } from "@nanostores/react";
+import { $user, updateUserData } from "@/stores/userStore";
 
 const FormSchema = z.object({
   firstName: z.string().min(2, {
@@ -54,12 +56,14 @@ const FormSchema = z.object({
 });
 
 export function InputForm() {
+  const user = useStore($user);
   const form = useForm<z.infer<typeof FormSchema>>({
     resolver: zodResolver(FormSchema),
     defaultValues: {},
   });
 
   function onSubmit(data: z.infer<typeof FormSchema>) {
+    updateUserData(data);
     toast({
       title: "You submitted the following values:",
       description: (
@@ -74,6 +78,7 @@ export function InputForm() {
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)} className="w-2/3 space-y-6">
         <FormField
+          defaultValue={user.firstName}
           control={form.control}
           name="firstName"
           render={({ field }) => (
@@ -88,6 +93,7 @@ export function InputForm() {
           )}
         />
         <FormField
+          defaultValue={user.secondName}
           control={form.control}
           name="secondName"
           render={({ field }) => (
@@ -102,6 +108,7 @@ export function InputForm() {
           )}
         />
         <FormField
+          defaultValue={user.aboutMe}
           control={form.control}
           name="aboutMe"
           render={({ field }) => (
@@ -119,6 +126,11 @@ export function InputForm() {
           )}
         />
         <FormField
+          defaultValue={
+            typeof user.dateOfBirth === "string"
+              ? new Date(user?.dateOfBirth)
+              : undefined
+          }
           control={form.control}
           name="dateOfBirth"
           render={({ field }) => (
@@ -135,6 +147,7 @@ export function InputForm() {
         <FormField
           control={form.control}
           name="gender"
+          defaultValue={user.gender}
           render={({ field }) => (
             <FormItem>
               <FormLabel>Gender</FormLabel>
@@ -160,6 +173,7 @@ export function InputForm() {
         />
 
         <FormField
+          defaultValue={user.nationality}
           control={form.control}
           name="nationality"
           render={({ field }) => (
@@ -185,6 +199,7 @@ export function InputForm() {
         />
 
         <FormField
+          defaultValue={user.email}
           control={form.control}
           name="email"
           render={({ field }) => (
@@ -199,6 +214,7 @@ export function InputForm() {
           )}
         />
         <FormField
+          defaultValue={user.phoneNumber}
           control={form.control}
           name="phoneNumber"
           render={({ field }) => (
@@ -213,6 +229,7 @@ export function InputForm() {
           )}
         />
         <FormField
+          defaultValue={user.website}
           control={form.control}
           name="website"
           render={({ field }) => (
@@ -227,6 +244,7 @@ export function InputForm() {
           )}
         />
         <FormField
+          defaultValue={user.addressType}
           control={form.control}
           name="addressType"
           render={({ field }) => (
@@ -241,6 +259,7 @@ export function InputForm() {
           )}
         />
         <FormField
+          defaultValue={user.addressLine1}
           control={form.control}
           name="addressLine1"
           render={({ field }) => (
@@ -255,6 +274,7 @@ export function InputForm() {
           )}
         />
         <FormField
+          defaultValue={user.addressLine2}
           control={form.control}
           name="addressLine2"
           render={({ field }) => (
@@ -269,6 +289,7 @@ export function InputForm() {
           )}
         />
         <FormField
+          defaultValue={user.postCode}
           control={form.control}
           name="postCode"
           render={({ field }) => (
@@ -283,6 +304,7 @@ export function InputForm() {
           )}
         />
         <FormField
+          defaultValue={user.city}
           control={form.control}
           name="city"
           render={({ field }) => (
@@ -298,6 +320,7 @@ export function InputForm() {
         />
 
         <FormField
+          defaultValue={user.country}
           control={form.control}
           name="country"
           render={({ field }) => (
