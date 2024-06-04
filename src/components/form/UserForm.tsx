@@ -160,10 +160,7 @@ export function InputForm() {
                 <SelectContent>
                   <SelectItem value="male">Male</SelectItem>
                   <SelectItem value="female">Female</SelectItem>
-                  <SelectItem value="other">
-                    Other
-                    {/* To do add enter field for manual entry of gender */}
-                  </SelectItem>
+                  <SelectItem value="other">Other</SelectItem>
                 </SelectContent>
               </Select>
               <FormDescription></FormDescription>
@@ -187,7 +184,9 @@ export function InputForm() {
                 </FormControl>
                 <SelectContent>
                   {nationalities.map((nationality) => (
-                    <SelectItem value={nationality}>{nationality}</SelectItem>
+                    <SelectItem key={nationality} value={nationality}>
+                      {nationality}
+                    </SelectItem>
                   ))}
                 </SelectContent>
               </Select>
@@ -333,7 +332,7 @@ export function InputForm() {
           )}
         />
 
-        <Button type="submit">Submit</Button>
+        <Button type="submit">Next</Button>
       </form>
     </Form>
   );

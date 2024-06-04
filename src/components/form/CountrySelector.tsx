@@ -27,10 +27,13 @@ export function CountrySelector({ field, placeholder = "Select" }: Props) {
       </FormControl>
       <SelectContent>
         {continentWithCountries.map(({ continent, countries }) => (
-          <SelectGroup>
+          <SelectGroup key={continent}>
             <SelectLabel> {continent}</SelectLabel>
             {countries.map((country) => (
-              <SelectItem value={country.toLowerCase().replace(" ", "_")}>
+              <SelectItem
+                key={country}
+                value={country.toLowerCase().replace(" ", "_")}
+              >
                 {country}
               </SelectItem>
             ))}
