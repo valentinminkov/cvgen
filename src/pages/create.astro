@@ -1,6 +1,6 @@
 ---
 import Layout from "../layouts/Layout.astro";
-import { InputForm } from "@/components/form/UserForm";
+import { InputAccordion } from "@/components/form/InputAccordion";
 
 const classes = {
   main: "bg-red-300 p-10",
@@ -9,6 +9,6 @@ const classes = {
 
 <Layout title="Welcome to Astro.">
   <main class={classes.main}>
-    <InputForm client:only="react" />
+    <InputAccordion client:only="react" />
   </main>
 </Layout>
