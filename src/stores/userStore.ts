@@ -50,4 +50,6 @@ export function updateUserData(newData: Partial<UserFormValue>) {
   };
 
   $user.set({ ...$user.get(), ...formattedUserData });
+  // To do confirm it has been saved
+  return true;
 }
