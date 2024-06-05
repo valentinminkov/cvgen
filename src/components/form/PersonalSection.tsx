@@ -63,14 +63,9 @@ export default function InputAccordion() {
   });
 
   function onSubmit(data: z.infer<typeof FormSchema>) {
-    updateUserData(data);
+    const saved = updateUserData(data);
     toast({
-      title: "You submitted the following values:",
-      description: (
-        <pre className="mt-2 w-[340px] rounded-md bg-slate-950 p-4">
-          <code className="text-white">{JSON.stringify(data, null, 2)}</code>
-        </pre>
-      ),
+      title: saved ? "Saved" : "Couldn't save data.",
     });
   }
 
@@ -168,7 +163,6 @@ export default function InputAccordion() {
             </FormItem>
           )}
         />
-
         <FormField
           defaultValue={user.nationality}
           control={form.control}
@@ -196,7 +190,6 @@ export default function InputAccordion() {
             </FormItem>
           )}
         />
-
         <FormField
           defaultValue={user.email}
           control={form.control}
