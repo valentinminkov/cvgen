@@ -7,6 +7,7 @@ import {
   AccordionTrigger,
 } from "@/components/ui/accordion";
 import PersonalSection from "@/components/form/PersonalSection";
+import ExperienceSection from "@/components/form/ExperienceSection";
 
 export function InputAccordion() {
   return (
@@ -22,7 +23,7 @@ export function InputAccordion() {
       <AccordionItem value="item-2">
         <AccordionTrigger>Work Experience</AccordionTrigger>
         <AccordionContent>
-          Lorem ipsum dolor sit amet consectetur .
+          <ExperienceSection />
         </AccordionContent>
       </AccordionItem>
       {/* Education and training */}
