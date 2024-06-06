@@ -110,7 +110,7 @@ export default function InputAccordion() {
           <p className="pb-4">entries</p>
           {experiences?.experiences.map((experience, index: number) => {
             return (
-              <Accordion type="single" collapsible>
+              <Accordion type="single" collapsible key={experience.title}>
                 {/* Personal data */}
                 <AccordionItem value="item-1">
                   <AccordionTrigger>{experience.title}</AccordionTrigger>
