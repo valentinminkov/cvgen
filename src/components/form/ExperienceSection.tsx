@@ -48,7 +48,7 @@ const FormSchema = z.object({
   }),
   startDate: z.date(),
   endDate: z.date().optional(),
-  ongoing: z.boolean(),
+  ongoing: z.boolean().optional(),
 });
 
 function ExperienceCard({
