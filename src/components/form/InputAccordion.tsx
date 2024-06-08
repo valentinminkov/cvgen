@@ -10,6 +10,7 @@ import PersonalSection from "@/components/form/PersonalSection";
 import ExperienceSection from "@/components/form/ExperienceSection";
 import EducationSection from "@/components/form/EducationSection";
 import LanguageSection from "@/components/form/LanguageSection";
+import SkillsSection from "@/components/form/SkillsSection";
 
 export function InputAccordion() {
   return (
@@ -46,7 +47,7 @@ export function InputAccordion() {
       <AccordionItem value="item-5">
         <AccordionTrigger>Job skills</AccordionTrigger>
         <AccordionContent>
-          Lorem ipsum dolor sit amet consectetur .
+          <SkillsSection />
         </AccordionContent>
       </AccordionItem>
     </Accordion>

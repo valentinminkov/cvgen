@@ -17,7 +17,6 @@ import { Input } from "@/components/ui/input";
 import { toast } from "@/components/ui/use-toast";
 import { useStore } from "@nanostores/react";
 import {
-  addMotherLanguage,
   addLanguage,
   removeLanguage,
   storeLanguage,
