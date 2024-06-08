@@ -99,7 +99,7 @@ function EntryCard({
   );
 }
 
-export default function InputAccordion() {
+export default function EducationSection() {
   const [isWorkOngoing, setIsWorkOngoing] = useState(false);
 
   const education = useStore(storeEducation);

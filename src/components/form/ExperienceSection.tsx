@@ -87,7 +87,7 @@ function ExperienceCard({
   );
 }
 
-export default function InputAccordion() {
+export default function ExperienceSection() {
   const [isWorkOngoing, setIsWorkOngoing] = useState(false);
 
   const experiences = useStore(storeExperiences);

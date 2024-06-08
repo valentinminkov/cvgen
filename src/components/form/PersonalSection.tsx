@@ -55,7 +55,7 @@ const FormSchema = z.object({
   country: z.string(),
 });
 
-export default function InputAccordion() {
+export default function PersonalSection() {
   const user = useStore($user);
   const form = useForm<z.infer<typeof FormSchema>>({
     resolver: zodResolver(FormSchema),

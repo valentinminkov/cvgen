@@ -30,17 +30,12 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
-import { DatePicker } from "@/components/form/Datepicker";
-import { CountrySelector } from "@/components/form/CountrySelector";
-import { Switch } from "@/components/ui/switch";
-import { Textarea } from "@/components/ui/textarea";
-import { useState } from "react";
 import { Label } from "@/components/ui/label";
 import { CrossCircledIcon } from "@radix-ui/react-icons";
 
 const LanguageFormSchema = z.object({
   motherLanguage: z.string(),
-  language: z.string(),
+  language: z.string().min(1, { message: "Language cannot be empty" }),
   listening: z.string(),
   reading: z.string(),
   writing: z.string(),
@@ -75,7 +70,7 @@ function LanguageCard({
   );
 }
 
-export default function InputAccordion() {
+export default function LanguageSection() {
   const languages = useStore(storeLanguage);
 
   const languageForm = useForm<z.infer<typeof LanguageFormSchema>>({
