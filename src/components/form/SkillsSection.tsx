@@ -22,19 +22,21 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
-import { Label } from "@/components/ui/label";
 import { CrossCircledIcon } from "@radix-ui/react-icons";
 import {
+  addSectionSkill,
   removeSkill,
+  removeSectionSkill,
   storeSkills,
   addSkill,
   type SkillGroup,
 } from "@/stores/skillsStore";
+import { getRandomString } from "@/lib/utils";
 
 const SkillFormSchema = z.object({
   type: z.string().min(1, { message: "Skills cannot be empty" }),
   level: z.string().min(1, { message: "Level cannot be empty" }),
-  skill: z.string(),
+  skill: z.string().optional(),
 });
 
 function SkillsCard({ index, skill }: { index: number; skill: SkillGroup }) {
@@ -49,9 +51,13 @@ function SkillsCard({ index, skill }: { index: number; skill: SkillGroup }) {
         <CrossCircledIcon />
       </div>
 
-      <h1 className="flex flex-col gap-2 px-2">
-        <Label>Skill</Label>
-      </h1>
+      <h1>{skill.type} skill</h1>
+      <h2>Level: {skill.level}</h2>
+      <div>
+        {skill.skills?.map((curSkill) => (
+          <div key={curSkill}>{curSkill}</div>
+        ))}
+      </div>
     </div>
   );
 }
@@ -69,6 +75,19 @@ export default function SkillsSection() {
     toast({
       title: saved ? "Language saved" : "Couldn't save data.",
     });
+  }
+
+  function insertSkill(e: any, fieldValue: string | undefined) {
+    if (e.key === "Enter" && fieldValue) {
+      addSectionSkill(fieldValue);
+      skillForm.resetField("skill");
+    }
+  }
+
+  function onFormKeyDown(e: any) {
+    if (e.key === "Enter") {
+      e.preventDefault();
+    }
   }
 
   return (
@@ -94,6 +113,7 @@ export default function SkillsSection() {
         <form
           className="w-2/3 space-y-6"
           onSubmit={skillForm.handleSubmit(onSkillSubmit)}
+          onKeyDown={onFormKeyDown}
         >
           <FormField
             defaultValue=""
@@ -126,7 +146,48 @@ export default function SkillsSection() {
               </FormItem>
             )}
           />
+          <div>
+            {skills?.sectionSkills &&
+              skills.sectionSkills.map((sectionSkill) => (
+                <div
+                  key={`${sectionSkill}-${getRandomString(
+                    sectionSkill.length
+                  )}`}
+                >
+                  <div
+                    onClick={() => {
+                      removeSectionSkill(sectionSkill);
+                    }}
+                    className="cursor-pointer hover:opacity-50 p-2"
+                  >
+                    <CrossCircledIcon />
 
+                    {sectionSkill}
+                  </div>
+                </div>
+              ))}
+            <FormField
+              defaultValue=""
+              control={skillForm.control}
+              name="skill"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Skill</FormLabel>
+                  <FormControl>
+                    <Input
+                      placeholder=""
+                      {...field}
+                      onKeyDown={(event) => {
+                        insertSkill(event, field.value);
+                      }}
+                    />
+                  </FormControl>
+                  <FormDescription></FormDescription>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+          </div>
           <Button type="submit">Add</Button>
         </form>
       </Form>
