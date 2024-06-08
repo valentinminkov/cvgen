@@ -18,6 +18,7 @@ interface LanguageSubmitFormPayload {
   listening: string;
   reading: string;
   writing: string;
+  motherLanguage?: string;
 }
 
 interface LanguageFormValue {
@@ -52,6 +53,16 @@ function addLanguage(newLanguage: LanguageSubmitFormPayload) {
 
   state.language.otherLanguages?.push(newLanguageEntry);
 
+  if (
+    newLanguage?.motherLanguage &&
+    newLanguage.motherLanguage !== state.language.motherLanguage
+  )
+    storeLanguage.set({
+      language: {
+        motherLanguage: newLanguage.motherLanguage,
+        otherLanguages: state.language.otherLanguages,
+      },
+    });
   return true;
 }
 

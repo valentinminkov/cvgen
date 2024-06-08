@@ -38,11 +38,8 @@ import { useState } from "react";
 import { Label } from "@/components/ui/label";
 import { CrossCircledIcon } from "@radix-ui/react-icons";
 
-const MainLanguageFormSchema = z.object({
-  motherLanguage: z.string(),
-});
-
 const LanguageFormSchema = z.object({
+  motherLanguage: z.string(),
   language: z.string(),
   listening: z.string(),
   reading: z.string(),
@@ -81,27 +78,10 @@ function LanguageCard({
 export default function InputAccordion() {
   const languages = useStore(storeLanguage);
 
-  const mainLanguageForm = useForm<z.infer<typeof MainLanguageFormSchema>>({
-    resolver: zodResolver(MainLanguageFormSchema),
-    defaultValues: {},
-  });
-
   const languageForm = useForm<z.infer<typeof LanguageFormSchema>>({
     resolver: zodResolver(LanguageFormSchema),
     defaultValues: {},
   });
-
-  function onMainLanguageSubmit({
-    motherLanguage,
-  }: {
-    motherLanguage: string;
-  }) {
-    const saved = addMotherLanguage(motherLanguage);
-
-    toast({
-      title: saved ? "Entry saved" : "Couldn't save data.",
-    });
-  }
 
   function onLanguageSubmit(payload: LanguageSubmitFormPayload) {
     const saved = addLanguage(payload);
@@ -133,37 +113,27 @@ export default function InputAccordion() {
             )}
           </div>
         )}
-      <div>
-        <Form {...mainLanguageForm}>
-          <form
-            onSubmit={mainLanguageForm.handleSubmit(onMainLanguageSubmit)}
-            className="w-2/3 space-y-6 "
-          >
-            <FormField
-              defaultValue=""
-              control={mainLanguageForm.control}
-              name="motherLanguage"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Mother language</FormLabel>
-                  <FormControl>
-                    <Input placeholder="Acme" {...field} />
-                  </FormControl>
-                  <FormDescription></FormDescription>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-            <Button type="submit">Add</Button>
-          </form>
-        </Form>
-      </div>
-
       <Form {...languageForm}>
         <form
           className="w-2/3 space-y-6"
           onSubmit={languageForm.handleSubmit(onLanguageSubmit)}
         >
+          <FormField
+            defaultValue={languages.language.motherLanguage}
+            control={languageForm.control}
+            name="motherLanguage"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Mother language</FormLabel>
+                <FormControl>
+                  <Input placeholder="Acme" {...field} />
+                </FormControl>
+                <FormDescription></FormDescription>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+
           <FormField
             defaultValue=""
             control={languageForm.control}
@@ -197,7 +167,7 @@ export default function InputAccordion() {
           />
 
           <FormField
-            defaultValue={languages.language.motherLanguage}
+            defaultValue=""
             control={languageForm.control}
             name="reading"
             render={({ field }) => (
