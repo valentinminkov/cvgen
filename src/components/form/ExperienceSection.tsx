@@ -111,8 +111,7 @@ export default function ExperienceSection() {
           {experiences?.experiences.map((experience, index: number) => {
             return (
               <Accordion type="single" collapsible key={experience.title}>
-                {/* Personal data */}
-                <AccordionItem value="item-1">
+                <AccordionItem value={experience.title}>
                   <AccordionTrigger>{experience.title}</AccordionTrigger>
                   <AccordionContent>
                     <ExperienceCard experience={experience} index={index} />

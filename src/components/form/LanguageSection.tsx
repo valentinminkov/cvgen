@@ -94,8 +94,7 @@ export default function LanguageSection() {
               (curLang, index: number) => {
                 return (
                   <Accordion type="single" collapsible key={curLang.language}>
-                    {/* Personal data */}
-                    <AccordionItem value="item-1">
+                    <AccordionItem value={curLang.language}>
                       <AccordionTrigger>{curLang.language}</AccordionTrigger>
                       <AccordionContent>
                         <LanguageCard language={curLang} index={index} />

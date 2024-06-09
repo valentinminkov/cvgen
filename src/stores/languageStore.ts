@@ -53,16 +53,16 @@ function addLanguage(newLanguage: LanguageSubmitFormPayload) {
 
   state.language.otherLanguages?.push(newLanguageEntry);
 
-  if (
-    newLanguage?.motherLanguage &&
-    newLanguage.motherLanguage !== state.language.motherLanguage
-  )
-    storeLanguage.set({
-      language: {
-        motherLanguage: newLanguage.motherLanguage,
-        otherLanguages: state.language.otherLanguages,
-      },
-    });
+  storeLanguage.set({
+    language: {
+      motherLanguage:
+        newLanguage?.motherLanguage &&
+        newLanguage.motherLanguage !== state.language.motherLanguage
+          ? newLanguage.motherLanguage
+          : state.language.motherLanguage,
+      otherLanguages: state.language.otherLanguages,
+    },
+  });
   return true;
 }
 

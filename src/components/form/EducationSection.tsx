@@ -123,8 +123,7 @@ export default function EducationSection() {
           {education?.education.map((education, index: number) => {
             return (
               <Accordion type="single" collapsible key={education.title}>
-                {/* Personal data */}
-                <AccordionItem value="item-1">
+                <AccordionItem value={education.name}>
                   <AccordionTrigger>{education.title}</AccordionTrigger>
                   <AccordionContent>
                     <EntryCard entry={education} index={index} />
