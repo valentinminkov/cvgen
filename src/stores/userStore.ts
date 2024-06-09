@@ -1,4 +1,5 @@
 import { persistentMap } from "@nanostores/persistent";
+import { getStoreKey } from "@/stores/config";
 
 export interface UserFormValue {
   firstName: string;
@@ -39,7 +40,7 @@ const initialState: PersistentUserFormValue = {
 };
 
 export const $user = persistentMap<PersistentUserFormValue>(
-  "user_",
+  getStoreKey("user"),
   initialState
 );
 

@@ -63,7 +63,7 @@ function SkillsCard({ index, skill }: { index: number; skill: SkillGroup }) {
 }
 
 export default function SkillsSection() {
-  const skills = useStore(storeSkills);
+  const skillsStore = useStore(storeSkills);
 
   const skillForm = useForm<z.infer<typeof SkillFormSchema>>({
     resolver: zodResolver(SkillFormSchema),
@@ -92,10 +92,10 @@ export default function SkillsSection() {
 
   return (
     <div>
-      {skills?.skills && skills.skills?.length > 0 && (
+      {skillsStore?.skills && skillsStore.skills?.length > 0 && (
         <div className="bg-gray-500 p-4">
           <p className="pb-4">entries</p>
-          {skills?.skills?.map((curSkill, index: number) => {
+          {skillsStore?.skills?.map((curSkill, index: number) => {
             return (
               <Accordion type="single" collapsible key={curSkill.type}>
                 <AccordionItem value="item-1">
@@ -147,8 +147,8 @@ export default function SkillsSection() {
             )}
           />
           <div>
-            {skills?.sectionSkills &&
-              skills.sectionSkills.map((sectionSkill) => (
+            {skillsStore?.sectionSkills &&
+              skillsStore.sectionSkills.map((sectionSkill) => (
                 <div
                   key={`${sectionSkill}-${getRandomString(
                     sectionSkill.length

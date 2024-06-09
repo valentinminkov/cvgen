@@ -1,4 +1,5 @@
 import { persistentMap } from "@nanostores/persistent";
+import { getStoreKey } from "@/stores/config";
 
 export interface EducationFormValue {
   title: string;
@@ -13,12 +14,12 @@ export interface EducationFormValue {
 }
 
 type PersistentEducationStore = Record<string, any> & {
-  education: EducationFormValue[];
+  educations: EducationFormValue[];
 };
 
 const storeEducation = persistentMap<PersistentEducationStore>(
-  "education_",
-  { education: [] },
+  getStoreKey("education"),
+  { educations: [] },
   {
     encode: JSON.stringify,
     decode: JSON.parse,
@@ -30,15 +31,17 @@ function addEducation(newEntry: EducationFormValue) {
 
   state.education.push(newEntry);
 
-  storeEducation.set({ education: state.education });
+  storeEducation.set({ educations: state.educations });
 
   return true;
 }
 
 function removeEducation(index: number) {
-  const newItems = storeEducation.get().education.filter((_, i) => i !== index);
+  const newItems = storeEducation
+    .get()
+    .educations.filter((_, i) => i !== index);
 
-  storeEducation.set({ education: newItems });
+  storeEducation.set({ educations: newItems });
 }
 
 export { storeEducation, addEducation, removeEducation };

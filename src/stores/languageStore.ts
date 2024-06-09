@@ -1,4 +1,5 @@
 import { persistentMap } from "@nanostores/persistent";
+import { getStoreKey } from "@/stores/config";
 
 // type SkillLevel = "A1" | "A2" | "B1" | "B2" | "C1" | "C2";
 
@@ -31,7 +32,7 @@ type PersistentLanguageStore = Record<string, any> & {
 };
 
 const storeLanguage = persistentMap<PersistentLanguageStore>(
-  "language_",
+  getStoreKey("language"),
   { language: { motherLanguage: "", otherLanguages: [] } },
   {
     encode: JSON.stringify,

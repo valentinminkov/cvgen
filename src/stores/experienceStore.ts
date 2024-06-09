@@ -1,4 +1,5 @@
 import { persistentMap } from "@nanostores/persistent";
+import { getStoreKey } from "@/stores/config";
 
 export interface ExperienceFormValue {
   title: string;
@@ -14,7 +15,7 @@ type PersistentExperienceStore = Record<string, any> & {
 };
 
 const storeExperiences = persistentMap<PersistentExperienceStore>(
-  "work_experiences",
+  getStoreKey("experience"),
   { experiences: [] },
   {
     encode: JSON.stringify,

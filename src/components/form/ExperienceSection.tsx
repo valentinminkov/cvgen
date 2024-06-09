@@ -90,7 +90,7 @@ function ExperienceCard({
 export default function ExperienceSection() {
   const [isWorkOngoing, setIsWorkOngoing] = useState(false);
 
-  const experiences = useStore(storeExperiences);
+  const experiencesStore = useStore(storeExperiences);
   const form = useForm<z.infer<typeof FormSchema>>({
     resolver: zodResolver(FormSchema),
     defaultValues: {},
@@ -105,10 +105,10 @@ export default function ExperienceSection() {
 
   return (
     <div>
-      {experiences?.experiences.length > 0 && (
+      {experiencesStore?.experiences.length > 0 && (
         <div className="bg-gray-500 p-4">
           <p className="pb-4">entries</p>
-          {experiences?.experiences.map((experience, index: number) => {
+          {experiencesStore?.experiences.map((experience, index: number) => {
             return (
               <Accordion type="single" collapsible key={experience.title}>
                 <AccordionItem value={experience.title}>

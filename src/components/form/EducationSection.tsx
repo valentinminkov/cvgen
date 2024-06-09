@@ -102,7 +102,7 @@ function EntryCard({
 export default function EducationSection() {
   const [isWorkOngoing, setIsWorkOngoing] = useState(false);
 
-  const education = useStore(storeEducation);
+  const educationStore = useStore(storeEducation);
   const form = useForm<z.infer<typeof FormSchema>>({
     resolver: zodResolver(FormSchema),
     defaultValues: {},
@@ -117,10 +117,10 @@ export default function EducationSection() {
 
   return (
     <div>
-      {education?.education.length > 0 && (
+      {educationStore?.education.length > 0 && (
         <div className="bg-gray-500 p-4">
           <p className="pb-4">entries</p>
-          {education?.education.map((education, index: number) => {
+          {educationStore?.educations.map((education, index: number) => {
             return (
               <Accordion type="single" collapsible key={education.title}>
                 <AccordionItem value={education.name}>

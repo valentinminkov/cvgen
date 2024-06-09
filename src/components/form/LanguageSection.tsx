@@ -70,7 +70,7 @@ function LanguageCard({
 }
 
 export default function LanguageSection() {
-  const languages = useStore(storeLanguage);
+  const languagesStore = useStore(storeLanguage);
 
   const languageForm = useForm<z.infer<typeof LanguageFormSchema>>({
     resolver: zodResolver(LanguageFormSchema),
@@ -86,11 +86,11 @@ export default function LanguageSection() {
 
   return (
     <div>
-      {languages?.language.otherLanguages &&
-        languages.language.otherLanguages?.length > 0 && (
+      {languagesStore?.language.otherLanguages &&
+        languagesStore.language.otherLanguages?.length > 0 && (
           <div className="bg-gray-500 p-4">
             <p className="pb-4">entries</p>
-            {languages?.language?.otherLanguages.map(
+            {languagesStore?.language?.otherLanguages.map(
               (curLang, index: number) => {
                 return (
                   <Accordion type="single" collapsible key={curLang.language}>
@@ -112,7 +112,7 @@ export default function LanguageSection() {
           onSubmit={languageForm.handleSubmit(onLanguageSubmit)}
         >
           <FormField
-            defaultValue={languages.language.motherLanguage}
+            defaultValue={languagesStore.language.motherLanguage}
             control={languageForm.control}
             name="motherLanguage"
             render={({ field }) => (

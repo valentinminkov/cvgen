@@ -1,5 +1,6 @@
 import { persistentMap } from "@nanostores/persistent";
 import { toast } from "@/components/ui/use-toast";
+import { getStoreKey } from "@/stores/config";
 
 interface SkillGroup {
   type: string;
@@ -17,7 +18,7 @@ type PersistentSkillsStore = Record<string, any> & {
 };
 
 const storeSkills = persistentMap<PersistentSkillsStore>(
-  "skills_",
+  getStoreKey("skills"),
   { skills: [], sectionSkills: [] },
   {
     encode: JSON.stringify,

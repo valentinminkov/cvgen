@@ -56,7 +56,7 @@ const FormSchema = z.object({
 });
 
 export default function PersonalSection() {
-  const user = useStore($user);
+  const userStore = useStore($user);
   const form = useForm<z.infer<typeof FormSchema>>({
     resolver: zodResolver(FormSchema),
     defaultValues: {},
@@ -73,7 +73,7 @@ export default function PersonalSection() {
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)} className="w-2/3 space-y-6 ">
         <FormField
-          defaultValue={user.firstName}
+          defaultValue={userStore.firstName}
           control={form.control}
           name="firstName"
           render={({ field }) => (
@@ -88,7 +88,7 @@ export default function PersonalSection() {
           )}
         />
         <FormField
-          defaultValue={user.secondName}
+          defaultValue={userStore.secondName}
           control={form.control}
           name="secondName"
           render={({ field }) => (
@@ -103,7 +103,7 @@ export default function PersonalSection() {
           )}
         />
         <FormField
-          defaultValue={user.aboutMe}
+          defaultValue={userStore.aboutMe}
           control={form.control}
           name="aboutMe"
           render={({ field }) => (
@@ -122,8 +122,8 @@ export default function PersonalSection() {
         />
         <FormField
           defaultValue={
-            typeof user.dateOfBirth === "string"
-              ? new Date(user?.dateOfBirth)
+            typeof userStore.dateOfBirth === "string"
+              ? new Date(userStore.dateOfBirth)
               : undefined
           }
           control={form.control}
@@ -142,7 +142,7 @@ export default function PersonalSection() {
         <FormField
           control={form.control}
           name="gender"
-          defaultValue={user.gender}
+          defaultValue={userStore.gender}
           render={({ field }) => (
             <FormItem>
               <FormLabel>Gender</FormLabel>
@@ -164,7 +164,7 @@ export default function PersonalSection() {
           )}
         />
         <FormField
-          defaultValue={user.nationality}
+          defaultValue={userStore.nationality}
           control={form.control}
           name="nationality"
           render={({ field }) => (
@@ -191,7 +191,7 @@ export default function PersonalSection() {
           )}
         />
         <FormField
-          defaultValue={user.email}
+          defaultValue={userStore.email}
           control={form.control}
           name="email"
           render={({ field }) => (
@@ -206,7 +206,7 @@ export default function PersonalSection() {
           )}
         />
         <FormField
-          defaultValue={user.phoneNumber}
+          defaultValue={userStore.phoneNumber}
           control={form.control}
           name="phoneNumber"
           render={({ field }) => (
@@ -221,7 +221,7 @@ export default function PersonalSection() {
           )}
         />
         <FormField
-          defaultValue={user.website}
+          defaultValue={userStore.website}
           control={form.control}
           name="website"
           render={({ field }) => (
@@ -236,7 +236,7 @@ export default function PersonalSection() {
           )}
         />
         <FormField
-          defaultValue={user.addressType}
+          defaultValue={userStore.addressType}
           control={form.control}
           name="addressType"
           render={({ field }) => (
@@ -251,7 +251,7 @@ export default function PersonalSection() {
           )}
         />
         <FormField
-          defaultValue={user.addressLine1}
+          defaultValue={userStore.addressLine1}
           control={form.control}
           name="addressLine1"
           render={({ field }) => (
@@ -266,7 +266,7 @@ export default function PersonalSection() {
           )}
         />
         <FormField
-          defaultValue={user.addressLine2}
+          defaultValue={userStore.addressLine2}
           control={form.control}
           name="addressLine2"
           render={({ field }) => (
@@ -281,7 +281,7 @@ export default function PersonalSection() {
           )}
         />
         <FormField
-          defaultValue={user.postCode}
+          defaultValue={userStore.postCode}
           control={form.control}
           name="postCode"
           render={({ field }) => (
@@ -296,7 +296,7 @@ export default function PersonalSection() {
           )}
         />
         <FormField
-          defaultValue={user.city}
+          defaultValue={userStore.city}
           control={form.control}
           name="city"
           render={({ field }) => (
@@ -312,7 +312,7 @@ export default function PersonalSection() {
         />
 
         <FormField
-          defaultValue={user.country}
+          defaultValue={userStore.country}
           control={form.control}
           name="country"
           render={({ field }) => (
