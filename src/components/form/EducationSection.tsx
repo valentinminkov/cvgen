@@ -117,7 +117,7 @@ export default function EducationSection() {
 
   return (
     <div>
-      {educationStore?.education.length > 0 && (
+      {educationStore?.educations.length > 0 && (
         <div className="bg-gray-500 p-4">
           <p className="pb-4">entries</p>
           {educationStore?.educations.map((education, index: number) => {

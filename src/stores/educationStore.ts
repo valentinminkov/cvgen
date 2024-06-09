@@ -29,7 +29,7 @@ const storeEducation = persistentMap<PersistentEducationStore>(
 function addEducation(newEntry: EducationFormValue) {
   const state = storeEducation.get();
 
-  state.education.push(newEntry);
+  state.educations.push(newEntry);
 
   storeEducation.set({ educations: state.educations });
 
