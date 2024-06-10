@@ -28,6 +28,7 @@ import { nationalities } from "@/config/nationalities";
 import { toast } from "@/components/ui/use-toast";
 import { useStore } from "@nanostores/react";
 import { $user, updateUserData } from "@/stores/userStore";
+import { content } from "@/config/content";
 
 const FormSchema = z.object({
   firstName: z.string().min(2, {
@@ -56,6 +57,11 @@ const FormSchema = z.object({
 });
 
 export default function PersonalSection() {
+  const {
+    content: {
+      components: { PersonalSection },
+    },
+  } = content;
   const userStore = useStore($user);
   const form = useForm<z.infer<typeof FormSchema>>({
     resolver: zodResolver(FormSchema),
@@ -78,7 +84,7 @@ export default function PersonalSection() {
           name="firstName"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>First name</FormLabel>
+              <FormLabel>{PersonalSection.FIRST_NAME}</FormLabel>
               <FormControl>
                 <Input placeholder="John" {...field} />
               </FormControl>
@@ -93,7 +99,7 @@ export default function PersonalSection() {
           name="secondName"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Second name</FormLabel>
+              <FormLabel>{PersonalSection.SECOND_NAME}</FormLabel>
               <FormControl>
                 <Input placeholder="Doe" {...field} />
               </FormControl>
@@ -108,7 +114,7 @@ export default function PersonalSection() {
           name="aboutMe"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>About</FormLabel>
+              <FormLabel>{PersonalSection.ABOUT}</FormLabel>
               <FormControl>
                 <Textarea
                   placeholder="Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nulla qui rem necessitatibus porro eveniet commodi officiis nam, quam atque quisquam non illo similique laudantium eius beatae quibusdam consequuntur explicabo error."
@@ -130,7 +136,7 @@ export default function PersonalSection() {
           name="dateOfBirth"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Date of birth</FormLabel>
+              <FormLabel>{PersonalSection.DATE_OF_BIRTH}</FormLabel>
               <FormControl>
                 <DatePicker placeholder="01/08/1935" field={field} />
               </FormControl>
@@ -145,7 +151,7 @@ export default function PersonalSection() {
           defaultValue={userStore.gender}
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Gender</FormLabel>
+              <FormLabel>{PersonalSection.GENDER}</FormLabel>
               <Select onValueChange={field.onChange} defaultValue={field.value}>
                 <FormControl>
                   <SelectTrigger>
@@ -153,9 +159,11 @@ export default function PersonalSection() {
                   </SelectTrigger>
                 </FormControl>
                 <SelectContent>
-                  <SelectItem value="male">Male</SelectItem>
-                  <SelectItem value="female">Female</SelectItem>
-                  <SelectItem value="other">Other</SelectItem>
+                  <SelectItem value="male">{PersonalSection.MALE}</SelectItem>
+                  <SelectItem value="female">
+                    {PersonalSection.FEMALE}
+                  </SelectItem>
+                  <SelectItem value="other">{PersonalSection.OTHER}</SelectItem>
                 </SelectContent>
               </Select>
               <FormDescription></FormDescription>
@@ -169,7 +177,7 @@ export default function PersonalSection() {
           name="nationality"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Nationality</FormLabel>
+              <FormLabel>{PersonalSection.NATIONALITY}</FormLabel>
               <Select onValueChange={field.onChange} defaultValue={field.value}>
                 <FormControl>
                   <SelectTrigger>
@@ -196,7 +204,7 @@ export default function PersonalSection() {
           name="email"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Email address</FormLabel>
+              <FormLabel>{PersonalSection.EMAIL_ADDRESS}</FormLabel>
               <FormControl>
                 <Input placeholder="john@doe.com" {...field} />
               </FormControl>
@@ -211,7 +219,7 @@ export default function PersonalSection() {
           name="phoneNumber"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Phone number</FormLabel>
+              <FormLabel>{PersonalSection.PHONE_NUMBER}</FormLabel>
               <FormControl>
                 <Input placeholder="+123 456 789 10" {...field} />
               </FormControl>
@@ -226,7 +234,7 @@ export default function PersonalSection() {
           name="website"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Website</FormLabel>
+              <FormLabel>{PersonalSection.WEBSITE}</FormLabel>
               <FormControl>
                 <Input placeholder="Enter your website" {...field} />
               </FormControl>
@@ -241,7 +249,7 @@ export default function PersonalSection() {
           name="addressType"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Address type</FormLabel>
+              <FormLabel>{PersonalSection.ADDRESS_TYPE}</FormLabel>
               <FormControl>
                 <Input placeholder="e.g. House / Mountain  / Dog" {...field} />
               </FormControl>
@@ -256,7 +264,7 @@ export default function PersonalSection() {
           name="addressLine1"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Address line 1</FormLabel>
+              <FormLabel>{PersonalSection.ADDRESS_LINE_1}</FormLabel>
               <FormControl>
                 <Input placeholder="First line of your address" {...field} />
               </FormControl>
@@ -271,7 +279,7 @@ export default function PersonalSection() {
           name="addressLine2"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Adress line 2</FormLabel>
+              <FormLabel>{PersonalSection.ADDRESS_LINE_2}</FormLabel>
               <FormControl>
                 <Input placeholder="Second line of your address" {...field} />
               </FormControl>
@@ -286,7 +294,7 @@ export default function PersonalSection() {
           name="postCode"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Postal code</FormLabel>
+              <FormLabel>{PersonalSection.POSTAL_CODE}</FormLabel>
               <FormControl>
                 <Input placeholder="1324" {...field} />
               </FormControl>
@@ -301,7 +309,7 @@ export default function PersonalSection() {
           name="city"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>City</FormLabel>
+              <FormLabel>{PersonalSection.CITY}</FormLabel>
               <FormControl>
                 <Input placeholder="Berlin" {...field} />
               </FormControl>
@@ -317,14 +325,14 @@ export default function PersonalSection() {
           name="country"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Country</FormLabel>
+              <FormLabel>{PersonalSection.COUNTRY}</FormLabel>
               <CountrySelector field={field} placeholder="Select" />
               <FormDescription></FormDescription>
               <FormMessage />
             </FormItem>
           )}
         />
-        <Button type="submit">Next</Button>
+        <Button type="submit">{PersonalSection.SUBMIT}</Button>
       </form>
     </Form>
   );

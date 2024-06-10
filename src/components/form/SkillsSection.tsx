@@ -32,6 +32,13 @@ import {
   type SkillGroup,
 } from "@/stores/skillsStore";
 import { getRandomString } from "@/lib/utils";
+import { content } from "@/config/content";
+
+const {
+  content: {
+    components: { SkillsSection },
+  },
+} = content;
 
 const SkillFormSchema = z.object({
   type: z.string().min(1, { message: "Skills cannot be empty" }),
@@ -51,8 +58,12 @@ function SkillsCard({ index, skill }: { index: number; skill: SkillGroup }) {
         <CrossCircledIcon />
       </div>
 
-      <h1>{skill.type} skill</h1>
-      <h2>Level: {skill.level}</h2>
+      <h1>
+        {skill.type} {SkillsSection.SKILL}
+      </h1>
+      <h2>
+        {SkillsSection.LEVEL}: {skill.level}
+      </h2>
       <div>
         {skill.skills?.map((curSkill) => (
           <div key={curSkill}>{curSkill}</div>
@@ -62,7 +73,7 @@ function SkillsCard({ index, skill }: { index: number; skill: SkillGroup }) {
   );
 }
 
-export default function SkillsSection() {
+export default function SkillsSectionComponent() {
   const skillsStore = useStore(storeSkills);
 
   const skillForm = useForm<z.infer<typeof SkillFormSchema>>({
@@ -94,7 +105,7 @@ export default function SkillsSection() {
     <div>
       {skillsStore?.skills && skillsStore.skills?.length > 0 && (
         <div className="bg-gray-500 p-4">
-          <p className="pb-4">entries</p>
+          <p className="pb-4">{SkillsSection.ENTRIES}</p>
           {skillsStore?.skills?.map((curSkill, index: number) => {
             return (
               <Accordion type="single" collapsible key={curSkill.type}>
@@ -121,7 +132,7 @@ export default function SkillsSection() {
             name="type"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Type</FormLabel>
+                <FormLabel>{SkillsSection.TYPE}</FormLabel>
                 <FormControl>
                   <Input placeholder="Acme" {...field} />
                 </FormControl>
@@ -137,7 +148,7 @@ export default function SkillsSection() {
             name="level"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Level</FormLabel>
+                <FormLabel>{SkillsSection.LEVEL}</FormLabel>
                 <FormControl>
                   <Input placeholder="Acme" {...field} />
                 </FormControl>
@@ -172,7 +183,7 @@ export default function SkillsSection() {
               name="skill"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Skill</FormLabel>
+                  <FormLabel>{SkillsSection.SKILL}</FormLabel>
                   <FormControl>
                     <Input
                       placeholder=""
@@ -188,7 +199,7 @@ export default function SkillsSection() {
               )}
             />
           </div>
-          <Button type="submit">Add</Button>
+          <Button type="submit">{SkillsSection.SUBMIT}</Button>
         </form>
       </Form>
     </div>

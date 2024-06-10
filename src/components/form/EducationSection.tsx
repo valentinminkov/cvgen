@@ -35,6 +35,13 @@ import { Textarea } from "@/components/ui/textarea";
 import { useState } from "react";
 import { Label } from "@/components/ui/label";
 import { CrossCircledIcon } from "@radix-ui/react-icons";
+import { content } from "@/config/content";
+
+const {
+  content: {
+    components: { EducationSection },
+  },
+} = content;
 
 const FormSchema = z.object({
   title: z.string().min(2, {
@@ -88,18 +95,18 @@ function EntryCard({
       </div>
 
       <h1 className="flex flex-col gap-2 px-2">
-        <Label>Title</Label>
+        <Label>{EducationSection.TITLE}</Label>
         {title}
       </h1>
       <p className="flex flex-col gap-2 px-2">
-        <Label>Description</Label>
+        <Label>{EducationSection.DESCRIPTION}</Label>
         {description}
       </p>
     </div>
   );
 }
 
-export default function EducationSection() {
+export default function EducationSectionComponent() {
   const [isWorkOngoing, setIsWorkOngoing] = useState(false);
 
   const educationStore = useStore(storeEducation);
@@ -119,7 +126,7 @@ export default function EducationSection() {
     <div>
       {educationStore?.educations.length > 0 && (
         <div className="bg-gray-500 p-4">
-          <p className="pb-4">entries</p>
+          <p className="pb-4">{EducationSection.ENTRIES}</p>
           {educationStore?.educations.map((education, index: number) => {
             return (
               <Accordion type="single" collapsible key={education.title}>
@@ -145,7 +152,7 @@ export default function EducationSection() {
             name="title"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Title</FormLabel>
+                <FormLabel>{EducationSection.TITLE}</FormLabel>
                 <FormControl>
                   <Input placeholder="Acme" {...field} />
                 </FormControl>
@@ -160,7 +167,7 @@ export default function EducationSection() {
             name="name"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Name</FormLabel>
+                <FormLabel>{EducationSection.NAME}</FormLabel>
                 <FormControl>
                   <Input placeholder="Acme" {...field} />
                 </FormControl>
@@ -176,7 +183,7 @@ export default function EducationSection() {
             name="website"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Website</FormLabel>
+                <FormLabel>{EducationSection.WEBSITE}</FormLabel>
                 <FormControl>
                   <Input placeholder="" {...field} />
                 </FormControl>
@@ -191,7 +198,7 @@ export default function EducationSection() {
             name="country"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Country</FormLabel>
+                <FormLabel>{EducationSection.COUNTRY}</FormLabel>
                 <FormControl>
                   <CountrySelector field={field} />
                 </FormControl>
@@ -207,7 +214,7 @@ export default function EducationSection() {
             name="city"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>City</FormLabel>
+                <FormLabel>{EducationSection.CITY}</FormLabel>
                 <FormControl>
                   <Input placeholder="Acme" {...field} />
                 </FormControl>
@@ -222,7 +229,7 @@ export default function EducationSection() {
             name="description"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Description</FormLabel>
+                <FormLabel>{EducationSection.DESCRIPTION}</FormLabel>
                 <FormControl>
                   <Textarea placeholder="Description" {...field} />
                 </FormControl>
@@ -237,7 +244,7 @@ export default function EducationSection() {
             name="startDate"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Start date</FormLabel>
+                <FormLabel>{EducationSection.START_DATE}</FormLabel>
                 <FormControl>
                   <DatePicker placeholder="" field={field} />
                 </FormControl>
@@ -251,7 +258,7 @@ export default function EducationSection() {
             name="ongoing"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Ongoing</FormLabel>
+                <FormLabel>{EducationSection.ONGOING}</FormLabel>
                 <FormControl>
                   <Switch
                     checked={field.value}
@@ -273,7 +280,7 @@ export default function EducationSection() {
               name="endDate"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>End date</FormLabel>
+                  <FormLabel>{EducationSection.END_DATE}</FormLabel>
                   <FormControl>
                     <DatePicker placeholder="" field={field} />
                   </FormControl>
@@ -284,7 +291,7 @@ export default function EducationSection() {
             />
           )}
 
-          <Button type="submit">Add</Button>
+          <Button type="submit">{EducationSection.SUBMIT}</Button>
         </form>
       </Form>
     </div>

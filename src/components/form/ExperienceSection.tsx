@@ -35,7 +35,11 @@ import { Textarea } from "@/components/ui/textarea";
 import { useState } from "react";
 import { Label } from "@/components/ui/label";
 import { CrossCircledIcon } from "@radix-ui/react-icons";
+import { content } from "@/config/content";
 
+const {
+  content: { components },
+} = content;
 const FormSchema = z.object({
   title: z.string().min(2, {
     message: "Title must be at least 2 characters.",
@@ -76,11 +80,11 @@ function ExperienceCard({
       </div>
 
       <h1 className="flex flex-col gap-2 px-2">
-        <Label>Title</Label>
+        <Label>{components.ExperienceSection.COMPANY_NAME}</Label>
         {title}
       </h1>
       <p className="flex flex-col gap-2 px-2">
-        <Label>Work Description</Label>
+        <Label>{components.ExperienceSection.WORK_DESCRIPTION}</Label>
         {workDescription}
       </p>
     </div>
@@ -107,7 +111,7 @@ export default function ExperienceSection() {
     <div>
       {experiencesStore?.experiences.length > 0 && (
         <div className="bg-gray-500 p-4">
-          <p className="pb-4">entries</p>
+          <p className="pb-4">{components.ExperienceSection.ENTRIES}</p>
           {experiencesStore?.experiences.map((experience, index: number) => {
             return (
               <Accordion type="single" collapsible key={experience.title}>
@@ -133,7 +137,9 @@ export default function ExperienceSection() {
             name="title"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Company name</FormLabel>
+                <FormLabel>
+                  {components.ExperienceSection.COMPANY_NAME}
+                </FormLabel>
                 <FormControl>
                   <Input placeholder="Acme" {...field} />
                 </FormControl>
@@ -147,7 +153,7 @@ export default function ExperienceSection() {
             name="country"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Location</FormLabel>
+                <FormLabel>{components.ExperienceSection.LOCATION}</FormLabel>
                 <FormControl>
                   <CountrySelector field={field} />
                 </FormControl>
@@ -161,7 +167,9 @@ export default function ExperienceSection() {
             name="workDescription"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Work Description</FormLabel>
+                <FormLabel>
+                  {components.ExperienceSection.WORK_DESCRIPTION}
+                </FormLabel>
                 <FormControl>
                   <Textarea placeholder="Work description" {...field} />
                 </FormControl>
@@ -176,7 +184,7 @@ export default function ExperienceSection() {
             name="startDate"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Start date</FormLabel>
+                <FormLabel>{components.ExperienceSection.START_DATE}</FormLabel>
                 <FormControl>
                   <DatePicker placeholder="" field={field} />
                 </FormControl>
@@ -190,7 +198,7 @@ export default function ExperienceSection() {
             name="ongoing"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Ongoing</FormLabel>
+                <FormLabel>{components.ExperienceSection.ONGOING}</FormLabel>
                 <FormControl>
                   <Switch
                     checked={field.value}
@@ -211,7 +219,7 @@ export default function ExperienceSection() {
               name="endDate"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>End date</FormLabel>
+                  <FormLabel>{components.ExperienceSection.END_DATE}</FormLabel>
                   <FormControl>
                     <DatePicker placeholder="" field={field} />
                   </FormControl>
@@ -222,7 +230,7 @@ export default function ExperienceSection() {
             />
           )}
 
-          <Button type="submit">Add</Button>
+          <Button type="submit">{components.ExperienceSection.SUBMIT}</Button>
         </form>
       </Form>
     </div>

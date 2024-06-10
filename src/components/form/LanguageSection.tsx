@@ -31,6 +31,13 @@ import {
 } from "@/components/ui/accordion";
 import { Label } from "@/components/ui/label";
 import { CrossCircledIcon } from "@radix-ui/react-icons";
+import { content } from "@/config/content";
+
+const {
+  content: {
+    components: { LanguageSection },
+  },
+} = content;
 
 const LanguageFormSchema = z.object({
   motherLanguage: z.string(),
@@ -59,17 +66,23 @@ function LanguageCard({
       </div>
 
       <h1 className="flex flex-col gap-2 px-2">
-        <Label>Language</Label>
+        <Label>{LanguageSection.LANGUAGE}</Label>
         {language}
       </h1>
-      <p className="flex flex-col gap-2 px-2">listening: {skills.listening}</p>
-      <p className="flex flex-col gap-2 px-2">reading: {skills.reading}</p>
-      <p className="flex flex-col gap-2 px-2">writing: {skills.writing}</p>
+      <p className="flex flex-col gap-2 px-2">
+        {LanguageSection.LANGUAGE}: {skills.listening}
+      </p>
+      <p className="flex flex-col gap-2 px-2">
+        {LanguageSection.READING}: {skills.reading}
+      </p>
+      <p className="flex flex-col gap-2 px-2">
+        {LanguageSection.WRITING}: {skills.writing}
+      </p>
     </div>
   );
 }
 
-export default function LanguageSection() {
+export default function LanguageSectionComponent() {
   const languagesStore = useStore(storeLanguage);
 
   const languageForm = useForm<z.infer<typeof LanguageFormSchema>>({
@@ -89,7 +102,7 @@ export default function LanguageSection() {
       {languagesStore?.language.otherLanguages &&
         languagesStore.language.otherLanguages?.length > 0 && (
           <div className="bg-gray-500 p-4">
-            <p className="pb-4">entries</p>
+            <p className="pb-4">{LanguageSection.ENTRIES}</p>
             {languagesStore?.language?.otherLanguages.map(
               (curLang, index: number) => {
                 return (
@@ -117,7 +130,7 @@ export default function LanguageSection() {
             name="motherLanguage"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Mother language</FormLabel>
+                <FormLabel>{LanguageSection.MOTHER_LANGUAGES}</FormLabel>
                 <FormControl>
                   <Input placeholder="Acme" {...field} />
                 </FormControl>
@@ -133,7 +146,7 @@ export default function LanguageSection() {
             name="language"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Language</FormLabel>
+                <FormLabel>{LanguageSection.LANGUAGE}</FormLabel>
                 <FormControl>
                   <Input placeholder="Acme" {...field} />
                 </FormControl>
@@ -149,7 +162,7 @@ export default function LanguageSection() {
             name="listening"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Listening</FormLabel>
+                <FormLabel>{LanguageSection.LISTENING}</FormLabel>
                 <FormControl>
                   <Input placeholder="Acme" {...field} />
                 </FormControl>
@@ -165,7 +178,7 @@ export default function LanguageSection() {
             name="reading"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Reading</FormLabel>
+                <FormLabel>{LanguageSection.READING}</FormLabel>
                 <FormControl>
                   <Input placeholder="Acme" {...field} />
                 </FormControl>
@@ -181,7 +194,7 @@ export default function LanguageSection() {
             name="writing"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Writing</FormLabel>
+                <FormLabel>{LanguageSection.WRITING}</FormLabel>
                 <FormControl>
                   <Input placeholder="Acme" {...field} />
                 </FormControl>
@@ -191,7 +204,7 @@ export default function LanguageSection() {
             )}
           />
 
-          <Button type="submit">Add</Button>
+          <Button type="submit">{LanguageSection.SUBMIT}</Button>
         </form>
       </Form>
     </div>
