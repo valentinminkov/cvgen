@@ -11,41 +11,55 @@ import ExperienceSection from "@/components/form/ExperienceSection";
 import EducationSection from "@/components/form/EducationSection";
 import LanguageSection from "@/components/form/LanguageSection";
 import SkillsSection from "@/components/form/SkillsSection";
+import { content } from "@/config/content";
 
-export function InputAccordion() {
+export default function InputAccordion() {
+  const {
+    content: {
+      components: {
+        InputAccordion: {
+          PERSONAL_DATA_SECTION,
+          WORK_EXPERIENCE_SECTION,
+          EDUCATION_TRAINING_SECTION,
+          LANGUAGE_TRAINING_SECTION,
+          JOB_SKILLS_SECTION,
+        },
+      },
+    },
+  } = content;
   return (
     <Accordion type="single" collapsible>
       {/* Personal data */}
       <AccordionItem value="item-1">
-        <AccordionTrigger>Personal data</AccordionTrigger>
+        <AccordionTrigger>{PERSONAL_DATA_SECTION}</AccordionTrigger>
         <AccordionContent>
           <PersonalSection />
         </AccordionContent>
       </AccordionItem>
       {/* Work experience */}
       <AccordionItem value="item-2">
-        <AccordionTrigger>Work Experience</AccordionTrigger>
+        <AccordionTrigger>{WORK_EXPERIENCE_SECTION}</AccordionTrigger>
         <AccordionContent>
           <ExperienceSection />
         </AccordionContent>
       </AccordionItem>
       {/* Education and training */}
       <AccordionItem value="item-3">
-        <AccordionTrigger>Education and training</AccordionTrigger>
+        <AccordionTrigger>{EDUCATION_TRAINING_SECTION}</AccordionTrigger>
         <AccordionContent>
           <EducationSection />
         </AccordionContent>
       </AccordionItem>
       {/* Language skills */}
       <AccordionItem value="item-4">
-        <AccordionTrigger>Language skills</AccordionTrigger>
+        <AccordionTrigger>{LANGUAGE_TRAINING_SECTION}</AccordionTrigger>
         <AccordionContent>
           <LanguageSection />
         </AccordionContent>
       </AccordionItem>
       {/* Job skills */}
       <AccordionItem value="item-5">
-        <AccordionTrigger>Job skills</AccordionTrigger>
+        <AccordionTrigger>{JOB_SKILLS_SECTION}</AccordionTrigger>
         <AccordionContent>
           <SkillsSection />
         </AccordionContent>
