@@ -56,19 +56,25 @@ const FormSchema = z.object({
   country: z.string(),
 });
 
-export default function PersonalSection() {
+export type PersonalFormType = z.infer<typeof FormSchema>;
+
+interface Props {
+  defaultFormValues?: PersonalFormType;
+}
+
+export default function PersonalSection({ defaultFormValues }: Props) {
   const {
     content: {
       components: { PersonalSection },
     },
   } = content;
   const userStore = useStore($user);
-  const form = useForm<z.infer<typeof FormSchema>>({
+  const form = useForm<PersonalFormType>({
     resolver: zodResolver(FormSchema),
     defaultValues: {},
   });
 
-  function onSubmit(data: z.infer<typeof FormSchema>) {
+  function onSubmit(data: PersonalFormType) {
     const saved = updateUserData(data);
     toast({
       title: saved ? "Saved" : "Couldn't save data.",
@@ -79,7 +85,11 @@ export default function PersonalSection() {
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)} className="w-2/3 space-y-6 ">
         <FormField
-          defaultValue={userStore.firstName}
+          defaultValue={
+            !!userStore.firstName
+              ? userStore.firstName
+              : defaultFormValues?.firstName
+          }
           control={form.control}
           name="firstName"
           render={({ field }) => (
@@ -94,7 +104,11 @@ export default function PersonalSection() {
           )}
         />
         <FormField
-          defaultValue={userStore.secondName}
+          defaultValue={
+            !!userStore.secondName
+              ? userStore.secondName
+              : defaultFormValues?.secondName
+          }
           control={form.control}
           name="secondName"
           render={({ field }) => (
@@ -109,7 +123,9 @@ export default function PersonalSection() {
           )}
         />
         <FormField
-          defaultValue={userStore.aboutMe}
+          defaultValue={
+            !!userStore.aboutMe ? userStore.aboutMe : defaultFormValues?.aboutMe
+          }
           control={form.control}
           name="aboutMe"
           render={({ field }) => (
@@ -130,7 +146,7 @@ export default function PersonalSection() {
           defaultValue={
             typeof userStore.dateOfBirth === "string"
               ? new Date(userStore.dateOfBirth)
-              : undefined
+              : undefined ?? defaultFormValues?.dateOfBirth
           }
           control={form.control}
           name="dateOfBirth"
@@ -148,7 +164,9 @@ export default function PersonalSection() {
         <FormField
           control={form.control}
           name="gender"
-          defaultValue={userStore.gender}
+          defaultValue={
+            !!userStore.gender ? userStore.gender : defaultFormValues?.gender
+          }
           render={({ field }) => (
             <FormItem>
               <FormLabel>{PersonalSection.GENDER}</FormLabel>
@@ -172,7 +190,11 @@ export default function PersonalSection() {
           )}
         />
         <FormField
-          defaultValue={userStore.nationality}
+          defaultValue={
+            !!userStore.nationality
+              ? userStore.nationality
+              : defaultFormValues?.nationality
+          }
           control={form.control}
           name="nationality"
           render={({ field }) => (
@@ -199,7 +221,9 @@ export default function PersonalSection() {
           )}
         />
         <FormField
-          defaultValue={userStore.email}
+          defaultValue={
+            !!userStore.email ? userStore.email : defaultFormValues?.email
+          }
           control={form.control}
           name="email"
           render={({ field }) => (
@@ -214,7 +238,11 @@ export default function PersonalSection() {
           )}
         />
         <FormField
-          defaultValue={userStore.phoneNumber}
+          defaultValue={
+            !!userStore.phoneNumber
+              ? userStore.phoneNumber
+              : defaultFormValues?.phoneNumber
+          }
           control={form.control}
           name="phoneNumber"
           render={({ field }) => (
@@ -229,7 +257,9 @@ export default function PersonalSection() {
           )}
         />
         <FormField
-          defaultValue={userStore.website}
+          defaultValue={
+            !!userStore.website ? userStore.website : defaultFormValues?.website
+          }
           control={form.control}
           name="website"
           render={({ field }) => (
@@ -244,7 +274,11 @@ export default function PersonalSection() {
           )}
         />
         <FormField
-          defaultValue={userStore.addressType}
+          defaultValue={
+            !!userStore.addressType
+              ? userStore.addressType
+              : defaultFormValues?.addressType
+          }
           control={form.control}
           name="addressType"
           render={({ field }) => (
@@ -259,7 +293,11 @@ export default function PersonalSection() {
           )}
         />
         <FormField
-          defaultValue={userStore.addressLine1}
+          defaultValue={
+            !!userStore.addressLine1
+              ? userStore.addressLine1
+              : defaultFormValues?.addressLine1
+          }
           control={form.control}
           name="addressLine1"
           render={({ field }) => (
@@ -274,7 +312,11 @@ export default function PersonalSection() {
           )}
         />
         <FormField
-          defaultValue={userStore.addressLine2}
+          defaultValue={
+            !!userStore.addressLine2
+              ? userStore.addressLine2
+              : defaultFormValues?.addressLine2
+          }
           control={form.control}
           name="addressLine2"
           render={({ field }) => (
@@ -289,7 +331,11 @@ export default function PersonalSection() {
           )}
         />
         <FormField
-          defaultValue={userStore.postCode}
+          defaultValue={
+            !!userStore.postCode
+              ? userStore.postCode
+              : defaultFormValues?.postCode
+          }
           control={form.control}
           name="postCode"
           render={({ field }) => (
@@ -304,7 +350,9 @@ export default function PersonalSection() {
           )}
         />
         <FormField
-          defaultValue={userStore.city}
+          defaultValue={
+            !!userStore.city ? userStore.city : defaultFormValues?.city
+          }
           control={form.control}
           name="city"
           render={({ field }) => (
@@ -320,7 +368,9 @@ export default function PersonalSection() {
         />
 
         <FormField
-          defaultValue={userStore.country}
+          defaultValue={
+            !!userStore.country ? userStore.country : defaultFormValues?.country
+          }
           control={form.control}
           name="country"
           render={({ field }) => (
