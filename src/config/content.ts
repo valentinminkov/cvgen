@@ -1,5 +1,5 @@
 const elementsContent = {
-  SUBMIT_BUTTON: "Submit",
+  SECTION_FORM_SUBMIT_BUTTON: "Save",
   RESET_BUTTON: "Reset",
 };
 
@@ -10,7 +10,7 @@ const componentsContent = {
     EDUCATION_TRAINING_SECTION: "Education and training",
     LANGUAGE_TRAINING_SECTION: "Languages",
     JOB_SKILLS_SECTION: "Job skills",
-    SUBMIT: elementsContent.SUBMIT_BUTTON,
+    SUBMIT: elementsContent.SECTION_FORM_SUBMIT_BUTTON,
     FILLED_MARK_PERSONAL_SECTION: "Filled",
     EXPERIENCES_LABEL: "Experiences",
     EDUCATIONS_LABEL: "Education and trainings",
@@ -36,7 +36,7 @@ const componentsContent = {
     POSTAL_CODE: "Postal code",
     CITY: "City",
     COUNTRY: "Country",
-    SUBMIT: elementsContent.SUBMIT_BUTTON,
+    SUBMIT: elementsContent.SECTION_FORM_SUBMIT_BUTTON,
     RESET: elementsContent.RESET_BUTTON,
   },
   ExperienceSection: {
@@ -47,7 +47,7 @@ const componentsContent = {
     START_DATE: "Start date",
     ONGOING: "Ongoing",
     END_DATE: "End date",
-    SUBMIT: elementsContent.SUBMIT_BUTTON,
+    SUBMIT: elementsContent.SECTION_FORM_SUBMIT_BUTTON,
   },
   EducationSection: {
     ENTRIES: "Entries",
@@ -60,7 +60,7 @@ const componentsContent = {
     START_DATE: "Start date",
     ONGOING: "ONGOING",
     END_DATE: "End date",
-    SUBMIT: elementsContent.SUBMIT_BUTTON,
+    SUBMIT: elementsContent.SECTION_FORM_SUBMIT_BUTTON,
   },
   LanguageSection: {
     ENTRIES: "Entries",
@@ -70,14 +70,14 @@ const componentsContent = {
     LISTENING: "Listening",
     READING: "Reading",
     WRITING: "Writing",
-    SUBMIT: elementsContent.SUBMIT_BUTTON,
+    SUBMIT: elementsContent.SECTION_FORM_SUBMIT_BUTTON,
   },
   SkillsSection: {
     ENTRIES: "Entries",
     TYPE: "Type",
     LEVEL: "Level",
     SKILL: "Skill",
-    SUBMIT: elementsContent.SUBMIT_BUTTON,
+    SUBMIT: elementsContent.SECTION_FORM_SUBMIT_BUTTON,
   },
 };
 
