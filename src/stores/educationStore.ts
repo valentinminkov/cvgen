@@ -17,7 +17,7 @@ type PersistentEducationStore = Record<string, any> & {
   educations: EducationFormValue[];
 };
 
-const storeEducation = persistentMap<PersistentEducationStore>(
+const $education = persistentMap<PersistentEducationStore>(
   getStoreKey("education"),
   { educations: [] },
   {
@@ -27,21 +27,19 @@ const storeEducation = persistentMap<PersistentEducationStore>(
 );
 
 function addEducation(newEntry: EducationFormValue) {
-  const state = storeEducation.get();
+  const state = $education.get();
 
   state.educations.push(newEntry);
 
-  storeEducation.set({ educations: state.educations });
+  $education.set({ educations: state.educations });
 
   return true;
 }
 
 function removeEducation(index: number) {
-  const newItems = storeEducation
-    .get()
-    .educations.filter((_, i) => i !== index);
+  const newItems = $education.get().educations.filter((_, i) => i !== index);
 
-  storeEducation.set({ educations: newItems });
+  $education.set({ educations: newItems });
 }
 
-export { storeEducation, addEducation, removeEducation };
+export { $education, addEducation, removeEducation };

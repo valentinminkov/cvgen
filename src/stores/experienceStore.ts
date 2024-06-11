@@ -14,7 +14,7 @@ type PersistentExperienceStore = Record<string, any> & {
   experiences: ExperienceFormValue[];
 };
 
-const storeExperiences = persistentMap<PersistentExperienceStore>(
+const $experiences = persistentMap<PersistentExperienceStore>(
   getStoreKey("experience"),
   { experiences: [] },
   {
@@ -24,21 +24,19 @@ const storeExperiences = persistentMap<PersistentExperienceStore>(
 );
 
 function addExperience(newEntry: ExperienceFormValue) {
-  const state = storeExperiences.get();
+  const state = $experiences.get();
 
   state.experiences.push(newEntry);
 
-  storeExperiences.set({ experiences: state.experiences });
+  $experiences.set({ experiences: state.experiences });
 
   return true;
 }
 
 function removeExperience(index: number) {
-  const newItems = storeExperiences
-    .get()
-    .experiences.filter((_, i) => i !== index);
+  const newItems = $experiences.get().experiences.filter((_, i) => i !== index);
 
-  storeExperiences.set({ experiences: newItems });
+  $experiences.set({ experiences: newItems });
 }
 
-export { storeExperiences, addExperience, removeExperience };
+export { $experiences, addExperience, removeExperience };

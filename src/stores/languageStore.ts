@@ -31,7 +31,7 @@ type PersistentLanguageStore = Record<string, any> & {
   language: LanguageFormValue;
 };
 
-const storeLanguage = persistentMap<PersistentLanguageStore>(
+const $language = persistentMap<PersistentLanguageStore>(
   getStoreKey("language"),
   { language: { motherLanguage: "", otherLanguages: [] } },
   {
@@ -50,11 +50,11 @@ function addLanguage(newLanguage: LanguageSubmitFormPayload) {
     },
   };
 
-  const state = storeLanguage.get();
+  const state = $language.get();
 
   state.language.otherLanguages?.push(newLanguageEntry);
 
-  storeLanguage.set({
+  $language.set({
     language: {
       motherLanguage:
         newLanguage?.motherLanguage &&
@@ -68,9 +68,9 @@ function addLanguage(newLanguage: LanguageSubmitFormPayload) {
 }
 
 function addMotherLanguage(language: string) {
-  const state = storeLanguage.get();
+  const state = $language.get();
 
-  storeLanguage.set({
+  $language.set({
     language: {
       motherLanguage: language,
       otherLanguages: state.language.otherLanguages,
@@ -81,13 +81,13 @@ function addMotherLanguage(language: string) {
 }
 
 function removeLanguage(index: number) {
-  const newItems = storeLanguage
+  const newItems = $language
     .get()
     .language.otherLanguages?.filter((_, i) => i !== index);
 
-  storeLanguage.set({
+  $language.set({
     language: {
-      motherLanguage: storeLanguage.get().language.motherLanguage,
+      motherLanguage: $language.get().language.motherLanguage,
       otherLanguages: newItems,
     },
   });
@@ -96,7 +96,7 @@ function removeLanguage(index: number) {
 export {
   addLanguage,
   removeLanguage,
-  storeLanguage,
+  $language,
   type LanguageFormValue,
   addMotherLanguage,
   type LanguageSubmitFormPayload,

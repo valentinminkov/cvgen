@@ -17,7 +17,7 @@ import { Input } from "@/components/ui/input";
 import { toast } from "@/components/ui/use-toast";
 import { useStore } from "@nanostores/react";
 import {
-  storeExperiences,
+  $experiences,
   addExperience,
   removeExperience,
   type ExperienceFormValue,
@@ -94,7 +94,7 @@ function ExperienceCard({
 export default function ExperienceSection() {
   const [isWorkOngoing, setIsWorkOngoing] = useState(false);
 
-  const experiencesStore = useStore(storeExperiences);
+  const experiencesStore = useStore($experiences);
   const form = useForm<z.infer<typeof FormSchema>>({
     resolver: zodResolver(FormSchema),
     defaultValues: {},

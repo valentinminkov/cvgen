@@ -36,7 +36,7 @@ export default function InputAccordion() {
   return (
     <Accordion type="single" collapsible>
       {/* Personal data */}
-      <AccordionItem value="item-1">
+      <AccordionItem value={PERSONAL_DATA_SECTION}>
         <AccordionTrigger>
           {PERSONAL_DATA_SECTION}
           {isPersonalDataFilled && <p>{FILLED_MARK_PERSONAL_SECTION}</p>}
@@ -46,28 +46,28 @@ export default function InputAccordion() {
         </AccordionContent>
       </AccordionItem>
       {/* Work experience */}
-      <AccordionItem value="item-2">
+      <AccordionItem value={WORK_EXPERIENCE_SECTION}>
         <AccordionTrigger>{WORK_EXPERIENCE_SECTION}</AccordionTrigger>
         <AccordionContent>
           <ExperienceSection />
         </AccordionContent>
       </AccordionItem>
       {/* Education and training */}
-      <AccordionItem value="item-3">
+      <AccordionItem value={EDUCATION_TRAINING_SECTION}>
         <AccordionTrigger>{EDUCATION_TRAINING_SECTION}</AccordionTrigger>
         <AccordionContent>
           <EducationSection />
         </AccordionContent>
       </AccordionItem>
       {/* Language skills */}
-      <AccordionItem value="item-4">
+      <AccordionItem value={LANGUAGE_TRAINING_SECTION}>
         <AccordionTrigger>{LANGUAGE_TRAINING_SECTION}</AccordionTrigger>
         <AccordionContent>
           <LanguageSection />
         </AccordionContent>
       </AccordionItem>
       {/* Job skills */}
-      <AccordionItem value="item-5">
+      <AccordionItem value={JOB_SKILLS_SECTION}>
         <AccordionTrigger>{JOB_SKILLS_SECTION}</AccordionTrigger>
         <AccordionContent>
           <SkillsSection />

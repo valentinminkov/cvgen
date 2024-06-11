@@ -19,7 +19,7 @@ import { useStore } from "@nanostores/react";
 import {
   addLanguage,
   removeLanguage,
-  storeLanguage,
+  $language,
   type Language,
   type LanguageSubmitFormPayload,
 } from "@/stores/languageStore";
@@ -83,7 +83,7 @@ function LanguageCard({
 }
 
 export default function LanguageSectionComponent() {
-  const languagesStore = useStore(storeLanguage);
+  const languagesStore = useStore($language);
 
   const languageForm = useForm<z.infer<typeof LanguageFormSchema>>({
     resolver: zodResolver(LanguageFormSchema),

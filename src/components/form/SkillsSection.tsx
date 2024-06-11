@@ -27,7 +27,7 @@ import {
   addSectionSkill,
   removeSkill,
   removeSectionSkill,
-  storeSkills,
+  $skills,
   addSkill,
   type SkillGroup,
 } from "@/stores/skillsStore";
@@ -74,7 +74,7 @@ function SkillsCard({ index, skill }: { index: number; skill: SkillGroup }) {
 }
 
 export default function SkillsSectionComponent() {
-  const skillsStore = useStore(storeSkills);
+  const skillsStore = useStore($skills);
 
   const skillForm = useForm<z.infer<typeof SkillFormSchema>>({
     resolver: zodResolver(SkillFormSchema),

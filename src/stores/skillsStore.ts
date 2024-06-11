@@ -17,7 +17,7 @@ type PersistentSkillsStore = Record<string, any> & {
   sectionSkills: string[];
 };
 
-const storeSkills = persistentMap<PersistentSkillsStore>(
+const $skills = persistentMap<PersistentSkillsStore>(
   getStoreKey("skills"),
   { skills: [], sectionSkills: [] },
   {
@@ -27,27 +27,27 @@ const storeSkills = persistentMap<PersistentSkillsStore>(
 );
 
 function addSkill(newEntry: SkillGroup) {
-  const state = storeSkills.get();
+  const state = $skills.get();
 
   const newSkill: SkillGroup = { ...newEntry, skills: state.sectionSkills };
 
-  storeSkills.set({ skills: [...state.skills, newSkill], sectionSkills: [] });
+  $skills.set({ skills: [...state.skills, newSkill], sectionSkills: [] });
 
   return true;
 }
 
 function removeSkill(index: number) {
-  const skillsObj = storeSkills.get();
+  const skillsObj = $skills.get();
   const newItems = skillsObj.skills.filter((_, i) => i !== index);
 
-  storeSkills.set({ skills: newItems, sectionSkills: skillsObj.sectionSkills });
+  $skills.set({ skills: newItems, sectionSkills: skillsObj.sectionSkills });
 }
 
 function addSectionSkill(sectionSkill: string) {
-  const skillsObj = storeSkills.get();
+  const skillsObj = $skills.get();
 
   if (!skillsObj.sectionSkills.includes(sectionSkill)) {
-    storeSkills.set({
+    $skills.set({
       skills: skillsObj.skills,
       sectionSkills: [...skillsObj.sectionSkills, sectionSkill],
     });
@@ -57,8 +57,8 @@ function addSectionSkill(sectionSkill: string) {
 }
 
 function removeSectionSkill(sectionSkillForRemoval: string) {
-  const skillsObj = storeSkills.get();
-  storeSkills.set({
+  const skillsObj = $skills.get();
+  $skills.set({
     skills: skillsObj.skills,
     sectionSkills: skillsObj.sectionSkills.filter(
       (curSectionSkill) => sectionSkillForRemoval !== curSectionSkill
@@ -67,10 +67,10 @@ function removeSectionSkill(sectionSkillForRemoval: string) {
 }
 
 function resetSectionSkills() {
-  storeSkills.set({ skills: storeSkills.get().skills, sectionSkills: [] });
+  $skills.set({ skills: $skills.get().skills, sectionSkills: [] });
 }
 export {
-  storeSkills,
+  $skills,
   addSkill,
   removeSkill,
   type SkillGroup,

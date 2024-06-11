@@ -17,7 +17,7 @@ import { Input } from "@/components/ui/input";
 import { toast } from "@/components/ui/use-toast";
 import { useStore } from "@nanostores/react";
 import {
-  storeEducation,
+  $education,
   addEducation,
   removeEducation,
   type EducationFormValue,
@@ -109,7 +109,7 @@ function EntryCard({
 export default function EducationSectionComponent() {
   const [isWorkOngoing, setIsWorkOngoing] = useState(false);
 
-  const educationStore = useStore(storeEducation);
+  const educationStore = useStore($education);
   const form = useForm<z.infer<typeof FormSchema>>({
     resolver: zodResolver(FormSchema),
     defaultValues: {},
