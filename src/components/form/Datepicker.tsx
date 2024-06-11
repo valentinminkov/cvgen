@@ -20,8 +20,6 @@ interface Props {
   field: ControllerRenderProps<any, any>;
 }
 export function DatePicker({ placeholder, field }: Props) {
-  const [date, setDate] = React.useState<Date>();
-
   return (
     <Popover>
       <PopoverTrigger asChild>
