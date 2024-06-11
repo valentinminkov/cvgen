@@ -1,6 +1,6 @@
 ---
 import { Button } from "@/components/ui/button";
-import Layout from "../layouts/Layout.astro";
+import Layout from "@/layouts/Layout.astro";
 import InputAccordion from "@/components/form/InputAccordion";
 
 const classes = {
@@ -12,7 +12,7 @@ const classes = {
   <main class=`${classes.main} flex flex-col gap-8`>
     <InputAccordion client:only="react" />
     <div>
-      <Button>Continue</Button>
+      <Button><a href="/create/visual">Continue</a></Button>
     </div>
   </main>
 </Layout>

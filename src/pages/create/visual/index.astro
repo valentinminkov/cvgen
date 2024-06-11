@@ -1,0 +1,28 @@
+---
+import { Button } from "@/components/ui/button";
+import Layout from "@/layouts/Layout.astro";
+import DataView from "@/components/dataView/Container";
+
+const classes = {
+  main: "bg-red-300 p-10",
+};
+---
+
+<Layout title="Welcome to Astro.">
+  <main class=`${classes.main} flex flex-col gap-8`>
+    <div>
+      Display the data here <br /><br />- Every section comes in different
+      component<br />- Components should be moveable with mouse to adjust
+      position
+      <br />- Components are packaged in a 'theme'
+      <br />- Components can but don't have to, have customisation options as a
+      package or per component
+    </div>
+    <div>
+      <div>
+        <DataView client:only="react" />
+        <Button>Continue</Button>
+      </div>
+    </div>
+  </main>
+</Layout>
