@@ -26,7 +26,7 @@ const {
   },
 } = content;
 
-test("Experience Section", async function () {
+test("Language Section", async function () {
   window.ResizeObserver = ResizeObserver;
 
   render(<LanguageSection />);
