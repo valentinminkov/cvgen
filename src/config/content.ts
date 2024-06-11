@@ -1,5 +1,6 @@
 const elementsContent = {
   SUBMIT_BUTTON: "Submit",
+  RESET_BUTTON: "Reset",
 };
 
 const componentsContent = {
@@ -10,6 +11,7 @@ const componentsContent = {
     LANGUAGE_TRAINING_SECTION: "Languages",
     JOB_SKILLS_SECTION: "Job skills",
     SUBMIT: elementsContent.SUBMIT_BUTTON,
+    FILLED_MARK_PERSONAL_SECTION: "Filled",
   },
   PersonalSection: {
     FIRST_NAME: "First name",
@@ -31,6 +33,7 @@ const componentsContent = {
     CITY: "City",
     COUNTRY: "Country",
     SUBMIT: elementsContent.SUBMIT_BUTTON,
+    RESET: elementsContent.RESET_BUTTON,
   },
   ExperienceSection: {
     ENTRIES: "ENTRIES",

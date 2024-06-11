@@ -12,8 +12,12 @@ import EducationSection from "@/components/form/EducationSection";
 import LanguageSection from "@/components/form/LanguageSection";
 import SkillsSection from "@/components/form/SkillsSection";
 import { content } from "@/config/content";
+import { $isPersonalDataFilled } from "@/stores/computed";
+import { useStore } from "@nanostores/react";
 
 export default function InputAccordion() {
+  const isPersonalDataFilled = useStore($isPersonalDataFilled);
+
   const {
     content: {
       components: {
@@ -23,15 +27,20 @@ export default function InputAccordion() {
           EDUCATION_TRAINING_SECTION,
           LANGUAGE_TRAINING_SECTION,
           JOB_SKILLS_SECTION,
+          FILLED_MARK_PERSONAL_SECTION,
         },
       },
     },
   } = content;
+
   return (
     <Accordion type="single" collapsible>
       {/* Personal data */}
       <AccordionItem value="item-1">
-        <AccordionTrigger>{PERSONAL_DATA_SECTION}</AccordionTrigger>
+        <AccordionTrigger>
+          {PERSONAL_DATA_SECTION}
+          {isPersonalDataFilled && <p>{FILLED_MARK_PERSONAL_SECTION}</p>}
+        </AccordionTrigger>
         <AccordionContent>
           <PersonalSection />
         </AccordionContent>

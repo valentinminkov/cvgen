@@ -27,7 +27,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { nationalities } from "@/config/nationalities";
 import { toast } from "@/components/ui/use-toast";
 import { useStore } from "@nanostores/react";
-import { $user, updateUserData } from "@/stores/userStore";
+import { $user, updateUserData, resetUserData } from "@/stores/userStore";
 import { content } from "@/config/content";
 
 const FormSchema = z.object({
@@ -79,6 +79,10 @@ export default function PersonalSection({ defaultFormValues }: Props) {
     toast({
       title: saved ? "Saved" : "Couldn't save data.",
     });
+  }
+
+  function onReset(e: any) {
+    resetUserData(form);
   }
 
   return (
@@ -382,7 +386,12 @@ export default function PersonalSection({ defaultFormValues }: Props) {
             </FormItem>
           )}
         />
-        <Button type="submit">{PersonalSection.SUBMIT}</Button>
+        <div className="flex gap-2">
+          <Button type="submit">{PersonalSection.SUBMIT}</Button>
+          <Button type="reset" variant={"ghost"} onClick={onReset}>
+            {PersonalSection.RESET}
+          </Button>
+        </div>
       </form>
     </Form>
   );
