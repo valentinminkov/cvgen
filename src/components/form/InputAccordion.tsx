@@ -12,11 +12,21 @@ import EducationSection from "@/components/form/EducationSection";
 import LanguageSection from "@/components/form/LanguageSection";
 import SkillsSection from "@/components/form/SkillsSection";
 import { content } from "@/config/content";
-import { $isPersonalDataFilled } from "@/stores/computed";
+import {
+  $skillsEntered,
+  $educationsEntered,
+  $experiencesEntered,
+  $isPersonalDataFilled,
+  $languagesEntered,
+} from "@/stores/computed";
 import { useStore } from "@nanostores/react";
 
 export default function InputAccordion() {
+  const skillsEntered = useStore($skillsEntered);
+  const educationsEntered = useStore($educationsEntered);
+  const experiencesEntered = useStore($experiencesEntered);
   const isPersonalDataFilled = useStore($isPersonalDataFilled);
+  const languagesEntered = useStore($languagesEntered);
 
   const {
     content: {
@@ -28,6 +38,10 @@ export default function InputAccordion() {
           LANGUAGE_TRAINING_SECTION,
           JOB_SKILLS_SECTION,
           FILLED_MARK_PERSONAL_SECTION,
+          SKILLS_LABEL,
+          LANGUAGES_LABEL,
+          EDUCATIONS_LABEL,
+          EXPERIENCES_LABEL,
         },
       },
     },
@@ -47,28 +61,56 @@ export default function InputAccordion() {
       </AccordionItem>
       {/* Work experience */}
       <AccordionItem value={WORK_EXPERIENCE_SECTION}>
-        <AccordionTrigger>{WORK_EXPERIENCE_SECTION}</AccordionTrigger>
+        <AccordionTrigger>
+          {WORK_EXPERIENCE_SECTION}
+          {!!experiencesEntered && (
+            <div>
+              {experiencesEntered} {EXPERIENCES_LABEL}
+            </div>
+          )}
+        </AccordionTrigger>
         <AccordionContent>
           <ExperienceSection />
         </AccordionContent>
       </AccordionItem>
       {/* Education and training */}
       <AccordionItem value={EDUCATION_TRAINING_SECTION}>
-        <AccordionTrigger>{EDUCATION_TRAINING_SECTION}</AccordionTrigger>
+        <AccordionTrigger>
+          {EDUCATION_TRAINING_SECTION}
+          {!!educationsEntered && (
+            <div>
+              {educationsEntered} {EDUCATIONS_LABEL}
+            </div>
+          )}
+        </AccordionTrigger>
         <AccordionContent>
           <EducationSection />
         </AccordionContent>
       </AccordionItem>
       {/* Language skills */}
       <AccordionItem value={LANGUAGE_TRAINING_SECTION}>
-        <AccordionTrigger>{LANGUAGE_TRAINING_SECTION}</AccordionTrigger>
+        <AccordionTrigger>
+          {LANGUAGE_TRAINING_SECTION}
+          {!!languagesEntered && (
+            <div>
+              {languagesEntered} {LANGUAGES_LABEL}
+            </div>
+          )}
+        </AccordionTrigger>
         <AccordionContent>
           <LanguageSection />
         </AccordionContent>
       </AccordionItem>
       {/* Job skills */}
       <AccordionItem value={JOB_SKILLS_SECTION}>
-        <AccordionTrigger>{JOB_SKILLS_SECTION}</AccordionTrigger>
+        <AccordionTrigger>
+          {JOB_SKILLS_SECTION}
+          {!!skillsEntered && (
+            <div>
+              {skillsEntered} {SKILLS_LABEL}
+            </div>
+          )}
+        </AccordionTrigger>
         <AccordionContent>
           <SkillsSection />
         </AccordionContent>

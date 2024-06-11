@@ -12,6 +12,10 @@ const componentsContent = {
     JOB_SKILLS_SECTION: "Job skills",
     SUBMIT: elementsContent.SUBMIT_BUTTON,
     FILLED_MARK_PERSONAL_SECTION: "Filled",
+    EXPERIENCES_LABEL: "Experiences",
+    EDUCATIONS_LABEL: "Education and trainings",
+    LANGUAGES_LABEL: "Languages",
+    SKILLS_LABEL: "Skill",
   },
   PersonalSection: {
     FIRST_NAME: "First name",
