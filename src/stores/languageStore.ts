@@ -24,7 +24,7 @@ interface LanguageSubmitFormPayload {
 
 interface LanguageFormValue {
   motherLanguage: string;
-  otherLanguages?: Language[];
+  otherLanguages: Language[];
 }
 
 type PersistentLanguageStore = Record<string, any> & {
