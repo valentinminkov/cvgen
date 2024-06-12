@@ -2,14 +2,17 @@
 
 import { $user } from "@/stores/userStore";
 import { useStore } from "@nanostores/react";
+import { viewComponentStyles } from "@/components/dataView/config";
 
 interface Props {}
+
+const { containerClass } = viewComponentStyles;
 
 export default function PersonalView({}: Props) {
   const user = useStore($user);
 
   return (
-    <div className="max-w-3xl mx-auto p-8 bg-white rounded-lg shadow-lg">
+    <div className={`${containerClass}`}>
       <div className="mb-8">
         <h1 className="text-4xl font-extrabold text-gray-900">
           Personal Section

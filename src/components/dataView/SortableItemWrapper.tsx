@@ -2,18 +2,16 @@
 
 import { useSortable } from "@dnd-kit/sortable";
 import { CSS } from "@dnd-kit/utilities";
+import { viewContainerStyles } from "@/components/dataView/config";
+
+const { containerClass } = viewContainerStyles;
 
 interface Props {
   id: string;
   children: React.ReactNode;
-  styleClasses?: string;
 }
 
-export default function SortableItemWrapper({
-  id,
-  children,
-  styleClasses,
-}: Props) {
+export default function SortableItemWrapper({ id, children }: Props) {
   const { attributes, listeners, setNodeRef, transform, transition } =
     useSortable({ id: id });
 
@@ -28,7 +26,7 @@ export default function SortableItemWrapper({
       style={style}
       {...attributes}
       {...listeners}
-      className={`${styleClasses ?? ""}`}
+      className={`${containerClass ?? ""}`}
     >
       {children}
     </div>

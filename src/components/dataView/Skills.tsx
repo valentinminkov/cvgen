@@ -2,8 +2,13 @@
 
 import { $skills } from "@/stores/skillsStore";
 import { useStore } from "@nanostores/react";
+import { viewComponentStyles } from "@/components/dataView/config";
 
-interface Props {}
+interface Props {
+  containerClass?: string;
+}
+
+const { containerClass } = viewComponentStyles;
 
 export default function SkillsView({}: Props) {
   const { skills, sectionSkills } = useStore($skills);
@@ -11,7 +16,7 @@ export default function SkillsView({}: Props) {
   const removeSkill = (index: number) => alert("Remove skill");
 
   return (
-    <div className="max-w-3xl mx-auto p-8 bg-white rounded-lg shadow-lg">
+    <div className={`${containerClass}`}>
       <h1 className="text-3xl font-semibold text-gray-800 mb-6">Skills</h1>
       {skills.length > 0 ? (
         <div className="divide-y divide-gray-200">

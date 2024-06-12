@@ -1,8 +1,10 @@
 "use client";
 import { $education } from "@/stores/educationStore";
 import { useStore } from "@nanostores/react";
+import { viewComponentStyles } from "@/components/dataView/config";
 
 interface Props {}
+const { containerClass } = viewComponentStyles;
 
 export default function EducationView({}: Props) {
   const { educations } = useStore($education);
@@ -10,7 +12,7 @@ export default function EducationView({}: Props) {
   const removeEducation = (index: number) => alert("Remove education");
 
   return (
-    <div className="p-4">
+    <div className={`${containerClass}`}>
       <h1 className="text-2xl font-bold mb-4">Education</h1>
       {educations.length === 0 ? (
         <p>No education entries available.</p>

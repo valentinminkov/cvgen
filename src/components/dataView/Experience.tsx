@@ -1,8 +1,11 @@
 "use client";
 import { $experiences } from "@/stores/experienceStore";
 import { useStore } from "@nanostores/react";
+import { viewComponentStyles } from "@/components/dataView/config";
 
 interface Props {}
+
+const { containerClass } = viewComponentStyles;
 
 export default function ExperienceView({}: Props) {
   const { experiences } = useStore($experiences);
@@ -10,7 +13,7 @@ export default function ExperienceView({}: Props) {
   const removeExperience = (index: number) => alert("remove experience");
 
   return (
-    <div className="p-4">
+    <div className={`${containerClass}`}>
       <h1 className="text-2xl font-bold mb-4">Experience</h1>
       {experiences.length === 0 ? (
         <p>No experience entries available.</p>

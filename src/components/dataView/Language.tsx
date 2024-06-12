@@ -2,8 +2,11 @@
 
 import { $language } from "@/stores/languageStore";
 import { useStore } from "@nanostores/react";
+import { viewComponentStyles } from "@/components/dataView/config";
 
 interface Props {}
+
+const { containerClass } = viewComponentStyles;
 
 export default function LanguageView({}: Props) {
   const { language } = useStore($language);
@@ -11,7 +14,7 @@ export default function LanguageView({}: Props) {
   const removeLanguage = (index: number) => alert("remove language");
 
   return (
-    <div className="max-w-3xl mx-auto p-8 bg-white rounded-lg shadow-lg">
+    <div className={`${containerClass}`}>
       <h1 className="text-3xl font-semibold text-gray-800 mb-6">
         Language Skills
       </h1>

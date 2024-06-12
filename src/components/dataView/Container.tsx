@@ -17,8 +17,6 @@ interface Sections {
   [key: string]: React.ReactNode;
 }
 
-const sectionContainerClasses = `border-solid border-2 border-sky-500 p-5`;
-
 const sections: Sections = {
   personal: <Personal />,
   educaton: <Education />,
@@ -26,8 +24,6 @@ const sections: Sections = {
   skills: <Skills />,
   experience: <Experience />,
 };
-
-const sectionKeys = Object.keys(sections);
 
 export default function Container() {
   const [items, setItems] = useState(Object.keys(sections));
@@ -37,11 +33,7 @@ export default function Container() {
       <DndContext collisionDetection={closestCenter} onDragEnd={handleDragEnd}>
         <SortableContext items={items} strategy={verticalListSortingStrategy}>
           {items.map((sectionKey: string) => (
-            <SortableItemWrapper
-              id={sectionKey}
-              key={sectionKey}
-              styleClasses={sectionContainerClasses}
-            >
+            <SortableItemWrapper id={sectionKey} key={sectionKey}>
               {sections[sectionKey]}
             </SortableItemWrapper>
           ))}
