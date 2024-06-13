@@ -2,14 +2,10 @@
 import { Button } from "@/components/ui/button";
 import Layout from "@/layouts/Layout.astro";
 import InputAccordion from "@/components/form/InputAccordion";
-
-const classes = {
-  main: "bg-red-300 p-10",
-};
 ---
 
 <Layout title="Welcome to Astro.">
-  <main class=`${classes.main} flex flex-col gap-8`>
+  <main class="flex flex-col gap-8">
     <InputAccordion client:only="react" />
     <div>
       <Button><a href="/create/visual">Continue</a></Button>
