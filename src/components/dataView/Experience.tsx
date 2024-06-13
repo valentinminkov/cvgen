@@ -5,7 +5,15 @@ import { viewComponentStyles } from "@/components/dataView/config";
 
 interface Props {}
 
-const { containerClass } = viewComponentStyles;
+const {
+  paragraphClass,
+  containerClass,
+  headerClass,
+  listContainerClass,
+  dangerButtonClass,
+  listEntryContainerClass,
+  subheaderClass,
+} = viewComponentStyles;
 
 export default function ExperienceView({}: Props) {
   const { experiences } = useStore($experiences);
@@ -14,28 +22,28 @@ export default function ExperienceView({}: Props) {
 
   return (
     <div className={`${containerClass}`}>
-      <h1 className="text-2xl font-bold mb-4">Experience</h1>
+      <h1 className={headerClass}>Experience</h1>
       {experiences.length === 0 ? (
         <p>No experience entries available.</p>
       ) : (
-        <ul className="space-y-4">
+        <ul className={listContainerClass}>
           {experiences.map((experience, index) => (
-            <li key={index} className="border p-4 rounded-md shadow-sm">
+            <li key={index} className={listEntryContainerClass}>
               <div className="flex justify-between items-center">
                 <div>
-                  <h2 className="text-xl font-semibold">{experience.title}</h2>
-                  <p className="text-gray-600">{experience.country}</p>
-                  <p className="text-gray-500">
+                  <h2 className={subheaderClass}>{experience.title}</h2>
+                  <p className={paragraphClass}>{experience.country}</p>
+                  <p className={paragraphClass}>
                     {experience.startDate.toString()} -{" "}
                     {experience.ongoing
                       ? "Present"
                       : experience.endDate?.toString()}
                   </p>
-                  <p className="mt-2">{experience.workDescription}</p>
+                  <p>{experience.workDescription}</p>
                 </div>
                 <button
                   onClick={() => removeExperience(index)}
-                  className="text-red-500 hover:text-red-700"
+                  className={dangerButtonClass}
                 >
                   Remove
                 </button>

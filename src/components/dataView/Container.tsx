@@ -12,13 +12,15 @@ import {
 } from "@dnd-kit/sortable";
 import SortableItemWrapper from "./SortableItemWrapper";
 import { useState } from "react";
+import { viewContainerStyles } from "@/components/dataView/config";
 
 interface Sections {
   [key: string]: React.ReactNode;
 }
 
-const sections: Sections = {
-  personal: <Personal />,
+const { containerClass } = viewContainerStyles;
+
+const sortableSections: Sections = {
   educaton: <Education />,
   languages: <Language />,
   skills: <Skills />,
@@ -26,15 +28,16 @@ const sections: Sections = {
 };
 
 export default function Container() {
-  const [items, setItems] = useState(Object.keys(sections));
+  const [items, setItems] = useState(Object.keys(sortableSections));
 
   return (
-    <div className="bg-gray-500 p-10">
+    <div className={containerClass}>
+      <Personal />
       <DndContext collisionDetection={closestCenter} onDragEnd={handleDragEnd}>
         <SortableContext items={items} strategy={verticalListSortingStrategy}>
           {items.map((sectionKey: string) => (
             <SortableItemWrapper id={sectionKey} key={sectionKey}>
-              {sections[sectionKey]}
+              {sortableSections[sectionKey]}
             </SortableItemWrapper>
           ))}
         </SortableContext>

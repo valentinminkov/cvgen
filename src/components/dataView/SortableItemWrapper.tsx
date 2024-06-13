@@ -2,9 +2,9 @@
 
 import { useSortable } from "@dnd-kit/sortable";
 import { CSS } from "@dnd-kit/utilities";
-import { viewContainerStyles } from "@/components/dataView/config";
+import { viewWrapperStyles } from "@/components/dataView/config";
 
-const { containerClass } = viewContainerStyles;
+const { containerClass } = viewWrapperStyles;
 
 interface Props {
   id: string;

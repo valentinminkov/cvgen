@@ -8,7 +8,15 @@ interface Props {
   containerClass?: string;
 }
 
-const { containerClass } = viewComponentStyles;
+const {
+  containerClass,
+  headerClass,
+  subheaderClass,
+  dangerButtonClass,
+  listContainerClass,
+  listEntryContainerClass,
+  labelClass,
+} = viewComponentStyles;
 
 export default function SkillsView({}: Props) {
   const { skills, sectionSkills } = useStore($skills);
@@ -17,29 +25,29 @@ export default function SkillsView({}: Props) {
 
   return (
     <div className={`${containerClass}`}>
-      <h1 className="text-3xl font-semibold text-gray-800 mb-6">Skills</h1>
+      <h1 className={headerClass}>Skills</h1>
       {skills.length > 0 ? (
         <div className="divide-y divide-gray-200">
           {skills.map((skillGroup, index) => (
             <div key={index} className="py-4">
-              <h2 className="text-xl font-semibold text-gray-800">
-                {skillGroup.type}
-              </h2>
+              <h2 className={subheaderClass}>{skillGroup.type}</h2>
               <div className="flex items-center mt-2">
-                <span className="mr-2 text-gray-700">Level:</span>
+                <span className={labelClass}>Level:</span>
                 <span>{skillGroup.level}</span>
               </div>
-              <div className="mt-2">
-                <p className="text-gray-700">Skills:</p>
-                <ul className="list-disc list-inside">
+              <div>
+                <p className={labelClass}>Skills:</p>
+                <ul className={listContainerClass}>
                   {skillGroup.skills?.map((skill, idx) => (
-                    <li key={idx}>{skill}</li>
+                    <li key={idx} className={listEntryContainerClass}>
+                      {skill}
+                    </li>
                   ))}
                 </ul>
               </div>
               <button
                 onClick={() => removeSkill(index)}
-                className="mt-4 py-1 px-3 bg-red-500 text-white rounded hover:bg-red-600 focus:outline-none focus:ring focus:ring-red-200"
+                className={dangerButtonClass}
               >
                 Remove Skill Group
               </button>
