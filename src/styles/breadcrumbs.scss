@@ -1,0 +1,6 @@
+@use "astro-breadcrumbs/breadcrumbs.scss" with (
+  $size-font: 18px,
+  $color-link: white,
+  $color-hover-link: hsl(0, 0%, 5%),
+  $color-is-current: hsl(0, 0%, 5%)
+);

@@ -29,6 +29,7 @@
     "@radix-ui/react-switch": "^1.0.3",
     "@radix-ui/react-toast": "^1.1.5",
     "astro": "^4.9.2",
+    "astro-breadcrumbs": "^2.3.1",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.1",
     "date-fns": "^3.6.0",
@@ -52,6 +53,7 @@
     "@types/react-dom": "^18.3.0",
     "@vitest/ui": "latest",
     "jsdom": "^24.1.0",
+    "sass": "^1.77.5",
     "vite": "latest",
     "vitest": "^1.6.0"
   }
