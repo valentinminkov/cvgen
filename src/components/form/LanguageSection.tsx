@@ -15,7 +15,10 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { toast } from "@/components/ui/use-toast";
-import LanguageSelector from "@/components/form/LanguageSelector";
+import {
+  LanguageLevelSelector,
+  LanguageSelector,
+} from "@/components/form/LanguageSelector";
 import { useStore } from "@nanostores/react";
 import {
   addLanguage,
@@ -166,7 +169,7 @@ export default function LanguageSectionComponent() {
               <FormItem>
                 <FormLabel>{LanguageSection.LISTENING}</FormLabel>
                 <FormControl>
-                  <Input placeholder="Acme" {...field} />
+                  <LanguageLevelSelector field={field} />
                 </FormControl>
                 <FormDescription></FormDescription>
                 <FormMessage />
@@ -182,7 +185,7 @@ export default function LanguageSectionComponent() {
               <FormItem>
                 <FormLabel>{LanguageSection.READING}</FormLabel>
                 <FormControl>
-                  <Input placeholder="Acme" {...field} />
+                  <LanguageLevelSelector field={field} />
                 </FormControl>
                 <FormDescription></FormDescription>
                 <FormMessage />
@@ -198,7 +201,7 @@ export default function LanguageSectionComponent() {
               <FormItem>
                 <FormLabel>{LanguageSection.WRITING}</FormLabel>
                 <FormControl>
-                  <Input placeholder="Acme" {...field} />
+                  <LanguageLevelSelector field={field} />
                 </FormControl>
                 <FormDescription></FormDescription>
                 <FormMessage />
