@@ -11,8 +11,8 @@ const {
   headerClass,
   subheaderClass,
   paragraphClass,
-  gridContainerClass,
   labelClass,
+  flexRowClass,
 } = viewComponentStyles;
 
 export default function PersonalView({}: Props) {
@@ -20,12 +20,9 @@ export default function PersonalView({}: Props) {
 
   return (
     <div className={`${containerClass}`}>
-      <div>
-        <h1 className={headerClass}>Personal Section</h1>
-      </div>
-      <div className={gridContainerClass}>
+      <div className={flexRowClass}>
         <div>
-          <h2 className={subheaderClass}>Personal Information</h2>
+          <h1 className={headerClass}>Personal Information</h1>
           <p className={paragraphClass}>
             <span className={labelClass}>First Name:</span> {user.firstName}
           </p>
@@ -49,6 +46,13 @@ export default function PersonalView({}: Props) {
             {user?.dateOfBirth?.toString()}
           </p>
         </div>
+        {user?.picture && (
+          <div>
+            <img className="" src={user.picture} width={160} height={160} />
+          </div>
+        )}
+      </div>
+      <div className={flexRowClass}>
         <div>
           <h2 className={subheaderClass}>Address</h2>
           <p className={paragraphClass}>
@@ -75,13 +79,13 @@ export default function PersonalView({}: Props) {
             <span className={labelClass}>Nationality:</span> {user.nationality}
           </p>
         </div>
+        {user.aboutMe && (
+          <div>
+            <h2 className={subheaderClass}>About Me</h2>
+            <p className={paragraphClass}>{user.aboutMe}</p>
+          </div>
+        )}
       </div>
-      {user.aboutMe && (
-        <div>
-          <h2 className={subheaderClass}>About Me</h2>
-          <p className={paragraphClass}>{user.aboutMe}</p>
-        </div>
-      )}
     </div>
   );
 }
