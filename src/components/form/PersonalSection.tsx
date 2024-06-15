@@ -30,6 +30,8 @@ import { useStore } from "@nanostores/react";
 import { $user, updateUserData, resetUserData } from "@/stores/userStore";
 import { content } from "@/config/content";
 import { useState, type ChangeEvent } from "react";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { sectionClasses } from "@/components/form/config";
 
 const FormSchema = z.object({
   firstName: z.string().min(2, {
@@ -108,23 +110,33 @@ export default function PersonalSection({ defaultFormValues }: Props) {
 
   return (
     <Form {...form}>
-      <form onSubmit={form.handleSubmit(onSubmit)} className="w-2/3 space-y-6 ">
-        <FormField
-          defaultValue={""}
-          control={form.control}
-          name="picture"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>{PersonalSection.PICTURE}</FormLabel>
-              <FormControl onChange={handlePictureFileChange}>
-                <Input id="picture" type="file" {...field} />
-              </FormControl>
-              <FormDescription></FormDescription>
-              <FormMessage />
-            </FormItem>
+      <form
+        onSubmit={form.handleSubmit(onSubmit)}
+        className={sectionClasses.form}
+      >
+        <div className="flex justify-between">
+          <FormField
+            defaultValue={""}
+            control={form.control}
+            name="picture"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>{PersonalSection.PICTURE}</FormLabel>
+                <FormControl onChange={handlePictureFileChange}>
+                  <Input id="picture" type="file" {...field} />
+                </FormControl>
+                <FormDescription></FormDescription>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+          {userStore?.picture && (
+            <Avatar className="w-24 h-24 rounded-sm">
+              <AvatarImage src={userStore.picture} />
+              <AvatarFallback>CN</AvatarFallback>
+            </Avatar>
           )}
-        />
-
+        </div>
         <FormField
           defaultValue={
             !!userStore.firstName
