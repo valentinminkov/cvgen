@@ -15,6 +15,7 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { toast } from "@/components/ui/use-toast";
+import LanguageSelector from "@/components/form/LanguageSelector";
 import { useStore } from "@nanostores/react";
 import {
   addLanguage,
@@ -133,7 +134,7 @@ export default function LanguageSectionComponent() {
               <FormItem>
                 <FormLabel>{LanguageSection.MOTHER_LANGUAGES}</FormLabel>
                 <FormControl>
-                  <Input placeholder="Acme" {...field} />
+                  <LanguageSelector field={field} />
                 </FormControl>
                 <FormDescription></FormDescription>
                 <FormMessage />
@@ -149,7 +150,7 @@ export default function LanguageSectionComponent() {
               <FormItem>
                 <FormLabel>{LanguageSection.LANGUAGE}</FormLabel>
                 <FormControl>
-                  <Input placeholder="Acme" {...field} />
+                  <LanguageSelector field={field} />
                 </FormControl>
                 <FormDescription></FormDescription>
                 <FormMessage />
