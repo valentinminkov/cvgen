@@ -20,9 +20,10 @@ const componentsContent = {
   PersonalSection: {
     FIRST_NAME: "First name",
     SECOND_NAME: "Second name",
-    MALE: "MALE",
-    FEMALE: "FEMALE",
-    OTHER: "OTHER",
+    MALE: "Male",
+    PICTURE: "Picture",
+    FEMALE: "Female",
+    OTHER: "Other",
     ABOUT: "About",
     DATE_OF_BIRTH: "Date of birth",
     GENDER: "Gender",

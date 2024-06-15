@@ -29,6 +29,7 @@ import { toast } from "@/components/ui/use-toast";
 import { useStore } from "@nanostores/react";
 import { $user, updateUserData, resetUserData } from "@/stores/userStore";
 import { content } from "@/config/content";
+import { useState, type ChangeEvent } from "react";
 
 const FormSchema = z.object({
   firstName: z.string().min(2, {
@@ -37,6 +38,7 @@ const FormSchema = z.object({
   secondName: z.string().min(2, {
     message: "",
   }),
+  picture: z.string().optional(),
   aboutMe: z.string().optional(),
   dateOfBirth: z.date(),
   gender: z.string(),
@@ -73,9 +75,11 @@ export default function PersonalSection({ defaultFormValues }: Props) {
     resolver: zodResolver(FormSchema),
     defaultValues: {},
   });
+  const [fileData, setFileData] = useState<string>("");
 
   function onSubmit(data: PersonalFormType) {
-    const saved = updateUserData(data);
+    const updatedData: PersonalFormType = { ...data, picture: fileData };
+    const saved = updateUserData(updatedData);
     toast({
       title: saved ? "Saved" : "Couldn't save data.",
     });
@@ -85,9 +89,42 @@ export default function PersonalSection({ defaultFormValues }: Props) {
     resetUserData(form);
   }
 
+  function handlePictureFileChange(event: ChangeEvent<HTMLInputElement>) {
+    const file = event.target.files?.length && event.target.files[0];
+
+    if (file) {
+      const reader = new FileReader();
+
+      reader.onload = (e) => {
+        const base64String = e?.target?.result as string;
+
+        if (base64String) {
+          setFileData(base64String);
+        }
+      };
+      reader.readAsDataURL(file);
+    }
+  }
+
   return (
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)} className="w-2/3 space-y-6 ">
+        <FormField
+          defaultValue={""}
+          control={form.control}
+          name="picture"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>{PersonalSection.PICTURE}</FormLabel>
+              <FormControl onChange={handlePictureFileChange}>
+                <Input id="picture" type="file" {...field} />
+              </FormControl>
+              <FormDescription></FormDescription>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+
         <FormField
           defaultValue={
             !!userStore.firstName

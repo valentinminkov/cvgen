@@ -18,6 +18,7 @@ export interface UserFormValue {
   city: string;
   country: string;
   aboutMe?: string;
+  picture?: string;
   dateOfBirth?: Date | string;
 }
 
@@ -38,6 +39,7 @@ const initialState: PersistentUserFormValue = {
   city: "",
   country: "",
   aboutMe: "",
+  picture: "",
   email: "",
 };
 
