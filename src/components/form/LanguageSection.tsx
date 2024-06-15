@@ -32,6 +32,7 @@ import {
 import { Label } from "@/components/ui/label";
 import { CrossCircledIcon } from "@radix-ui/react-icons";
 import { content } from "@/config/content";
+import { sectionClasses } from "./config";
 
 const {
   content: {
@@ -121,7 +122,7 @@ export default function LanguageSectionComponent() {
         )}
       <Form {...languageForm}>
         <form
-          className="w-2/3 space-y-6"
+          className={sectionClasses.form}
           onSubmit={languageForm.handleSubmit(onLanguageSubmit)}
         >
           <FormField

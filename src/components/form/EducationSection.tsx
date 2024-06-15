@@ -3,6 +3,7 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
+import { sectionClasses } from "@/components/form/config";
 import { Button } from "@/components/ui/button";
 import {
   Form,
@@ -144,7 +145,7 @@ export default function EducationSectionComponent() {
       <Form {...form}>
         <form
           onSubmit={form.handleSubmit(onSubmit)}
-          className="w-2/3 space-y-6 "
+          className={sectionClasses.form}
         >
           <FormField
             defaultValue=""

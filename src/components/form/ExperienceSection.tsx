@@ -1,5 +1,6 @@
 "use client";
 
+import { sectionClasses } from "@/components/form/config";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
@@ -129,7 +130,7 @@ export default function ExperienceSection() {
       <Form {...form}>
         <form
           onSubmit={form.handleSubmit(onSubmit)}
-          className="w-2/3 space-y-6 "
+          className={sectionClasses.form}
         >
           <FormField
             defaultValue=""

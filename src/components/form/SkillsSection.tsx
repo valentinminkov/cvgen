@@ -33,6 +33,7 @@ import {
 } from "@/stores/skillsStore";
 import { getRandomString } from "@/lib/utils";
 import { content } from "@/config/content";
+import { sectionClasses } from "@/components/form/config";
 
 const {
   content: {
@@ -122,7 +123,7 @@ export default function SkillsSectionComponent() {
       )}
       <Form {...skillForm}>
         <form
-          className="w-2/3 space-y-6"
+          className={sectionClasses.form}
           onSubmit={skillForm.handleSubmit(onSkillSubmit)}
           onKeyDown={onFormKeyDown}
         >

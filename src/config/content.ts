@@ -59,7 +59,7 @@ const componentsContent = {
     CITY: "City",
     DESCRIPTION: "Description",
     START_DATE: "Start date",
-    ONGOING: "ONGOING",
+    ONGOING: "Ongoing",
     END_DATE: "End date",
     SUBMIT: elementsContent.SECTION_FORM_SUBMIT_BUTTON,
   },
