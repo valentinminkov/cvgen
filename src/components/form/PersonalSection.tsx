@@ -25,7 +25,6 @@ import { CountrySelector } from "@/components/form/CountrySelector";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { AspectRatio } from "@/components/ui/aspect-ratio";
-
 import { nationalities } from "@/config/nationalities";
 import { toast } from "@/components/ui/use-toast";
 import { useStore } from "@nanostores/react";
@@ -39,7 +38,6 @@ import {
 } from "@/stores/userStore";
 import { content } from "@/config/content";
 import { useState, type ChangeEvent } from "react";
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { sectionClasses } from "@/components/form/config";
 import AddSocialMedia from "@/components/form/AddSocialMedia";
 import { CrossCircledIcon } from "@radix-ui/react-icons";
@@ -131,71 +129,77 @@ export default function PersonalSection({ defaultFormValues }: Props) {
         className={sectionClasses.form}
       >
         <div className="flex justify-between">
-          <FormField
-            defaultValue={""}
-            control={form.control}
-            name="picture"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>{PersonalSection.PICTURE}</FormLabel>
-                <FormControl onChange={handlePictureFileChange}>
-                  <Input id="picture" type="file" {...field} />
-                </FormControl>
-                <FormDescription></FormDescription>
-                <FormMessage />
-              </FormItem>
+          <div className="flex flex-col gap-2">
+            <FormField
+              defaultValue={
+                !!userStore.firstName
+                  ? userStore.firstName
+                  : defaultFormValues?.firstName
+              }
+              control={form.control}
+              name="firstName"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>{PersonalSection.FIRST_NAME}</FormLabel>
+                  <FormControl>
+                    <Input placeholder="John" {...field} />
+                  </FormControl>
+                  <FormDescription></FormDescription>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+            <FormField
+              defaultValue={
+                !!userStore.secondName
+                  ? userStore.secondName
+                  : defaultFormValues?.secondName
+              }
+              control={form.control}
+              name="secondName"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>{PersonalSection.SECOND_NAME}</FormLabel>
+                  <FormControl>
+                    <Input placeholder="Doe" {...field} />
+                  </FormControl>
+                  <FormDescription></FormDescription>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+          </div>
+
+          <div className="flex flex-col gap-10">
+            {userStore?.picture && (
+              <div className="w-[80px] h-[80px] self-center">
+                <AspectRatio ratio={16 / 9}>
+                  <img
+                    src={userStore.picture}
+                    alt="Image"
+                    className="rounded-md object-cover"
+                  />
+                </AspectRatio>
+              </div>
             )}
-          />
-          {userStore?.picture && (
-            <div className="w-[80px]">
-              <AspectRatio ratio={16 / 9}>
-                <img
-                  src={userStore.picture}
-                  alt="Image"
-                  className="rounded-md object-cover"
-                />
-              </AspectRatio>
-            </div>
-          )}
+
+            <FormField
+              defaultValue={""}
+              control={form.control}
+              name="picture"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>{PersonalSection.PICTURE}</FormLabel>
+                  <FormControl onChange={handlePictureFileChange}>
+                    <Input id="picture" type="file" {...field} />
+                  </FormControl>
+                  <FormDescription></FormDescription>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+          </div>
         </div>
-        <FormField
-          defaultValue={
-            !!userStore.firstName
-              ? userStore.firstName
-              : defaultFormValues?.firstName
-          }
-          control={form.control}
-          name="firstName"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>{PersonalSection.FIRST_NAME}</FormLabel>
-              <FormControl>
-                <Input placeholder="John" {...field} />
-              </FormControl>
-              <FormDescription></FormDescription>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
-        <FormField
-          defaultValue={
-            !!userStore.secondName
-              ? userStore.secondName
-              : defaultFormValues?.secondName
-          }
-          control={form.control}
-          name="secondName"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>{PersonalSection.SECOND_NAME}</FormLabel>
-              <FormControl>
-                <Input placeholder="Doe" {...field} />
-              </FormControl>
-              <FormDescription></FormDescription>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
         <FormField
           defaultValue={
             !!userStore.aboutMe ? userStore.aboutMe : defaultFormValues?.aboutMe
