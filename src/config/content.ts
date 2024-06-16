@@ -39,6 +39,14 @@ const componentsContent = {
     COUNTRY: "Country",
     SUBMIT: elementsContent.SECTION_FORM_SUBMIT_BUTTON,
     RESET: elementsContent.RESET_BUTTON,
+    SOCIAL_MEDIA_ENTRIES: "Social media entries",
+  },
+  AddSocialMedia: {
+    ENTER_SOCIAL_MEDIA: "Enter Social Media",
+    NAME: "Name",
+    URL: "Url",
+    SOCIAL_MEDIAL_URL: "Social media time",
+    ADD_SOCIAL_MEDIA: "Add social media",
   },
   ExperienceSection: {
     ENTRIES: "ENTRIES",

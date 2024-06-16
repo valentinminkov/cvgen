@@ -27,11 +27,20 @@ import { Textarea } from "@/components/ui/textarea";
 import { nationalities } from "@/config/nationalities";
 import { toast } from "@/components/ui/use-toast";
 import { useStore } from "@nanostores/react";
-import { $user, updateUserData, resetUserData } from "@/stores/userStore";
+import {
+  $user,
+  updateUserData,
+  addNewSocialMedia,
+  resetUserData,
+  type SocialMedia,
+  removeSocialMediaByName,
+} from "@/stores/userStore";
 import { content } from "@/config/content";
 import { useState, type ChangeEvent } from "react";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { sectionClasses } from "@/components/form/config";
+import AddSocialMedia from "@/components/form/AddSocialMedia";
+import { CrossCircledIcon } from "@radix-ui/react-icons";
 
 const FormSchema = z.object({
   firstName: z.string().min(2, {
@@ -89,6 +98,11 @@ export default function PersonalSection({ defaultFormValues }: Props) {
 
   function onReset(e: any) {
     resetUserData(form);
+  }
+
+  function addSocialMedia(newSocialMedia: SocialMedia) {
+    const added = addNewSocialMedia(newSocialMedia);
+    return added;
   }
 
   function handlePictureFileChange(event: ChangeEvent<HTMLInputElement>) {
@@ -195,6 +209,48 @@ export default function PersonalSection({ defaultFormValues }: Props) {
             </FormItem>
           )}
         />
+
+        {userStore?.socialMedia && !!userStore.socialMedia.length && (
+          <div>
+            <h3
+              className="py-4
+"
+            >
+              {PersonalSection.SOCIAL_MEDIA_ENTRIES}
+            </h3>
+
+            <div className="bg-gray-500 p-2">
+              {userStore.socialMedia?.map((socialMediaEntry) => {
+                return (
+                  <div
+                    key={socialMediaEntry.name + socialMediaEntry.url}
+                    className="py-2 border-solid border-b-2"
+                  >
+                    <div
+                      onClick={() => {
+                        removeSocialMediaByName(socialMediaEntry.name);
+                      }}
+                      className="cursor-pointer hover:opacity-50 p-2"
+                    >
+                      <CrossCircledIcon />
+                    </div>
+
+                    {/* {socialMediaEntry?.icon && (
+                    <img src={socialMediaEntry.icon} width={32} height={32} />
+                  )} */}
+                    <div className="py-6">
+                      <p>{socialMediaEntry.name}</p>
+                      <a href={socialMediaEntry.url}>{socialMediaEntry.url}</a>
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
+          </div>
+        )}
+
+        <AddSocialMedia addSocialMedia={addSocialMedia} />
+
         <FormField
           defaultValue={
             typeof userStore.dateOfBirth === "string"
