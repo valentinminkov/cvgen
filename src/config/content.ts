@@ -49,7 +49,7 @@ const componentsContent = {
     ADD_SOCIAL_MEDIA: "Add social media",
   },
   ExperienceSection: {
-    ENTRIES: "ENTRIES",
+    ENTRIES: "Entries",
     COMPANY_NAME: "Company name",
     LOCATION: "Location",
     WORK_DESCRIPTION: "Work description",

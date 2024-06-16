@@ -24,6 +24,8 @@ import { DatePicker } from "@/components/form/Datepicker";
 import { CountrySelector } from "@/components/form/CountrySelector";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
+import { AspectRatio } from "@/components/ui/aspect-ratio";
+
 import { nationalities } from "@/config/nationalities";
 import { toast } from "@/components/ui/use-toast";
 import { useStore } from "@nanostores/react";
@@ -145,10 +147,15 @@ export default function PersonalSection({ defaultFormValues }: Props) {
             )}
           />
           {userStore?.picture && (
-            <Avatar className="w-24 h-24 rounded-sm">
-              <AvatarImage src={userStore.picture} />
-              <AvatarFallback>CN</AvatarFallback>
-            </Avatar>
+            <div className="w-[80px]">
+              <AspectRatio ratio={16 / 9}>
+                <img
+                  src={userStore.picture}
+                  alt="Image"
+                  className="rounded-md object-cover"
+                />
+              </AspectRatio>
+            </div>
           )}
         </div>
         <FormField

@@ -3,6 +3,7 @@
 import { $user } from "@/stores/userStore";
 import { useStore } from "@nanostores/react";
 import { viewComponentStyles } from "@/components/dataView/config";
+import { AspectRatio } from "@/components/ui/aspect-ratio";
 
 interface Props {}
 
@@ -46,9 +47,15 @@ export default function PersonalView({}: Props) {
             {user?.dateOfBirth?.toString()}
           </p>
         </div>
-        {user?.picture && (
-          <div>
-            <img className="" src={user.picture} width={160} height={160} />
+        {user.picture && (
+          <div className="w-[80px]">
+            <AspectRatio ratio={16 / 9}>
+              <img
+                src={user.picture}
+                alt="Image"
+                className="rounded-md object-cover"
+              />
+            </AspectRatio>
           </div>
         )}
       </div>
