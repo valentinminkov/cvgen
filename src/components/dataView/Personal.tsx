@@ -52,6 +52,20 @@ export default function PersonalView({}: Props) {
           </div>
         )}
       </div>
+      {user?.socialMedia && !!user.socialMedia.length && (
+        <div
+          className={`${flexRowClass} flex flex-col gap-2 border-solid border-y-2 p-2`}
+        >
+          <h3>Social Medias</h3>
+          <>
+            {user.socialMedia.map((socialMedia) => (
+              <div>
+                <a href={socialMedia.url}>{socialMedia.name}</a>
+              </div>
+            ))}
+          </>
+        </div>
+      )}
       <div className={flexRowClass}>
         <div>
           <h2 className={subheaderClass}>Address</h2>

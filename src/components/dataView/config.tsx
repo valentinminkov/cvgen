@@ -1,6 +1,6 @@
 export const viewComponentStyles = {
   containerClass:
-    "bg-zinc-900 max-w-3xl mx-auto p-14 bg-white shadow-lg flex flex-col gap-4",
+    "bg-zinc-900 max-w-3xl mx-auto p-14 bg-white shadow-lg flex flex-col gap-4 text-white",
   headerClass: "text-2xl font-bold mb-4 text-gray-200",
   subheaderClass: "text-xl font-semibold text-gray-400",
   paragraphClass: "text-lg text-gray-700 mb-2",
