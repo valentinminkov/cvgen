@@ -122,14 +122,17 @@ export default function PersonalSection({ defaultFormValues }: Props) {
     }
   }
 
+  const sectionRow = "flex justify-between";
+  const sectionCol = "flex flex-col gap-5";
+
   return (
     <Form {...form}>
       <form
         onSubmit={form.handleSubmit(onSubmit)}
         className={sectionClasses.form}
       >
-        <div className="flex justify-between">
-          <div className="flex flex-col gap-2">
+        <div className={sectionRow}>
+          <div className={sectionCol}>
             <FormField
               defaultValue={
                 !!userStore.firstName
@@ -168,9 +171,48 @@ export default function PersonalSection({ defaultFormValues }: Props) {
                 </FormItem>
               )}
             />
+
+            <FormField
+              defaultValue={
+                typeof userStore.dateOfBirth === "string"
+                  ? new Date(userStore.dateOfBirth)
+                  : undefined ?? defaultFormValues?.dateOfBirth
+              }
+              control={form.control}
+              name="dateOfBirth"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>{PersonalSection.DATE_OF_BIRTH}</FormLabel>
+                  <FormControl>
+                    <DatePicker placeholder="01/08/1935" field={field} />
+                  </FormControl>
+                  <FormDescription></FormDescription>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+            <FormField
+              defaultValue={
+                !!userStore.phoneNumber
+                  ? userStore.phoneNumber
+                  : defaultFormValues?.phoneNumber
+              }
+              control={form.control}
+              name="phoneNumber"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>{PersonalSection.PHONE_NUMBER}</FormLabel>
+                  <FormControl>
+                    <Input placeholder="+123 456 789 10" {...field} />
+                  </FormControl>
+                  <FormDescription></FormDescription>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
           </div>
 
-          <div className="flex flex-col gap-10">
+          <div className={sectionCol}>
             {userStore?.picture && (
               <div className="w-[80px] h-[80px] self-center">
                 <AspectRatio ratio={16 / 9}>
@@ -198,310 +240,305 @@ export default function PersonalSection({ defaultFormValues }: Props) {
                 </FormItem>
               )}
             />
+            <FormField
+              control={form.control}
+              name="gender"
+              defaultValue={
+                !!userStore.gender
+                  ? userStore.gender
+                  : defaultFormValues?.gender
+              }
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>{PersonalSection.GENDER}</FormLabel>
+                  <Select
+                    onValueChange={field.onChange}
+                    defaultValue={field.value}
+                  >
+                    <FormControl>
+                      <SelectTrigger>
+                        <SelectValue placeholder="Select" />
+                      </SelectTrigger>
+                    </FormControl>
+                    <SelectContent>
+                      <SelectItem value="male">
+                        {PersonalSection.MALE}
+                      </SelectItem>
+                      <SelectItem value="female">
+                        {PersonalSection.FEMALE}
+                      </SelectItem>
+                      <SelectItem value="other">
+                        {PersonalSection.OTHER}
+                      </SelectItem>
+                    </SelectContent>
+                  </Select>
+                  <FormDescription></FormDescription>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+            <FormField
+              defaultValue={
+                !!userStore.website
+                  ? userStore.website
+                  : defaultFormValues?.website
+              }
+              control={form.control}
+              name="website"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>{PersonalSection.WEBSITE}</FormLabel>
+                  <FormControl>
+                    <Input placeholder="Enter your website" {...field} />
+                  </FormControl>
+                  <FormDescription></FormDescription>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
           </div>
         </div>
-        <FormField
-          defaultValue={
-            !!userStore.aboutMe ? userStore.aboutMe : defaultFormValues?.aboutMe
-          }
-          control={form.control}
-          name="aboutMe"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>{PersonalSection.ABOUT}</FormLabel>
-              <FormControl>
-                <Textarea
-                  placeholder="Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nulla qui rem necessitatibus porro eveniet commodi officiis nam, quam atque quisquam non illo similique laudantium eius beatae quibusdam consequuntur explicabo error."
-                  {...field}
-                />
-              </FormControl>
-              <FormDescription></FormDescription>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
 
-        {userStore?.socialMedia && !!userStore.socialMedia.length && (
-          <div>
-            <h3
-              className="py-4
-"
-            >
-              {PersonalSection.SOCIAL_MEDIA_ENTRIES}
-            </h3>
+        <div className={sectionCol}>
+          <FormField
+            defaultValue={
+              !!userStore.nationality
+                ? userStore.nationality
+                : defaultFormValues?.nationality
+            }
+            control={form.control}
+            name="nationality"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>{PersonalSection.NATIONALITY}</FormLabel>
+                <Select
+                  onValueChange={field.onChange}
+                  defaultValue={field.value}
+                >
+                  <FormControl>
+                    <SelectTrigger>
+                      <SelectValue placeholder="Select" />
+                    </SelectTrigger>
+                  </FormControl>
+                  <SelectContent>
+                    {nationalities.map((nationality) => (
+                      <SelectItem key={nationality} value={nationality}>
+                        {nationality}
+                      </SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
 
-            <div className="bg-gray-500 p-2">
-              {userStore.socialMedia?.map((socialMediaEntry) => {
-                return (
-                  <div
-                    key={socialMediaEntry.name + socialMediaEntry.url}
-                    className="py-2 border-solid border-b-2"
-                  >
-                    <div
-                      onClick={() => {
-                        removeSocialMediaByName(socialMediaEntry.name);
-                      }}
-                      className="cursor-pointer hover:opacity-50 p-2"
-                    >
-                      <CrossCircledIcon />
-                    </div>
+                <FormDescription></FormDescription>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
 
-                    {/* {socialMediaEntry?.icon && (
-                    <img src={socialMediaEntry.icon} width={32} height={32} />
-                  )} */}
-                    <div className="py-6">
-                      <p>{socialMediaEntry.name}</p>
-                      <a href={socialMediaEntry.url}>{socialMediaEntry.url}</a>
-                    </div>
-                  </div>
-                );
-              })}
-            </div>
+          <FormField
+            defaultValue={
+              !!userStore.email ? userStore.email : defaultFormValues?.email
+            }
+            control={form.control}
+            name="email"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>{PersonalSection.EMAIL_ADDRESS}</FormLabel>
+                <FormControl>
+                  <Input placeholder="john@doe.com" {...field} />
+                </FormControl>
+                <FormDescription></FormDescription>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+          <FormField
+            defaultValue={
+              !!userStore.aboutMe
+                ? userStore.aboutMe
+                : defaultFormValues?.aboutMe
+            }
+            control={form.control}
+            name="aboutMe"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>{PersonalSection.ABOUT}</FormLabel>
+                <FormControl>
+                  <Textarea
+                    placeholder="Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nulla qui rem necessitatibus porro eveniet commodi officiis nam, quam atque quisquam non illo similique laudantium eius beatae quibusdam consequuntur explicabo error."
+                    {...field}
+                  />
+                </FormControl>
+                <FormDescription></FormDescription>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+        </div>
+        <div className={sectionRow}>
+          <div className={sectionCol}>
+            {userStore?.socialMedia && !!userStore.socialMedia.length && (
+              <div>
+                <h3 className="py-4">{PersonalSection.SOCIAL_MEDIA_ENTRIES}</h3>
+
+                <div className="bg-gray-500 p-2">
+                  {userStore.socialMedia?.map((socialMediaEntry) => {
+                    return (
+                      <div
+                        key={socialMediaEntry.name + socialMediaEntry.url}
+                        className="py-2 border-solid border-b-2"
+                      >
+                        <div
+                          onClick={() => {
+                            removeSocialMediaByName(socialMediaEntry.name);
+                          }}
+                          className="cursor-pointer hover:opacity-50 p-2"
+                        >
+                          <CrossCircledIcon />
+                        </div>
+
+                        {socialMediaEntry?.icon && (
+                          <img
+                            src={socialMediaEntry.icon}
+                            width={32}
+                            height={32}
+                          />
+                        )}
+
+                        <div className="py-6">
+                          <p>{socialMediaEntry.name}</p>
+                          <a href={socialMediaEntry.url}>
+                            {socialMediaEntry.url}
+                          </a>
+                        </div>
+                      </div>
+                    );
+                  })}
+                </div>
+              </div>
+            )}
           </div>
-        )}
 
-        <AddSocialMedia addSocialMedia={addSocialMedia} />
-
-        <FormField
-          defaultValue={
-            typeof userStore.dateOfBirth === "string"
-              ? new Date(userStore.dateOfBirth)
-              : undefined ?? defaultFormValues?.dateOfBirth
-          }
-          control={form.control}
-          name="dateOfBirth"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>{PersonalSection.DATE_OF_BIRTH}</FormLabel>
-              <FormControl>
-                <DatePicker placeholder="01/08/1935" field={field} />
-              </FormControl>
-              <FormDescription></FormDescription>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
-        <FormField
-          control={form.control}
-          name="gender"
-          defaultValue={
-            !!userStore.gender ? userStore.gender : defaultFormValues?.gender
-          }
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>{PersonalSection.GENDER}</FormLabel>
-              <Select onValueChange={field.onChange} defaultValue={field.value}>
+          <div className={sectionCol}>
+            <AddSocialMedia addSocialMedia={addSocialMedia} />
+          </div>
+        </div>
+        <div className={sectionCol}>
+          <FormField
+            defaultValue={
+              !!userStore.addressType
+                ? userStore.addressType
+                : defaultFormValues?.addressType
+            }
+            control={form.control}
+            name="addressType"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>{PersonalSection.ADDRESS_TYPE}</FormLabel>
                 <FormControl>
-                  <SelectTrigger>
-                    <SelectValue placeholder="Select" />
-                  </SelectTrigger>
+                  <Input
+                    placeholder="e.g. House / Mountain  / Dog"
+                    {...field}
+                  />
                 </FormControl>
-                <SelectContent>
-                  <SelectItem value="male">{PersonalSection.MALE}</SelectItem>
-                  <SelectItem value="female">
-                    {PersonalSection.FEMALE}
-                  </SelectItem>
-                  <SelectItem value="other">{PersonalSection.OTHER}</SelectItem>
-                </SelectContent>
-              </Select>
-              <FormDescription></FormDescription>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
-        <FormField
-          defaultValue={
-            !!userStore.nationality
-              ? userStore.nationality
-              : defaultFormValues?.nationality
-          }
-          control={form.control}
-          name="nationality"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>{PersonalSection.NATIONALITY}</FormLabel>
-              <Select onValueChange={field.onChange} defaultValue={field.value}>
+                <FormDescription></FormDescription>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+          <FormField
+            defaultValue={
+              !!userStore.addressLine1
+                ? userStore.addressLine1
+                : defaultFormValues?.addressLine1
+            }
+            control={form.control}
+            name="addressLine1"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>{PersonalSection.ADDRESS_LINE_1}</FormLabel>
                 <FormControl>
-                  <SelectTrigger>
-                    <SelectValue placeholder="Select" />
-                  </SelectTrigger>
+                  <Input placeholder="First line of your address" {...field} />
                 </FormControl>
-                <SelectContent>
-                  {nationalities.map((nationality) => (
-                    <SelectItem key={nationality} value={nationality}>
-                      {nationality}
-                    </SelectItem>
-                  ))}
-                </SelectContent>
-              </Select>
+                <FormDescription></FormDescription>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+          <FormField
+            defaultValue={
+              !!userStore.addressLine2
+                ? userStore.addressLine2
+                : defaultFormValues?.addressLine2
+            }
+            control={form.control}
+            name="addressLine2"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>{PersonalSection.ADDRESS_LINE_2}</FormLabel>
+                <FormControl>
+                  <Input placeholder="Second line of your address" {...field} />
+                </FormControl>
+                <FormDescription></FormDescription>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+          <FormField
+            defaultValue={
+              !!userStore.postCode
+                ? userStore.postCode
+                : defaultFormValues?.postCode
+            }
+            control={form.control}
+            name="postCode"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>{PersonalSection.POSTAL_CODE}</FormLabel>
+                <FormControl>
+                  <Input placeholder="1324" {...field} />
+                </FormControl>
+                <FormDescription></FormDescription>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+          <FormField
+            defaultValue={
+              !!userStore.city ? userStore.city : defaultFormValues?.city
+            }
+            control={form.control}
+            name="city"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>{PersonalSection.CITY}</FormLabel>
+                <FormControl>
+                  <Input placeholder="Berlin" {...field} />
+                </FormControl>
+                <FormDescription></FormDescription>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
 
-              <FormDescription></FormDescription>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
-        <FormField
-          defaultValue={
-            !!userStore.email ? userStore.email : defaultFormValues?.email
-          }
-          control={form.control}
-          name="email"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>{PersonalSection.EMAIL_ADDRESS}</FormLabel>
-              <FormControl>
-                <Input placeholder="john@doe.com" {...field} />
-              </FormControl>
-              <FormDescription></FormDescription>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
-        <FormField
-          defaultValue={
-            !!userStore.phoneNumber
-              ? userStore.phoneNumber
-              : defaultFormValues?.phoneNumber
-          }
-          control={form.control}
-          name="phoneNumber"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>{PersonalSection.PHONE_NUMBER}</FormLabel>
-              <FormControl>
-                <Input placeholder="+123 456 789 10" {...field} />
-              </FormControl>
-              <FormDescription></FormDescription>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
-        <FormField
-          defaultValue={
-            !!userStore.website ? userStore.website : defaultFormValues?.website
-          }
-          control={form.control}
-          name="website"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>{PersonalSection.WEBSITE}</FormLabel>
-              <FormControl>
-                <Input placeholder="Enter your website" {...field} />
-              </FormControl>
-              <FormDescription></FormDescription>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
-        <FormField
-          defaultValue={
-            !!userStore.addressType
-              ? userStore.addressType
-              : defaultFormValues?.addressType
-          }
-          control={form.control}
-          name="addressType"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>{PersonalSection.ADDRESS_TYPE}</FormLabel>
-              <FormControl>
-                <Input placeholder="e.g. House / Mountain  / Dog" {...field} />
-              </FormControl>
-              <FormDescription></FormDescription>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
-        <FormField
-          defaultValue={
-            !!userStore.addressLine1
-              ? userStore.addressLine1
-              : defaultFormValues?.addressLine1
-          }
-          control={form.control}
-          name="addressLine1"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>{PersonalSection.ADDRESS_LINE_1}</FormLabel>
-              <FormControl>
-                <Input placeholder="First line of your address" {...field} />
-              </FormControl>
-              <FormDescription></FormDescription>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
-        <FormField
-          defaultValue={
-            !!userStore.addressLine2
-              ? userStore.addressLine2
-              : defaultFormValues?.addressLine2
-          }
-          control={form.control}
-          name="addressLine2"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>{PersonalSection.ADDRESS_LINE_2}</FormLabel>
-              <FormControl>
-                <Input placeholder="Second line of your address" {...field} />
-              </FormControl>
-              <FormDescription></FormDescription>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
-        <FormField
-          defaultValue={
-            !!userStore.postCode
-              ? userStore.postCode
-              : defaultFormValues?.postCode
-          }
-          control={form.control}
-          name="postCode"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>{PersonalSection.POSTAL_CODE}</FormLabel>
-              <FormControl>
-                <Input placeholder="1324" {...field} />
-              </FormControl>
-              <FormDescription></FormDescription>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
-        <FormField
-          defaultValue={
-            !!userStore.city ? userStore.city : defaultFormValues?.city
-          }
-          control={form.control}
-          name="city"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>{PersonalSection.CITY}</FormLabel>
-              <FormControl>
-                <Input placeholder="Berlin" {...field} />
-              </FormControl>
-              <FormDescription></FormDescription>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
-
-        <FormField
-          defaultValue={
-            !!userStore.country ? userStore.country : defaultFormValues?.country
-          }
-          control={form.control}
-          name="country"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>{PersonalSection.COUNTRY}</FormLabel>
-              <CountrySelector field={field} placeholder="Select" />
-              <FormDescription></FormDescription>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
+          <FormField
+            defaultValue={
+              !!userStore.country
+                ? userStore.country
+                : defaultFormValues?.country
+            }
+            control={form.control}
+            name="country"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>{PersonalSection.COUNTRY}</FormLabel>
+                <CountrySelector field={field} placeholder="Select" />
+                <FormDescription></FormDescription>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+        </div>
         <div className="flex gap-2">
           <Button type="submit">{PersonalSection.SUBMIT}</Button>
           <Button type="reset" variant={"ghost"} onClick={onReset}>
