@@ -86,6 +86,7 @@ const componentsContent = {
     TYPE: "Type",
     LEVEL: "Level",
     SKILL: "Skill",
+    SKILLS: "Skills",
     SUBMIT: elementsContent.SECTION_FORM_SUBMIT_BUTTON,
   },
 };

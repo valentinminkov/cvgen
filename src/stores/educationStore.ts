@@ -8,7 +8,7 @@ export interface EducationFormValue {
   website?: string;
   country?: string;
   city?: string;
-  description?: string;
+  description: string;
   ongoing?: boolean;
   endDate?: Date;
 }

@@ -34,9 +34,11 @@ import { CountrySelector } from "@/components/form/CountrySelector";
 import { Switch } from "@/components/ui/switch";
 import { Textarea } from "@/components/ui/textarea";
 import { useState } from "react";
-import { Label } from "@/components/ui/label";
-import { CrossCircledIcon } from "@radix-ui/react-icons";
 import { content } from "@/config/content";
+import {
+  ExperienceCard,
+  ExperienceCardTitle,
+} from "@/components/form/ExperienceCard";
 
 const {
   content: { components },
@@ -55,42 +57,6 @@ const FormSchema = z.object({
   endDate: z.date().optional(),
   ongoing: z.boolean().optional(),
 });
-
-function ExperienceCard({
-  index,
-  experience: { workDescription, title, startDate, endDate, ongoing },
-}: {
-  index: number;
-  experience: ExperienceFormValue;
-}) {
-  return (
-    <div className="bg-gray-600 p-5 flex flex-col gap-6">
-      <div
-        onClick={() => {
-          removeExperience(index);
-        }}
-        className="cursor-pointer hover:opacity-50 p-2"
-      >
-        <CrossCircledIcon />
-      </div>
-      <div className="px-2 pb-2 ">
-        <span>
-          {startDate?.toString()}{" "}
-          {ongoing ? "- ongoing" : ` - ${endDate?.toString()}`}
-        </span>
-      </div>
-
-      <h1 className="flex flex-col gap-2 px-2">
-        <Label>{components.ExperienceSection.COMPANY_NAME}</Label>
-        {title}
-      </h1>
-      <p className="flex flex-col gap-2 px-2">
-        <Label>{components.ExperienceSection.WORK_DESCRIPTION}</Label>
-        {workDescription}
-      </p>
-    </div>
-  );
-}
 
 export default function ExperienceSection() {
   const [isWorkOngoing, setIsWorkOngoing] = useState(false);
@@ -112,17 +78,34 @@ export default function ExperienceSection() {
     <div className="flex gap-10">
       {experiencesStore?.experiences.length > 0 && (
         <div className="bg-gray-500 p-4 w-4/12">
-          <p className="pb-4">
-            {components.ExperienceSection.ENTRIES} (
-            {experiencesStore.experiences.length})
-          </p>
+          <ExperienceCardTitle
+            entriesLength={experiencesStore.experiences.length}
+          />
           {experiencesStore?.experiences.map((experience, index: number) => {
             return (
               <Accordion type="single" collapsible key={experience.title}>
                 <AccordionItem value={experience.title}>
                   <AccordionTrigger>{experience.title}</AccordionTrigger>
                   <AccordionContent>
-                    <ExperienceCard experience={experience} index={index} />
+                    <ExperienceCard
+                      date={{
+                        startDate: experience.startDate,
+                        ongoing: experience.ongoing,
+                        endDate: experience.endDate,
+                      }}
+                      content={[
+                        {
+                          value: experience.title,
+                          label: components.ExperienceSection.COMPANY_NAME,
+                        },
+                        {
+                          value: experience.workDescription,
+                          label: components.EducationSection.DESCRIPTION,
+                        },
+                      ]}
+                      removeExperience={removeExperience}
+                      index={index}
+                    />
                   </AccordionContent>
                 </AccordionItem>
               </Accordion>

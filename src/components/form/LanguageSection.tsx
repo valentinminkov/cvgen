@@ -24,7 +24,6 @@ import {
   addLanguage,
   removeLanguage,
   $language,
-  type Language,
   type LanguageSubmitFormPayload,
 } from "@/stores/languageStore";
 import {
@@ -33,10 +32,9 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
-import { Label } from "@/components/ui/label";
-import { CrossCircledIcon } from "@radix-ui/react-icons";
 import { content } from "@/config/content";
 import { sectionClasses } from "./config";
+import { ExperienceCard, ExperienceCardTitle } from "./ExperienceCard";
 
 const {
   content: {
@@ -51,41 +49,6 @@ const LanguageFormSchema = z.object({
   reading: z.string(),
   writing: z.string(),
 });
-
-function LanguageCard({
-  index,
-  language: { skills, language },
-}: {
-  index: number;
-  language: Language;
-}) {
-  return (
-    <div className="bg-gray-600 p-5 flex flex-col gap-6">
-      <div
-        onClick={() => {
-          removeLanguage(index);
-        }}
-        className="cursor-pointer hover:opacity-50 p-2"
-      >
-        <CrossCircledIcon />
-      </div>
-
-      <h1 className="flex flex-col gap-2 px-2">
-        <Label>{LanguageSection.LANGUAGE}</Label>
-        {language}
-      </h1>
-      <p className="flex flex-col gap-2 px-2">
-        {LanguageSection.LANGUAGE}: {skills.listening}
-      </p>
-      <p className="flex flex-col gap-2 px-2">
-        {LanguageSection.READING}: {skills.reading}
-      </p>
-      <p className="flex flex-col gap-2 px-2">
-        {LanguageSection.WRITING}: {skills.writing}
-      </p>
-    </div>
-  );
-}
 
 export default function LanguageSectionComponent() {
   const languagesStore = useStore($language);
@@ -107,7 +70,9 @@ export default function LanguageSectionComponent() {
       {languagesStore?.language.otherLanguages &&
         languagesStore.language.otherLanguages?.length > 0 && (
           <div className="bg-gray-500 p-4 w-4/12">
-            <p className="pb-4">{LanguageSection.ENTRIES}</p>
+            <ExperienceCardTitle
+              entriesLength={languagesStore.language.otherLanguages.length}
+            />
             {languagesStore?.language?.otherLanguages.map(
               (curLang, index: number) => {
                 return (
@@ -115,7 +80,28 @@ export default function LanguageSectionComponent() {
                     <AccordionItem value={curLang.language}>
                       <AccordionTrigger>{curLang.language}</AccordionTrigger>
                       <AccordionContent>
-                        <LanguageCard language={curLang} index={index} />
+                        <ExperienceCard
+                          content={[
+                            {
+                              label: LanguageSection.LANGUAGE,
+                              value: curLang.language,
+                            },
+                            {
+                              label: LanguageSection.READING,
+                              value: curLang.skills.reading,
+                            },
+                            {
+                              label: LanguageSection.LISTENING,
+                              value: curLang.skills.listening,
+                            },
+                            {
+                              label: LanguageSection.WRITING,
+                              value: curLang.skills.writing,
+                            },
+                          ]}
+                          removeExperience={removeLanguage}
+                          index={index}
+                        />
                       </AccordionContent>
                     </AccordionItem>
                   </Accordion>

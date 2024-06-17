@@ -34,9 +34,8 @@ import { CountrySelector } from "@/components/form/CountrySelector";
 import { Switch } from "@/components/ui/switch";
 import { Textarea } from "@/components/ui/textarea";
 import { useState } from "react";
-import { Label } from "@/components/ui/label";
-import { CrossCircledIcon } from "@radix-ui/react-icons";
 import { content } from "@/config/content";
+import { ExperienceCard, ExperienceCardTitle } from "./ExperienceCard";
 
 const {
   content: {
@@ -60,52 +59,12 @@ const FormSchema = z.object({
     })
     .optional(),
   city: z.string().min(2, { message: "City must be a city" }).optional(),
-  description: z
-    .string()
-    .min(2, {
-      message: "Must be at least 2 characters",
-    })
-    .optional(),
+  description: z.string().min(2, {
+    message: "Must be at least 2 characters",
+  }),
   endDate: z.date().optional(),
   ongoing: z.boolean().optional(),
 });
-
-// To DO Share with Experience Secion Card
-function EntryCard({
-  index,
-  entry: { description, title, country, name, startDate, endDate, ongoing },
-}: {
-  index: number;
-  entry: EducationFormValue;
-}) {
-  return (
-    <div className="bg-gray-600 p-5 flex flex-col gap-6">
-      <div
-        onClick={() => {
-          removeEducation(index);
-        }}
-        className="cursor-pointer hover:opacity-50 p-2"
-      >
-        <CrossCircledIcon />
-      </div>
-      <div className="px-2 pb-2 ">
-        <span>
-          {startDate?.toString()}{" "}
-          {ongoing ? "- ongoing" : ` - ${endDate?.toString()}`}
-        </span>
-      </div>
-
-      <h1 className="flex flex-col gap-2 px-2">
-        <Label>{EducationSection.TITLE}</Label>
-        {title}
-      </h1>
-      <p className="flex flex-col gap-2 px-2">
-        <Label>{EducationSection.DESCRIPTION}</Label>
-        {description}
-      </p>
-    </div>
-  );
-}
 
 export default function EducationSectionComponent() {
   const [isWorkOngoing, setIsWorkOngoing] = useState(false);
@@ -127,14 +86,34 @@ export default function EducationSectionComponent() {
     <div className="flex gap-10">
       {educationStore?.educations.length > 0 && (
         <div className="bg-gray-500 p-4 w-4/12">
-          <p className="pb-4">{EducationSection.ENTRIES}</p>
+          <ExperienceCardTitle
+            entriesLength={educationStore.educations.length}
+          />
           {educationStore?.educations.map((education, index: number) => {
             return (
               <Accordion type="single" collapsible key={education.title}>
                 <AccordionItem value={education.name}>
                   <AccordionTrigger>{education.title}</AccordionTrigger>
                   <AccordionContent>
-                    <EntryCard entry={education} index={index} />
+                    <ExperienceCard
+                      date={{
+                        endDate: education.endDate,
+                        ongoing: education.ongoing,
+                        startDate: education.startDate,
+                      }}
+                      removeExperience={removeEducation}
+                      content={[
+                        {
+                          label: EducationSection.TITLE,
+                          value: education.title,
+                        },
+                        {
+                          label: EducationSection.DESCRIPTION,
+                          value: education.description,
+                        },
+                      ]}
+                      index={index}
+                    />
                   </AccordionContent>
                 </AccordionItem>
               </Accordion>
