@@ -124,9 +124,9 @@ export default function EducationSectionComponent() {
   }
 
   return (
-    <div>
+    <div className="flex gap-10">
       {educationStore?.educations.length > 0 && (
-        <div className="bg-gray-500 p-4">
+        <div className="bg-gray-500 p-4 w-4/12">
           <p className="pb-4">{EducationSection.ENTRIES}</p>
           {educationStore?.educations.map((education, index: number) => {
             return (
@@ -142,159 +142,169 @@ export default function EducationSectionComponent() {
           })}
         </div>
       )}
-      <Form {...form}>
-        <form
-          onSubmit={form.handleSubmit(onSubmit)}
-          className={sectionClasses.form}
-        >
-          <FormField
-            defaultValue=""
-            control={form.control}
-            name="title"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>{EducationSection.TITLE}</FormLabel>
-                <FormControl>
-                  <Input placeholder="Acme" {...field} />
-                </FormControl>
-                <FormDescription></FormDescription>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-          <FormField
-            defaultValue=""
-            control={form.control}
-            name="name"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>{EducationSection.NAME}</FormLabel>
-                <FormControl>
-                  <Input placeholder="Acme" {...field} />
-                </FormControl>
-                <FormDescription></FormDescription>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
+      <div className="w-full">
+        <Form {...form}>
+          <form
+            onSubmit={form.handleSubmit(onSubmit)}
+            className={sectionClasses.form}
+          >
+            <div className="flex gap-10 w-full">
+              <FormField
+                defaultValue=""
+                control={form.control}
+                name="title"
+                render={({ field }) => (
+                  <FormItem className="w-full">
+                    <FormLabel>{EducationSection.TITLE}</FormLabel>
+                    <FormControl>
+                      <Input placeholder="Acme" {...field} />
+                    </FormControl>
+                    <FormDescription></FormDescription>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              <FormField
+                defaultValue=""
+                control={form.control}
+                name="name"
+                render={({ field }) => (
+                  <FormItem className="w-full">
+                    <FormLabel>{EducationSection.NAME}</FormLabel>
+                    <FormControl>
+                      <Input placeholder="Acme" {...field} />
+                    </FormControl>
+                    <FormDescription></FormDescription>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+            </div>
+            <div className="flex gap-10 w-full">
+              <FormField
+                defaultValue=""
+                control={form.control}
+                name="website"
+                render={({ field }) => (
+                  <FormItem className="w-full">
+                    <FormLabel>{EducationSection.WEBSITE}</FormLabel>
+                    <FormControl>
+                      <Input placeholder="" {...field} />
+                    </FormControl>
+                    <FormDescription></FormDescription>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
 
-          <FormField
-            defaultValue=""
-            control={form.control}
-            name="website"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>{EducationSection.WEBSITE}</FormLabel>
-                <FormControl>
-                  <Input placeholder="" {...field} />
-                </FormControl>
-                <FormDescription></FormDescription>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
+              <FormField
+                control={form.control}
+                name="country"
+                render={({ field }) => (
+                  <FormItem className="w-full">
+                    <FormLabel>{EducationSection.COUNTRY}</FormLabel>
+                    <FormControl>
+                      <CountrySelector field={field} />
+                    </FormControl>
+                    <FormDescription></FormDescription>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+            </div>
+            <div className="flex gap-10 w-full">
+              <FormField
+                defaultValue=""
+                control={form.control}
+                name="city"
+                render={({ field }) => (
+                  <FormItem className="w-full">
+                    <FormLabel>{EducationSection.CITY}</FormLabel>
+                    <FormControl>
+                      <Input placeholder="Acme" {...field} />
+                    </FormControl>
+                    <FormDescription></FormDescription>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
 
-          <FormField
-            control={form.control}
-            name="country"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>{EducationSection.COUNTRY}</FormLabel>
-                <FormControl>
-                  <CountrySelector field={field} />
-                </FormControl>
-                <FormDescription></FormDescription>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
+              <FormField
+                control={form.control}
+                name="description"
+                render={({ field }) => (
+                  <FormItem className="w-full">
+                    <FormLabel>{EducationSection.DESCRIPTION}</FormLabel>
+                    <FormControl>
+                      <Textarea
+                        placeholder="Description"
+                        {...field}
+                        className="w-full"
+                      />
+                    </FormControl>
+                    <FormDescription></FormDescription>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+            </div>
+            <div className="flex items-center w-full gap-5">
+              <FormField
+                control={form.control}
+                name="startDate"
+                render={({ field }) => (
+                  <FormItem className="w-full">
+                    <FormLabel>{EducationSection.START_DATE}</FormLabel>
+                    <FormControl>
+                      <DatePicker placeholder="" field={field} />
+                    </FormControl>
+                    <FormDescription></FormDescription>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              <FormField
+                control={form.control}
+                name="ongoing"
+                render={({ field }) => (
+                  <FormItem className="w-full flex flex-col items-center">
+                    <FormLabel>{EducationSection.ONGOING}</FormLabel>
+                    <FormControl>
+                      <Switch
+                        checked={field.value}
+                        onCheckedChange={(checked) => {
+                          setIsWorkOngoing(checked);
+                          field.onChange(checked);
+                        }}
+                      />
+                    </FormControl>
+                    <FormDescription></FormDescription>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
 
-          <FormField
-            defaultValue=""
-            control={form.control}
-            name="city"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>{EducationSection.CITY}</FormLabel>
-                <FormControl>
-                  <Input placeholder="Acme" {...field} />
-                </FormControl>
-                <FormDescription></FormDescription>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-
-          <FormField
-            control={form.control}
-            name="description"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>{EducationSection.DESCRIPTION}</FormLabel>
-                <FormControl>
-                  <Textarea placeholder="Description" {...field} />
-                </FormControl>
-                <FormDescription></FormDescription>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-
-          <FormField
-            control={form.control}
-            name="startDate"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>{EducationSection.START_DATE}</FormLabel>
-                <FormControl>
-                  <DatePicker placeholder="" field={field} />
-                </FormControl>
-                <FormDescription></FormDescription>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-          <FormField
-            control={form.control}
-            name="ongoing"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>{EducationSection.ONGOING}</FormLabel>
-                <FormControl>
-                  <Switch
-                    checked={field.value}
-                    onCheckedChange={(checked) => {
-                      setIsWorkOngoing(checked);
-                      field.onChange(checked);
-                    }}
-                  />
-                </FormControl>
-                <FormDescription></FormDescription>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-
-          {!isWorkOngoing && (
-            <FormField
-              control={form.control}
-              name="endDate"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>{EducationSection.END_DATE}</FormLabel>
-                  <FormControl>
-                    <DatePicker placeholder="" field={field} />
-                  </FormControl>
-                  <FormDescription></FormDescription>
-                  <FormMessage />
-                </FormItem>
+              {!isWorkOngoing && (
+                <FormField
+                  control={form.control}
+                  name="endDate"
+                  render={({ field }) => (
+                    <FormItem className="w-full">
+                      <FormLabel>{EducationSection.END_DATE}</FormLabel>
+                      <FormControl>
+                        <DatePicker placeholder="" field={field} />
+                      </FormControl>
+                      <FormDescription></FormDescription>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
               )}
-            />
-          )}
-
-          <Button type="submit">{EducationSection.SUBMIT}</Button>
-        </form>
-      </Form>
+            </div>
+            <Button type="submit">{EducationSection.SUBMIT}</Button>
+          </form>
+        </Form>
+      </div>
     </div>
   );
 }

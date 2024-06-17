@@ -103,10 +103,10 @@ export default function LanguageSectionComponent() {
   }
 
   return (
-    <div>
+    <div className="flex gap-10">
       {languagesStore?.language.otherLanguages &&
         languagesStore.language.otherLanguages?.length > 0 && (
-          <div className="bg-gray-500 p-4">
+          <div className="bg-gray-500 p-4 w-4/12">
             <p className="pb-4">{LanguageSection.ENTRIES}</p>
             {languagesStore?.language?.otherLanguages.map(
               (curLang, index: number) => {
@@ -124,94 +124,97 @@ export default function LanguageSectionComponent() {
             )}
           </div>
         )}
-      <Form {...languageForm}>
-        <form
-          className={sectionClasses.form}
-          onSubmit={languageForm.handleSubmit(onLanguageSubmit)}
-        >
-          <FormField
-            defaultValue={languagesStore.language.motherLanguage}
-            control={languageForm.control}
-            name="motherLanguage"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>{LanguageSection.MOTHER_LANGUAGES}</FormLabel>
-                <FormControl>
-                  <LanguageSelector field={field} />
-                </FormControl>
-                <FormDescription></FormDescription>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
+      <div className="w-full">
+        <Form {...languageForm}>
+          <form
+            className={sectionClasses.form}
+            onSubmit={languageForm.handleSubmit(onLanguageSubmit)}
+          >
+            <FormField
+              defaultValue={languagesStore.language.motherLanguage}
+              control={languageForm.control}
+              name="motherLanguage"
+              render={({ field }) => (
+                <FormItem className="w-full">
+                  <FormLabel>{LanguageSection.MOTHER_LANGUAGES}</FormLabel>
+                  <FormControl>
+                    <LanguageSelector field={field} />
+                  </FormControl>
+                  <FormDescription></FormDescription>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+            <div className="flex flex-col gap-2">
+              <FormField
+                defaultValue=""
+                control={languageForm.control}
+                name="language"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>{LanguageSection.LANGUAGE}</FormLabel>
+                    <FormControl>
+                      <LanguageSelector field={field} />
+                    </FormControl>
+                    <FormDescription></FormDescription>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              <div className="flex py-2 gap-4 w-full">
+                <FormField
+                  defaultValue=""
+                  control={languageForm.control}
+                  name="listening"
+                  render={({ field }) => (
+                    <FormItem className="w-full">
+                      <FormLabel>{LanguageSection.LISTENING}</FormLabel>
+                      <FormControl>
+                        <LanguageLevelSelector field={field} />
+                      </FormControl>
+                      <FormDescription></FormDescription>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
 
-          <FormField
-            defaultValue=""
-            control={languageForm.control}
-            name="language"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>{LanguageSection.LANGUAGE}</FormLabel>
-                <FormControl>
-                  <LanguageSelector field={field} />
-                </FormControl>
-                <FormDescription></FormDescription>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
+                <FormField
+                  defaultValue=""
+                  control={languageForm.control}
+                  name="reading"
+                  render={({ field }) => (
+                    <FormItem className="w-full">
+                      <FormLabel>{LanguageSection.READING}</FormLabel>
+                      <FormControl>
+                        <LanguageLevelSelector field={field} />
+                      </FormControl>
+                      <FormDescription></FormDescription>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
 
-          <FormField
-            defaultValue=""
-            control={languageForm.control}
-            name="listening"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>{LanguageSection.LISTENING}</FormLabel>
-                <FormControl>
-                  <LanguageLevelSelector field={field} />
-                </FormControl>
-                <FormDescription></FormDescription>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-
-          <FormField
-            defaultValue=""
-            control={languageForm.control}
-            name="reading"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>{LanguageSection.READING}</FormLabel>
-                <FormControl>
-                  <LanguageLevelSelector field={field} />
-                </FormControl>
-                <FormDescription></FormDescription>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-
-          <FormField
-            defaultValue=""
-            control={languageForm.control}
-            name="writing"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>{LanguageSection.WRITING}</FormLabel>
-                <FormControl>
-                  <LanguageLevelSelector field={field} />
-                </FormControl>
-                <FormDescription></FormDescription>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-
-          <Button type="submit">{LanguageSection.SUBMIT}</Button>
-        </form>
-      </Form>
+                <FormField
+                  defaultValue=""
+                  control={languageForm.control}
+                  name="writing"
+                  render={({ field }) => (
+                    <FormItem className="w-full">
+                      <FormLabel>{LanguageSection.WRITING}</FormLabel>
+                      <FormControl>
+                        <LanguageLevelSelector field={field} />
+                      </FormControl>
+                      <FormDescription></FormDescription>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+              </div>
+            </div>
+            <Button type="submit">{LanguageSection.SUBMIT}</Button>
+          </form>
+        </Form>
+      </div>
     </div>
   );
 }

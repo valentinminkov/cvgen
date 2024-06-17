@@ -103,9 +103,9 @@ export default function SkillsSectionComponent() {
   }
 
   return (
-    <div>
+    <div className="flex gap-10 w-full">
       {skillsStore?.skills && skillsStore.skills?.length > 0 && (
-        <div className="bg-gray-500 p-4">
+        <div className="bg-gray-500 p-4 w-4/12">
           <p className="pb-4">{SkillsSection.ENTRIES}</p>
           {skillsStore?.skills?.map((curSkill, index: number) => {
             return (
@@ -121,88 +121,93 @@ export default function SkillsSectionComponent() {
           })}
         </div>
       )}
-      <Form {...skillForm}>
-        <form
-          className={sectionClasses.form}
-          onSubmit={skillForm.handleSubmit(onSkillSubmit)}
-          onKeyDown={onFormKeyDown}
-        >
-          <FormField
-            defaultValue=""
-            control={skillForm.control}
-            name="type"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>{SkillsSection.TYPE}</FormLabel>
-                <FormControl>
-                  <Input placeholder="Acme" {...field} />
-                </FormControl>
-                <FormDescription></FormDescription>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
+      <div className="w-full">
+        <Form {...skillForm}>
+          <form
+            className={sectionClasses.form}
+            onSubmit={skillForm.handleSubmit(onSkillSubmit)}
+            onKeyDown={onFormKeyDown}
+          >
+            <div className="flex w-full gap-5">
+              <FormField
+                defaultValue=""
+                control={skillForm.control}
+                name="type"
+                render={({ field }) => (
+                  <FormItem className="w-full">
+                    <FormLabel>{SkillsSection.TYPE}</FormLabel>
+                    <FormControl>
+                      <Input placeholder="Acme" {...field} />
+                    </FormControl>
+                    <FormDescription></FormDescription>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
 
-          <FormField
-            defaultValue=""
-            control={skillForm.control}
-            name="level"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>{SkillsSection.LEVEL}</FormLabel>
-                <FormControl>
-                  <Input placeholder="Acme" {...field} />
-                </FormControl>
-                <FormDescription></FormDescription>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-          <div>
-            {skillsStore?.sectionSkills &&
-              skillsStore.sectionSkills.map((sectionSkill) => (
-                <div
-                  key={`${sectionSkill}-${getRandomString(
-                    sectionSkill.length
-                  )}`}
-                >
-                  <div
-                    onClick={() => {
-                      removeSectionSkill(sectionSkill);
-                    }}
-                    className="cursor-pointer hover:opacity-50 p-2"
-                  >
-                    <CrossCircledIcon />
-
-                    {sectionSkill}
-                  </div>
-                </div>
-              ))}
-            <FormField
-              defaultValue=""
-              control={skillForm.control}
-              name="skill"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>{SkillsSection.SKILL}</FormLabel>
-                  <FormControl>
-                    <Input
-                      placeholder=""
-                      {...field}
-                      onKeyDown={(event) => {
-                        insertSkill(event, field.value);
-                      }}
-                    />
-                  </FormControl>
-                  <FormDescription></FormDescription>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-          </div>
-          <Button type="submit">{SkillsSection.SUBMIT}</Button>
-        </form>
-      </Form>
+              <FormField
+                defaultValue=""
+                control={skillForm.control}
+                name="level"
+                render={({ field }) => (
+                  <FormItem className="w-full">
+                    <FormLabel>{SkillsSection.LEVEL}</FormLabel>
+                    <FormControl>
+                      <Input placeholder="Acme" {...field} />
+                    </FormControl>
+                    <FormDescription></FormDescription>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+            </div>
+            <div>
+              <div className="flex gap-4">
+                {skillsStore?.sectionSkills &&
+                  skillsStore.sectionSkills.map((sectionSkill) => (
+                    <div
+                      key={`${sectionSkill}-${getRandomString(
+                        sectionSkill.length
+                      )}`}
+                    >
+                      <div
+                        onClick={() => {
+                          removeSectionSkill(sectionSkill);
+                        }}
+                        className="cursor-pointer hover:opacity-50 p-2 flex gap-2 "
+                      >
+                        <CrossCircledIcon />
+                        {sectionSkill}
+                      </div>
+                    </div>
+                  ))}
+              </div>
+              <FormField
+                defaultValue=""
+                control={skillForm.control}
+                name="skill"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>{SkillsSection.SKILL}</FormLabel>
+                    <FormControl>
+                      <Input
+                        placeholder=""
+                        {...field}
+                        onKeyDown={(event) => {
+                          insertSkill(event, field.value);
+                        }}
+                      />
+                    </FormControl>
+                    <FormDescription></FormDescription>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+            </div>
+            <Button type="submit">{SkillsSection.SUBMIT}</Button>
+          </form>
+        </Form>
+      </div>
     </div>
   );
 }

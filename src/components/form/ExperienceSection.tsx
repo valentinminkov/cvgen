@@ -109,10 +109,13 @@ export default function ExperienceSection() {
   }
 
   return (
-    <div>
+    <div className="flex gap-10">
       {experiencesStore?.experiences.length > 0 && (
-        <div className="bg-gray-500 p-4">
-          <p className="pb-4">{components.ExperienceSection.ENTRIES}</p>
+        <div className="bg-gray-500 p-4 w-4/12">
+          <p className="pb-4">
+            {components.ExperienceSection.ENTRIES} (
+            {experiencesStore.experiences.length})
+          </p>
           {experiencesStore?.experiences.map((experience, index: number) => {
             return (
               <Accordion type="single" collapsible key={experience.title}>
@@ -127,113 +130,125 @@ export default function ExperienceSection() {
           })}
         </div>
       )}
-      <Form {...form}>
-        <form
-          onSubmit={form.handleSubmit(onSubmit)}
-          className={sectionClasses.form}
-        >
-          <FormField
-            defaultValue=""
-            control={form.control}
-            name="title"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>
-                  {components.ExperienceSection.COMPANY_NAME}
-                </FormLabel>
-                <FormControl>
-                  <Input placeholder="Acme" {...field} />
-                </FormControl>
-                <FormDescription></FormDescription>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-          <FormField
-            control={form.control}
-            name="country"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>{components.ExperienceSection.LOCATION}</FormLabel>
-                <FormControl>
-                  <CountrySelector field={field} />
-                </FormControl>
-                <FormDescription></FormDescription>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-          <FormField
-            control={form.control}
-            name="workDescription"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>
-                  {components.ExperienceSection.WORK_DESCRIPTION}
-                </FormLabel>
-                <FormControl>
-                  <Textarea placeholder="Work description" {...field} />
-                </FormControl>
-                <FormDescription></FormDescription>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-
-          <FormField
-            control={form.control}
-            name="startDate"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>{components.ExperienceSection.START_DATE}</FormLabel>
-                <FormControl>
-                  <DatePicker placeholder="" field={field} />
-                </FormControl>
-                <FormDescription></FormDescription>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-          <FormField
-            control={form.control}
-            name="ongoing"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>{components.ExperienceSection.ONGOING}</FormLabel>
-                <FormControl>
-                  <Switch
-                    checked={field.value}
-                    onCheckedChange={(checked) => {
-                      setIsWorkOngoing(checked);
-                      field.onChange(checked);
-                    }}
-                  />
-                </FormControl>
-                <FormDescription></FormDescription>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-          {!isWorkOngoing && (
+      <div className="w-full">
+        <Form {...form}>
+          <form
+            onSubmit={form.handleSubmit(onSubmit)}
+            className={sectionClasses.form}
+          >
+            <div className="flex w-full gap-10">
+              <FormField
+                defaultValue=""
+                control={form.control}
+                name="title"
+                render={({ field }) => (
+                  <FormItem className="w-full">
+                    <FormLabel>
+                      {components.ExperienceSection.COMPANY_NAME}
+                    </FormLabel>
+                    <FormControl>
+                      <Input placeholder="Acme" {...field} />
+                    </FormControl>
+                    <FormDescription></FormDescription>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              <FormField
+                control={form.control}
+                name="country"
+                render={({ field }) => (
+                  <FormItem className="w-full">
+                    <FormLabel>
+                      {components.ExperienceSection.LOCATION}
+                    </FormLabel>
+                    <FormControl>
+                      <CountrySelector field={field} />
+                    </FormControl>
+                    <FormDescription></FormDescription>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+            </div>
             <FormField
               control={form.control}
-              name="endDate"
+              name="workDescription"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>{components.ExperienceSection.END_DATE}</FormLabel>
+                  <FormLabel>
+                    {components.ExperienceSection.WORK_DESCRIPTION}
+                  </FormLabel>
                   <FormControl>
-                    <DatePicker placeholder="" field={field} />
+                    <Textarea placeholder="Work description" {...field} />
                   </FormControl>
                   <FormDescription></FormDescription>
                   <FormMessage />
                 </FormItem>
               )}
             />
-          )}
-
-          <Button type="submit">{components.ExperienceSection.SUBMIT}</Button>
-        </form>
-      </Form>
+            <div className="flex items-center">
+              <FormField
+                control={form.control}
+                name="startDate"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>
+                      {components.ExperienceSection.START_DATE}
+                    </FormLabel>
+                    <FormControl>
+                      <DatePicker placeholder="" field={field} />
+                    </FormControl>
+                    <FormDescription></FormDescription>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              <FormField
+                control={form.control}
+                name="ongoing"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>
+                      {components.ExperienceSection.ONGOING}
+                    </FormLabel>
+                    <FormControl>
+                      <Switch
+                        checked={field.value}
+                        onCheckedChange={(checked) => {
+                          setIsWorkOngoing(checked);
+                          field.onChange(checked);
+                        }}
+                      />
+                    </FormControl>
+                    <FormDescription></FormDescription>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              {!isWorkOngoing && (
+                <FormField
+                  control={form.control}
+                  name="endDate"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel>
+                        {components.ExperienceSection.END_DATE}
+                      </FormLabel>
+                      <FormControl>
+                        <DatePicker placeholder="" field={field} />
+                      </FormControl>
+                      <FormDescription></FormDescription>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+              )}
+            </div>
+            <Button type="submit">{components.ExperienceSection.SUBMIT}</Button>
+          </form>
+        </Form>
+      </div>
     </div>
   );
 }
