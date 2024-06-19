@@ -29,9 +29,7 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
-import { DatePicker } from "@/components/form/Datepicker";
 import { CountrySelector } from "@/components/form/CountrySelector";
-import { Switch } from "@/components/ui/switch";
 import { Textarea } from "@/components/ui/textarea";
 import { useState } from "react";
 import { content } from "@/config/content";
@@ -39,6 +37,7 @@ import {
   ExperienceCard,
   ExperienceCardTitle,
 } from "@/components/form/ExperienceCard";
+import DateRangePicker from "@/components/form/DateRangePicker";
 
 const {
   content: { components },
@@ -170,64 +169,7 @@ export default function ExperienceSection() {
                 </FormItem>
               )}
             />
-            <div className="flex items-center">
-              <FormField
-                control={form.control}
-                name="startDate"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>
-                      {components.ExperienceSection.START_DATE}
-                    </FormLabel>
-                    <FormControl>
-                      <DatePicker placeholder="" field={field} />
-                    </FormControl>
-                    <FormDescription></FormDescription>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-              <FormField
-                control={form.control}
-                name="ongoing"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>
-                      {components.ExperienceSection.ONGOING}
-                    </FormLabel>
-                    <FormControl>
-                      <Switch
-                        checked={field.value}
-                        onCheckedChange={(checked) => {
-                          setIsWorkOngoing(checked);
-                          field.onChange(checked);
-                        }}
-                      />
-                    </FormControl>
-                    <FormDescription></FormDescription>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-              {!isWorkOngoing && (
-                <FormField
-                  control={form.control}
-                  name="endDate"
-                  render={({ field }) => (
-                    <FormItem>
-                      <FormLabel>
-                        {components.ExperienceSection.END_DATE}
-                      </FormLabel>
-                      <FormControl>
-                        <DatePicker placeholder="" field={field} />
-                      </FormControl>
-                      <FormDescription></FormDescription>
-                      <FormMessage />
-                    </FormItem>
-                  )}
-                />
-              )}
-            </div>
+            <DateRangePicker form={form} />
             <Button type="submit">{components.ExperienceSection.SUBMIT}</Button>
           </form>
         </Form>

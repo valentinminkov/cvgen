@@ -53,9 +53,6 @@ const componentsContent = {
     COMPANY_NAME: "Company name",
     LOCATION: "Location",
     WORK_DESCRIPTION: "Work description",
-    START_DATE: "Start date",
-    ONGOING: "Ongoing",
-    END_DATE: "End date",
     SUBMIT: elementsContent.SECTION_FORM_SUBMIT_BUTTON,
   },
   EducationSection: {
@@ -66,9 +63,6 @@ const componentsContent = {
     COUNTRY: "Country",
     CITY: "City",
     DESCRIPTION: "Description",
-    START_DATE: "Start date",
-    ONGOING: "Ongoing",
-    END_DATE: "End date",
     SUBMIT: elementsContent.SECTION_FORM_SUBMIT_BUTTON,
   },
   LanguageSection: {
@@ -88,6 +82,11 @@ const componentsContent = {
     SKILL: "Skill",
     SKILLS: "Skills",
     SUBMIT: elementsContent.SECTION_FORM_SUBMIT_BUTTON,
+  },
+  DateRangePicker: {
+    START_DATE: "Start date",
+    ONGOING: "Ongoing",
+    END_DATE: "End date",
   },
 };
 

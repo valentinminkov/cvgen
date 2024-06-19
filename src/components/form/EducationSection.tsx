@@ -36,6 +36,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { useState } from "react";
 import { content } from "@/config/content";
 import { ExperienceCard, ExperienceCardTitle } from "./ExperienceCard";
+import DateRangePicker from "@/components/form/DateRangePicker";
 
 const {
   content: {
@@ -227,59 +228,7 @@ export default function EducationSectionComponent() {
                 )}
               />
             </div>
-            <div className="flex items-center w-full gap-5">
-              <FormField
-                control={form.control}
-                name="startDate"
-                render={({ field }) => (
-                  <FormItem className="w-full">
-                    <FormLabel>{EducationSection.START_DATE}</FormLabel>
-                    <FormControl>
-                      <DatePicker placeholder="" field={field} />
-                    </FormControl>
-                    <FormDescription></FormDescription>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-              <FormField
-                control={form.control}
-                name="ongoing"
-                render={({ field }) => (
-                  <FormItem className="w-full flex flex-col items-center">
-                    <FormLabel>{EducationSection.ONGOING}</FormLabel>
-                    <FormControl>
-                      <Switch
-                        checked={field.value}
-                        onCheckedChange={(checked) => {
-                          setIsWorkOngoing(checked);
-                          field.onChange(checked);
-                        }}
-                      />
-                    </FormControl>
-                    <FormDescription></FormDescription>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-
-              {!isWorkOngoing && (
-                <FormField
-                  control={form.control}
-                  name="endDate"
-                  render={({ field }) => (
-                    <FormItem className="w-full">
-                      <FormLabel>{EducationSection.END_DATE}</FormLabel>
-                      <FormControl>
-                        <DatePicker placeholder="" field={field} />
-                      </FormControl>
-                      <FormDescription></FormDescription>
-                      <FormMessage />
-                    </FormItem>
-                  )}
-                />
-              )}
-            </div>
+            <DateRangePicker form={form} />
             <Button type="submit">{EducationSection.SUBMIT}</Button>
           </form>
         </Form>
