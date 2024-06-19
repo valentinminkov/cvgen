@@ -35,12 +35,14 @@ import {
   resetUserData,
   type SocialMedia,
   removeSocialMediaByName,
+  removeSocialMediaByIndex,
 } from "@/stores/userStore";
 import { content } from "@/config/content";
 import { useState, type ChangeEvent } from "react";
 import { sectionClasses } from "@/components/form/config";
 import AddSocialMedia from "@/components/form/AddSocialMedia";
 import { CrossCircledIcon } from "@radix-ui/react-icons";
+import { ListEntryCard, ListEntryTitle } from "./ListEntry";
 
 const FormSchema = z.object({
   firstName: z.string().min(2, {
@@ -122,8 +124,8 @@ export default function PersonalSection({ defaultFormValues }: Props) {
     }
   }
 
-  const sectionRow = "flex justify-between";
-  const sectionCol = "flex flex-col gap-5 w-5/12";
+  const sectionRow = "flex justify-between gap-10";
+  const sectionCol = "flex flex-col gap-5 w-full";
 
   return (
     <Form {...form}>
@@ -131,8 +133,37 @@ export default function PersonalSection({ defaultFormValues }: Props) {
         onSubmit={form.handleSubmit(onSubmit)}
         className={sectionClasses.form}
       >
+        <div className="flex flex-col gap-4">
+          {userStore?.picture && (
+            <div className="w-[100px] h-[100px] self-center">
+              <AspectRatio ratio={1 / 1}>
+                <img
+                  src={userStore.picture}
+                  alt="Image"
+                  className="rounded-full object-cover"
+                />
+              </AspectRatio>
+            </div>
+          )}
+
+          <FormField
+            defaultValue={""}
+            control={form.control}
+            name="picture"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>{PersonalSection.PICTURE}</FormLabel>
+                <FormControl onChange={handlePictureFileChange}>
+                  <Input id="picture" type="file" {...field} />
+                </FormControl>
+                <FormDescription></FormDescription>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+        </div>
         <div className={sectionRow}>
-          <div className={sectionCol}>
+          <div className={`${sectionCol}`}>
             <FormField
               defaultValue={
                 !!userStore.firstName
@@ -191,55 +222,9 @@ export default function PersonalSection({ defaultFormValues }: Props) {
                 </FormItem>
               )}
             />
-            <FormField
-              defaultValue={
-                !!userStore.phoneNumber
-                  ? userStore.phoneNumber
-                  : defaultFormValues?.phoneNumber
-              }
-              control={form.control}
-              name="phoneNumber"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>{PersonalSection.PHONE_NUMBER}</FormLabel>
-                  <FormControl>
-                    <Input placeholder="+123 456 789 10" {...field} />
-                  </FormControl>
-                  <FormDescription></FormDescription>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
           </div>
 
           <div className={sectionCol}>
-            {userStore?.picture && (
-              <div className="w-[80px] h-[80px] self-center">
-                <AspectRatio ratio={16 / 9}>
-                  <img
-                    src={userStore.picture}
-                    alt="Image"
-                    className="rounded-md object-cover"
-                  />
-                </AspectRatio>
-              </div>
-            )}
-
-            <FormField
-              defaultValue={""}
-              control={form.control}
-              name="picture"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>{PersonalSection.PICTURE}</FormLabel>
-                  <FormControl onChange={handlePictureFileChange}>
-                    <Input id="picture" type="file" {...field} />
-                  </FormControl>
-                  <FormDescription></FormDescription>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
             <FormField
               control={form.control}
               name="gender"
@@ -306,6 +291,25 @@ export default function PersonalSection({ defaultFormValues }: Props) {
                     </SelectContent>
                   </Select>
 
+                  <FormDescription></FormDescription>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+            <FormField
+              defaultValue={
+                !!userStore.phoneNumber
+                  ? userStore.phoneNumber
+                  : defaultFormValues?.phoneNumber
+              }
+              control={form.control}
+              name="phoneNumber"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>{PersonalSection.PHONE_NUMBER}</FormLabel>
+                  <FormControl>
+                    <Input placeholder="+123 456 789 10" {...field} />
+                  </FormControl>
                   <FormDescription></FormDescription>
                   <FormMessage />
                 </FormItem>
@@ -380,41 +384,21 @@ export default function PersonalSection({ defaultFormValues }: Props) {
           <div className={"flex gap-20"}>
             {userStore?.socialMedia && !!userStore.socialMedia.length && (
               <div className="">
-                <h3 className="py-2">{PersonalSection.SOCIAL_MEDIA_ENTRIES}</h3>
-
+                <ListEntryTitle
+                  entriesLabel={PersonalSection.SOCIAL_MEDIA_ENTRIES}
+                  entriesLength={userStore.socialMedia.length}
+                />
                 <div className="flex flex-col gap-5  max-h-56	p-4 relative overflow-y-auto">
-                  {userStore.socialMedia?.map((socialMediaEntry) => {
+                  {userStore.socialMedia?.map((socialMediaEntry, i) => {
                     return (
-                      <div
-                        key={socialMediaEntry.name + socialMediaEntry.url}
-                        className="p-2 border-solid border-b-2 border-slate-400 "
-                      >
-                        <div
-                          onClick={() => {
-                            removeSocialMediaByName(socialMediaEntry.name);
-                          }}
-                          className="cursor-pointer hover:opacity-50 p-2"
-                        >
-                          <CrossCircledIcon />
-                        </div>
-
-                        <div className="flex justify-center items-center gap-4">
-                          {socialMediaEntry?.icon && (
-                            <img
-                              src={socialMediaEntry.icon}
-                              width={32}
-                              height={32}
-                            />
-                          )}
-
-                          <div className="py-6">
-                            <p>{socialMediaEntry.name}</p>
-                            <a href={socialMediaEntry.url}>
-                              {socialMediaEntry.url}
-                            </a>
-                          </div>
-                        </div>
-                      </div>
+                      <ListEntryCard
+                        removeEntry={removeSocialMediaByIndex}
+                        index={i}
+                        content={[
+                          { label: "Name", value: socialMediaEntry.name },
+                          { label: "url", value: socialMediaEntry.url },
+                        ]}
+                      />
                     );
                   })}
                 </div>

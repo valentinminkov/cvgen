@@ -82,6 +82,21 @@ export function removeSocialMediaByName(socialMediaName: string) {
   $user.set({ ...store, socialMedia: updatedSocialMedias });
 }
 
+export function removeSocialMediaByIndex(indexToRemove: number) {
+  const store = $user.get();
+
+  if (
+    store.socialMedia &&
+    indexToRemove >= 0 &&
+    indexToRemove < store.socialMedia.length
+  ) {
+    const updatedSocialMedias = store.socialMedia.splice(indexToRemove, 1);
+    $user.set({ ...store, socialMedia: updatedSocialMedias });
+    return true;
+  }
+  return false;
+}
+
 export function updateUserData(newData: Partial<UserFormValue>) {
   const formattedUserData = {
     ...newData,

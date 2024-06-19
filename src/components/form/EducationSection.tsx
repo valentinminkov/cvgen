@@ -35,7 +35,7 @@ import { Switch } from "@/components/ui/switch";
 import { Textarea } from "@/components/ui/textarea";
 import { useState } from "react";
 import { content } from "@/config/content";
-import { ExperienceCard, ExperienceCardTitle } from "./ExperienceCard";
+import { ListEntryCard, ListEntryTitle } from "./ListEntry";
 import DateRangePicker from "@/components/form/DateRangePicker";
 
 const {
@@ -87,22 +87,20 @@ export default function EducationSectionComponent() {
     <div className="flex gap-10">
       {educationStore?.educations.length > 0 && (
         <div className="bg-gray-500 p-4 w-4/12">
-          <ExperienceCardTitle
-            entriesLength={educationStore.educations.length}
-          />
+          <ListEntryTitle entriesLength={educationStore.educations.length} />
           {educationStore?.educations.map((education, index: number) => {
             return (
               <Accordion type="single" collapsible key={education.title}>
                 <AccordionItem value={education.name}>
                   <AccordionTrigger>{education.title}</AccordionTrigger>
                   <AccordionContent>
-                    <ExperienceCard
+                    <ListEntryCard
                       date={{
                         endDate: education.endDate,
                         ongoing: education.ongoing,
                         startDate: education.startDate,
                       }}
-                      removeExperience={removeEducation}
+                      removeEntry={removeEducation}
                       content={[
                         {
                           label: EducationSection.TITLE,

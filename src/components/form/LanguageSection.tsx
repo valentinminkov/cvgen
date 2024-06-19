@@ -34,7 +34,7 @@ import {
 } from "@/components/ui/accordion";
 import { content } from "@/config/content";
 import { sectionClasses } from "./config";
-import { ExperienceCard, ExperienceCardTitle } from "./ExperienceCard";
+import { ListEntryCard, ListEntryTitle } from "./ListEntry";
 
 const {
   content: {
@@ -70,7 +70,7 @@ export default function LanguageSectionComponent() {
       {languagesStore?.language.otherLanguages &&
         languagesStore.language.otherLanguages?.length > 0 && (
           <div className="bg-gray-500 p-4 w-4/12">
-            <ExperienceCardTitle
+            <ListEntryTitle
               entriesLength={languagesStore.language.otherLanguages.length}
             />
             {languagesStore?.language?.otherLanguages.map(
@@ -80,7 +80,7 @@ export default function LanguageSectionComponent() {
                     <AccordionItem value={curLang.language}>
                       <AccordionTrigger>{curLang.language}</AccordionTrigger>
                       <AccordionContent>
-                        <ExperienceCard
+                        <ListEntryCard
                           content={[
                             {
                               label: LanguageSection.LANGUAGE,
@@ -99,7 +99,7 @@ export default function LanguageSectionComponent() {
                               value: curLang.skills.writing,
                             },
                           ]}
-                          removeExperience={removeLanguage}
+                          removeEntry={removeLanguage}
                           index={index}
                         />
                       </AccordionContent>

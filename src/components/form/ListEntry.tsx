@@ -1,12 +1,12 @@
 import { CrossCircledIcon } from "@radix-ui/react-icons";
 import { Label } from "@radix-ui/react-label";
 
-export interface ExperienceCardContent {
+export interface ListEntryContent {
   value: string;
   label?: string;
 }
 
-export interface ExperienceDate {
+export interface ListEntryDate {
   startDate: Date;
   ongoing?: boolean;
   endDate?: Date;
@@ -14,21 +14,21 @@ export interface ExperienceDate {
 
 interface Props {
   index: number;
-  content: ExperienceCardContent[];
-  removeExperience: (index: number) => void;
-  date?: ExperienceDate;
+  content: ListEntryContent[];
+  removeEntry: (index: number) => void;
+  date?: ListEntryDate;
 }
 
-interface ExperienceCardTitleProps {
+interface ListEntryTitleProps {
   entriesLength: number;
   entriesLabel?: string;
 }
 
 const ENTRIES_DEFAUL_LABEL = "Entries";
-export function ExperienceCardTitle({
+export function ListEntryTitle({
   entriesLabel,
   entriesLength,
-}: ExperienceCardTitleProps) {
+}: ListEntryTitleProps) {
   return (
     <p className="pb-4">
       {entriesLabel ?? ENTRIES_DEFAUL_LABEL} ({entriesLength})
@@ -36,17 +36,12 @@ export function ExperienceCardTitle({
   );
 }
 
-export function ExperienceCard({
-  index,
-  removeExperience,
-  content,
-  date,
-}: Props) {
+export function ListEntryCard({ index, removeEntry, content, date }: Props) {
   return (
     <div className="bg-gray-600 p-5 flex flex-col gap-6">
       <div
         onClick={() => {
-          removeExperience(index);
+          removeEntry(index);
         }}
         className="cursor-pointer hover:opacity-50 p-2"
       >

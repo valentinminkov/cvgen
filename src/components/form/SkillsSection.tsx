@@ -34,7 +34,7 @@ import {
 import { getRandomString } from "@/lib/utils";
 import { content } from "@/config/content";
 import { sectionClasses } from "@/components/form/config";
-import { ExperienceCard, ExperienceCardTitle } from "./ExperienceCard";
+import { ListEntryCard, ListEntryTitle } from "./ListEntry";
 
 const {
   content: {
@@ -80,16 +80,16 @@ export default function SkillsSectionComponent() {
     <div className="flex gap-10 w-full">
       {skillsStore?.skills && skillsStore.skills?.length > 0 && (
         <div className="bg-gray-500 p-4 w-4/12">
-          <ExperienceCardTitle entriesLength={skillsStore.skills.length} />
+          <ListEntryTitle entriesLength={skillsStore.skills.length} />
           {skillsStore?.skills?.map((curSkill, index: number) => {
             return (
               <Accordion type="single" collapsible key={curSkill.type}>
                 <AccordionItem value="item-1">
                   <AccordionTrigger>{curSkill.type}</AccordionTrigger>
                   <AccordionContent>
-                    <ExperienceCard
+                    <ListEntryCard
                       index={index}
-                      removeExperience={removeSkill}
+                      removeEntry={removeSkill}
                       content={[
                         { label: SkillsSection.SKILL, value: curSkill.type },
                         { label: SkillsSection.LEVEL, value: curSkill.level },
