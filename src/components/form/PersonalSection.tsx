@@ -34,7 +34,6 @@ import {
   addNewSocialMedia,
   resetUserData,
   type SocialMedia,
-  removeSocialMediaByName,
   removeSocialMediaByIndex,
 } from "@/stores/userStore";
 import { content } from "@/config/content";
@@ -123,16 +122,13 @@ export default function PersonalSection({ defaultFormValues }: Props) {
     }
   }
 
-  const sectionRow = "flex justify-between";
-  const sectionCol = "flex flex-col gap-2 w-full bg-gray-800 p-6";
-
   return (
     <Form {...form}>
       <form
         onSubmit={form.handleSubmit(onSubmit)}
         className={sectionClasses.form}
       >
-        <div className={`flex flex-col gap-4 ${sectionCol}`}>
+        <div className={`flex flex-col gap-4 ${sectionClasses.sectionCol}`}>
           <div className="flex">
             {userStore?.picture && (
               <div className="w-[250px] h-[250px]">
@@ -162,8 +158,8 @@ export default function PersonalSection({ defaultFormValues }: Props) {
             )}
           />
         </div>
-        <div className={sectionRow}>
-          <div className={`${sectionCol}`}>
+        <div className={sectionClasses.sectionRow}>
+          <div className={`${sectionClasses.sectionCol}`}>
             <FormField
               defaultValue={
                 !!userStore.firstName
@@ -224,7 +220,7 @@ export default function PersonalSection({ defaultFormValues }: Props) {
             />
           </div>
 
-          <div className={sectionCol}>
+          <div className={sectionClasses.sectionCol}>
             <FormField
               control={form.control}
               name="gender"
@@ -317,8 +313,8 @@ export default function PersonalSection({ defaultFormValues }: Props) {
             />
           </div>
         </div>
-        <div className={sectionRow}>
-          <div className={sectionCol}>
+        <div className={sectionClasses.sectionRow}>
+          <div className={sectionClasses.sectionCol}>
             <FormField
               defaultValue={
                 !!userStore.email ? userStore.email : defaultFormValues?.email
@@ -337,7 +333,7 @@ export default function PersonalSection({ defaultFormValues }: Props) {
               )}
             />
           </div>
-          <div className={sectionCol}>
+          <div className={sectionClasses.sectionCol}>
             <FormField
               defaultValue={
                 !!userStore.website
@@ -359,8 +355,8 @@ export default function PersonalSection({ defaultFormValues }: Props) {
             />
           </div>
         </div>
-        <div className={sectionRow}>
-          <div className={sectionCol}>
+        <div className={sectionClasses.sectionRow}>
+          <div className={sectionClasses.sectionCol}>
             <FormField
               defaultValue={
                 !!userStore.addressType
@@ -429,7 +425,7 @@ export default function PersonalSection({ defaultFormValues }: Props) {
             />
           </div>
 
-          <div className={sectionCol}>
+          <div className={sectionClasses.sectionCol}>
             <FormField
               defaultValue={
                 !!userStore.postCode
@@ -487,8 +483,8 @@ export default function PersonalSection({ defaultFormValues }: Props) {
           </div>
         </div>
 
-        <div className={`${sectionRow}`}>
-          <div className={`h-auto	${sectionCol}`}>
+        <div className={`${sectionClasses.sectionRow}`}>
+          <div className={`h-auto	${sectionClasses.sectionCol}`}>
             <FormField
               defaultValue={
                 !!userStore.aboutMe
@@ -512,14 +508,14 @@ export default function PersonalSection({ defaultFormValues }: Props) {
                 </FormItem>
               )}
             />
-            <div className="flex gap-2 pt-4 self-start">
+            <div className={sectionClasses.controlBtnContainer}>
               <Button type="submit">{PersonalSection.SUBMIT}</Button>
               <Button type="reset" variant={"ghost"} onClick={onReset}>
                 {PersonalSection.RESET}
               </Button>
             </div>
           </div>
-          <div className={sectionCol}>
+          <div className={sectionClasses.sectionCol}>
             <div className="flex justify-between">
               <AddSocialMedia addSocialMedia={addSocialMedia} />
 

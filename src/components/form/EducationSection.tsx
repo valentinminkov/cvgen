@@ -29,9 +29,7 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
-import { DatePicker } from "@/components/form/Datepicker";
 import { CountrySelector } from "@/components/form/CountrySelector";
-import { Switch } from "@/components/ui/switch";
 import { Textarea } from "@/components/ui/textarea";
 import { useState } from "react";
 import { content } from "@/config/content";
@@ -85,114 +83,118 @@ export default function EducationSectionComponent() {
 
   return (
     <div className="flex">
-      <div className="w-full">
+      <div className={`w-full`}>
         <Form {...form}>
           <form
             onSubmit={form.handleSubmit(onSubmit)}
             className={sectionClasses.form}
           >
-            <div className="flex gap-10 w-full">
-              <FormField
-                defaultValue=""
-                control={form.control}
-                name="title"
-                render={({ field }) => (
-                  <FormItem className="w-full">
-                    <FormLabel>{EducationSection.TITLE}</FormLabel>
-                    <FormControl>
-                      <Input placeholder="Acme" {...field} />
-                    </FormControl>
-                    <FormDescription></FormDescription>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-              <FormField
-                defaultValue=""
-                control={form.control}
-                name="name"
-                render={({ field }) => (
-                  <FormItem className="w-full">
-                    <FormLabel>{EducationSection.NAME}</FormLabel>
-                    <FormControl>
-                      <Input placeholder="Acme" {...field} />
-                    </FormControl>
-                    <FormDescription></FormDescription>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-            </div>
-            <div className="flex gap-10 w-full">
-              <FormField
-                defaultValue=""
-                control={form.control}
-                name="website"
-                render={({ field }) => (
-                  <FormItem className="w-full">
-                    <FormLabel>{EducationSection.WEBSITE}</FormLabel>
-                    <FormControl>
-                      <Input placeholder="" {...field} />
-                    </FormControl>
-                    <FormDescription></FormDescription>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
+            <div className={sectionClasses.sectionCol}>
+              <div className={`flex gap-10 w-full `}>
+                <FormField
+                  defaultValue=""
+                  control={form.control}
+                  name="title"
+                  render={({ field }) => (
+                    <FormItem className="w-full">
+                      <FormLabel>{EducationSection.TITLE}</FormLabel>
+                      <FormControl>
+                        <Input placeholder="Acme" {...field} />
+                      </FormControl>
+                      <FormDescription></FormDescription>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+                <FormField
+                  defaultValue=""
+                  control={form.control}
+                  name="name"
+                  render={({ field }) => (
+                    <FormItem className="w-full">
+                      <FormLabel>{EducationSection.NAME}</FormLabel>
+                      <FormControl>
+                        <Input placeholder="Acme" {...field} />
+                      </FormControl>
+                      <FormDescription></FormDescription>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+              </div>
+              <div className="flex gap-10 w-full">
+                <FormField
+                  defaultValue=""
+                  control={form.control}
+                  name="website"
+                  render={({ field }) => (
+                    <FormItem className="w-full">
+                      <FormLabel>{EducationSection.WEBSITE}</FormLabel>
+                      <FormControl>
+                        <Input placeholder="" {...field} />
+                      </FormControl>
+                      <FormDescription></FormDescription>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
 
-              <FormField
-                control={form.control}
-                name="country"
-                render={({ field }) => (
-                  <FormItem className="w-full">
-                    <FormLabel>{EducationSection.COUNTRY}</FormLabel>
-                    <FormControl>
-                      <CountrySelector field={field} />
-                    </FormControl>
-                    <FormDescription></FormDescription>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-            </div>
-            <div className="flex gap-10 w-full">
-              <FormField
-                defaultValue=""
-                control={form.control}
-                name="city"
-                render={({ field }) => (
-                  <FormItem className="w-full">
-                    <FormLabel>{EducationSection.CITY}</FormLabel>
-                    <FormControl>
-                      <Input placeholder="Acme" {...field} />
-                    </FormControl>
-                    <FormDescription></FormDescription>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
+                <FormField
+                  control={form.control}
+                  name="country"
+                  render={({ field }) => (
+                    <FormItem className="w-full">
+                      <FormLabel>{EducationSection.COUNTRY}</FormLabel>
+                      <FormControl>
+                        <CountrySelector field={field} />
+                      </FormControl>
+                      <FormDescription></FormDescription>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+              </div>
+              <div className="flex gap-10 w-full">
+                <FormField
+                  defaultValue=""
+                  control={form.control}
+                  name="city"
+                  render={({ field }) => (
+                    <FormItem className="w-full">
+                      <FormLabel>{EducationSection.CITY}</FormLabel>
+                      <FormControl>
+                        <Input placeholder="Acme" {...field} />
+                      </FormControl>
+                      <FormDescription></FormDescription>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
 
-              <FormField
-                control={form.control}
-                name="description"
-                render={({ field }) => (
-                  <FormItem className="w-full">
-                    <FormLabel>{EducationSection.DESCRIPTION}</FormLabel>
-                    <FormControl>
-                      <Textarea
-                        placeholder="Description"
-                        {...field}
-                        className="w-full"
-                      />
-                    </FormControl>
-                    <FormDescription></FormDescription>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
+                <FormField
+                  control={form.control}
+                  name="description"
+                  render={({ field }) => (
+                    <FormItem className="w-full">
+                      <FormLabel>{EducationSection.DESCRIPTION}</FormLabel>
+                      <FormControl>
+                        <Textarea
+                          placeholder="Description"
+                          {...field}
+                          className="w-full"
+                        />
+                      </FormControl>
+                      <FormDescription></FormDescription>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+              </div>
+              <DateRangePicker form={form} />
+              <div className={sectionClasses.controlBtnContainer}>
+                <Button type="submit">{EducationSection.SUBMIT}</Button>
+              </div>
             </div>
-            <DateRangePicker form={form} />
-            <Button type="submit">{EducationSection.SUBMIT}</Button>
           </form>
         </Form>
       </div>

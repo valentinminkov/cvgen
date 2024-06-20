@@ -82,7 +82,7 @@ export default function ExperienceSection() {
             onSubmit={form.handleSubmit(onSubmit)}
             className={sectionClasses.form}
           >
-            <div className="flex w-full gap-10">
+            <div className={`flex w-full gap-10 ${sectionClasses.sectionCol}`}>
               <FormField
                 defaultValue=""
                 control={form.control}
@@ -117,24 +117,30 @@ export default function ExperienceSection() {
                 )}
               />
             </div>
-            <FormField
-              control={form.control}
-              name="workDescription"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>
-                    {components.ExperienceSection.WORK_DESCRIPTION}
-                  </FormLabel>
-                  <FormControl>
-                    <Textarea placeholder="Work description" {...field} />
-                  </FormControl>
-                  <FormDescription></FormDescription>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-            <DateRangePicker form={form} />
-            <Button type="submit">{components.ExperienceSection.SUBMIT}</Button>
+            <div className={sectionClasses.sectionCol}>
+              <FormField
+                control={form.control}
+                name="workDescription"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>
+                      {components.ExperienceSection.WORK_DESCRIPTION}
+                    </FormLabel>
+                    <FormControl>
+                      <Textarea placeholder="Work description" {...field} />
+                    </FormControl>
+                    <FormDescription></FormDescription>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              <DateRangePicker form={form} />
+              <div className={sectionClasses.controlBtnContainer}>
+                <Button type="submit">
+                  {components.ExperienceSection.SUBMIT}
+                </Button>
+              </div>
+            </div>
           </form>
         </Form>
       </div>
