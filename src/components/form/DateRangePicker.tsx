@@ -21,14 +21,14 @@ export default function DateRangePicker({ form }: Props) {
   const {
     content: { components },
   } = content;
-
+  const formItemClass = "flex flex-col";
   return (
     <div className="flex items-center gap-5 ">
       <FormField
         control={form.control}
         name="startDate"
         render={({ field }) => (
-          <FormItem>
+          <FormItem className={formItemClass}>
             <FormLabel>{components.DateRangePicker.START_DATE}</FormLabel>
             <FormControl>
               <DatePicker placeholder="" field={field} />
@@ -42,7 +42,7 @@ export default function DateRangePicker({ form }: Props) {
         control={form.control}
         name="ongoing"
         render={({ field }) => (
-          <FormItem>
+          <FormItem className={formItemClass}>
             <FormLabel>{components.DateRangePicker.ONGOING}</FormLabel>
             <FormControl>
               <Switch
@@ -63,7 +63,7 @@ export default function DateRangePicker({ form }: Props) {
           control={form.control}
           name="endDate"
           render={({ field }) => (
-            <FormItem>
+            <FormItem className={formItemClass}>
               <FormLabel>{components.DateRangePicker.END_DATE}</FormLabel>
               <FormControl>
                 <DatePicker placeholder="" field={field} />
