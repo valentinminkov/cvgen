@@ -84,44 +84,7 @@ export default function EducationSectionComponent() {
   }
 
   return (
-    <div className="flex gap-10">
-      {educationStore?.educations.length > 0 && (
-        <ListEntryContainer>
-          <>
-            <ListEntryTitle entriesLength={educationStore.educations.length} />
-            {educationStore?.educations.map((education, index: number) => {
-              return (
-                <Accordion type="single" collapsible key={education.title}>
-                  <AccordionItem value={education.name}>
-                    <AccordionTrigger>{education.title}</AccordionTrigger>
-                    <AccordionContent>
-                      <ListEntryCard
-                        date={{
-                          endDate: education.endDate,
-                          ongoing: education.ongoing,
-                          startDate: education.startDate,
-                        }}
-                        removeEntry={removeEducation}
-                        content={[
-                          {
-                            label: EducationSection.TITLE,
-                            value: education.title,
-                          },
-                          {
-                            label: EducationSection.DESCRIPTION,
-                            value: education.description,
-                          },
-                        ]}
-                        index={index}
-                      />
-                    </AccordionContent>
-                  </AccordionItem>
-                </Accordion>
-              );
-            })}
-          </>
-        </ListEntryContainer>
-      )}
+    <div className="flex">
       <div className="w-full">
         <Form {...form}>
           <form
@@ -233,6 +196,43 @@ export default function EducationSectionComponent() {
           </form>
         </Form>
       </div>
+      {educationStore?.educations.length > 0 && (
+        <ListEntryContainer>
+          <>
+            <ListEntryTitle entriesLength={educationStore.educations.length} />
+            {educationStore?.educations.map((education, index: number) => {
+              return (
+                <Accordion type="single" collapsible key={education.title}>
+                  <AccordionItem value={education.name}>
+                    <AccordionTrigger>{education.title}</AccordionTrigger>
+                    <AccordionContent>
+                      <ListEntryCard
+                        date={{
+                          endDate: education.endDate,
+                          ongoing: education.ongoing,
+                          startDate: education.startDate,
+                        }}
+                        removeEntry={removeEducation}
+                        content={[
+                          {
+                            label: EducationSection.TITLE,
+                            value: education.title,
+                          },
+                          {
+                            label: EducationSection.DESCRIPTION,
+                            value: education.description,
+                          },
+                        ]}
+                        index={index}
+                      />
+                    </AccordionContent>
+                  </AccordionItem>
+                </Accordion>
+              );
+            })}
+          </>
+        </ListEntryContainer>
+      )}
     </div>
   );
 }

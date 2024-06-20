@@ -123,8 +123,8 @@ export default function PersonalSection({ defaultFormValues }: Props) {
     }
   }
 
-  const sectionRow = "flex justify-between gap-10";
-  const sectionCol = "flex flex-col gap-5 w-full";
+  const sectionRow = "flex justify-between";
+  const sectionCol = "flex flex-col gap-2 w-full bg-gray-800 p-6";
 
   return (
     <Form {...form}>
@@ -132,19 +132,20 @@ export default function PersonalSection({ defaultFormValues }: Props) {
         onSubmit={form.handleSubmit(onSubmit)}
         className={sectionClasses.form}
       >
-        <div className="flex flex-col gap-4">
-          {userStore?.picture && (
-            <div className="w-[100px] h-[100px]">
-              <AspectRatio ratio={1 / 1}>
-                <img
-                  src={userStore.picture}
-                  alt="Image"
-                  className="rounded-s object-cover"
-                />
-              </AspectRatio>
-            </div>
-          )}
-
+        <div className={`flex flex-col gap-4 ${sectionCol}`}>
+          <div className="flex">
+            {userStore?.picture && (
+              <div className="w-[250px] h-[250px]">
+                <AspectRatio ratio={1 / 1}>
+                  <img
+                    src={userStore.picture}
+                    alt="Image"
+                    className="object-cover w-full h-full"
+                  />
+                </AspectRatio>
+              </div>
+            )}
+          </div>
           <FormField
             defaultValue={""}
             control={form.control}
@@ -316,7 +317,6 @@ export default function PersonalSection({ defaultFormValues }: Props) {
             />
           </div>
         </div>
-
         <div className={sectionRow}>
           <div className={sectionCol}>
             <FormField
@@ -336,7 +336,8 @@ export default function PersonalSection({ defaultFormValues }: Props) {
                 </FormItem>
               )}
             />
-
+          </div>
+          <div className={sectionCol}>
             <FormField
               defaultValue={
                 !!userStore.website
@@ -356,57 +357,7 @@ export default function PersonalSection({ defaultFormValues }: Props) {
                 </FormItem>
               )}
             />
-            <FormField
-              defaultValue={
-                !!userStore.aboutMe
-                  ? userStore.aboutMe
-                  : defaultFormValues?.aboutMe
-              }
-              control={form.control}
-              name="aboutMe"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>{PersonalSection.ABOUT}</FormLabel>
-                  <FormControl>
-                    <Textarea
-                      placeholder="Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nulla qui rem necessitatibus porro eveniet commodi officiis nam, quam atque quisquam non illo similique laudantium eius beatae quibusdam consequuntur explicabo error."
-                      {...field}
-                    />
-                  </FormControl>
-                  <FormDescription></FormDescription>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
           </div>
-
-          <ListEntryContainer>
-            <>
-              {userStore?.socialMedia && !!userStore.socialMedia.length && (
-                <div className="">
-                  <ListEntryTitle
-                    entriesLabel={PersonalSection.SOCIAL_MEDIA_ENTRIES}
-                    entriesLength={userStore.socialMedia.length}
-                  />
-                  <div className="flex flex-col gap-5  max-h-56	p-4 relative overflow-y-auto">
-                    {userStore.socialMedia?.map((socialMediaEntry, i) => {
-                      return (
-                        <ListEntryCard
-                          removeEntry={removeSocialMediaByIndex}
-                          index={i}
-                          content={[
-                            { label: "Name", value: socialMediaEntry.name },
-                            { label: "url", value: socialMediaEntry.url },
-                          ]}
-                        />
-                      );
-                    })}
-                  </div>
-                </div>
-              )}
-            </>
-          </ListEntryContainer>
-          <AddSocialMedia addSocialMedia={addSocialMedia} />
         </div>
         <div className={sectionRow}>
           <div className={sectionCol}>
@@ -535,11 +486,71 @@ export default function PersonalSection({ defaultFormValues }: Props) {
             />
           </div>
         </div>
-        <div className="flex gap-2">
-          <Button type="submit">{PersonalSection.SUBMIT}</Button>
-          <Button type="reset" variant={"ghost"} onClick={onReset}>
-            {PersonalSection.RESET}
-          </Button>
+
+        <div className={`${sectionRow}`}>
+          <div className={`h-auto	${sectionCol}`}>
+            <FormField
+              defaultValue={
+                !!userStore.aboutMe
+                  ? userStore.aboutMe
+                  : defaultFormValues?.aboutMe
+              }
+              control={form.control}
+              name="aboutMe"
+              render={({ field }) => (
+                <FormItem className="h-4/5">
+                  <FormLabel>{PersonalSection.ABOUT}</FormLabel>
+                  <FormControl className="h-4/5">
+                    <Textarea
+                      className="h-4/5"
+                      placeholder="Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nulla qui rem necessitatibus porro eveniet commodi officiis nam, quam atque quisquam non illo similique laudantium eius beatae quibusdam consequuntur explicabo error."
+                      {...field}
+                    />
+                  </FormControl>
+                  <FormDescription></FormDescription>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+            <div className="flex gap-2 pt-4 self-start">
+              <Button type="submit">{PersonalSection.SUBMIT}</Button>
+              <Button type="reset" variant={"ghost"} onClick={onReset}>
+                {PersonalSection.RESET}
+              </Button>
+            </div>
+          </div>
+          <div className={sectionCol}>
+            <div className="flex justify-between">
+              <AddSocialMedia addSocialMedia={addSocialMedia} />
+
+              <ListEntryContainer>
+                <>
+                  {userStore?.socialMedia && !!userStore.socialMedia.length && (
+                    <div className="">
+                      <ListEntryTitle
+                        entriesLabel={PersonalSection.SOCIAL_MEDIA_ENTRIES}
+                        entriesLength={userStore.socialMedia.length}
+                      />
+                      <div className="flex flex-col gap-5  max-h-56	p-4 relative overflow-y-auto">
+                        {userStore.socialMedia?.map((socialMediaEntry, i) => {
+                          return (
+                            <ListEntryCard
+                              removeEntry={removeSocialMediaByIndex}
+                              index={i}
+                              content={[
+                                { label: "Name", value: socialMediaEntry.name },
+                                { label: "url", value: socialMediaEntry.url },
+                              ]}
+                            />
+                          );
+                        })}
+                      </div>
+                    </div>
+                  )}
+                </>
+              </ListEntryContainer>
+            </div>
+          </div>
         </div>
       </form>
     </Form>

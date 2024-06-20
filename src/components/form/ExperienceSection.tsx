@@ -75,51 +75,7 @@ export default function ExperienceSection() {
   }
 
   return (
-    <div className="flex gap-10">
-      <ListEntryContainer>
-        <>
-          {experiencesStore?.experiences.length > 0 && (
-            <>
-              <ListEntryTitle
-                entriesLength={experiencesStore.experiences.length}
-              />
-              {experiencesStore?.experiences.map(
-                (experience, index: number) => {
-                  return (
-                    <Accordion type="single" collapsible key={experience.title}>
-                      <AccordionItem value={experience.title}>
-                        <AccordionTrigger>{experience.title}</AccordionTrigger>
-                        <AccordionContent>
-                          <ListEntryCard
-                            date={{
-                              startDate: experience.startDate,
-                              ongoing: experience.ongoing,
-                              endDate: experience.endDate,
-                            }}
-                            content={[
-                              {
-                                value: experience.title,
-                                label:
-                                  components.ExperienceSection.COMPANY_NAME,
-                              },
-                              {
-                                value: experience.workDescription,
-                                label: components.EducationSection.DESCRIPTION,
-                              },
-                            ]}
-                            removeEntry={removeExperience}
-                            index={index}
-                          />
-                        </AccordionContent>
-                      </AccordionItem>
-                    </Accordion>
-                  );
-                }
-              )}
-            </>
-          )}
-        </>
-      </ListEntryContainer>
+    <div className="flex">
       <div className="w-full">
         <Form {...form}>
           <form
@@ -182,6 +138,50 @@ export default function ExperienceSection() {
           </form>
         </Form>
       </div>
+      <ListEntryContainer>
+        <>
+          {experiencesStore?.experiences.length > 0 && (
+            <>
+              <ListEntryTitle
+                entriesLength={experiencesStore.experiences.length}
+              />
+              {experiencesStore?.experiences.map(
+                (experience, index: number) => {
+                  return (
+                    <Accordion type="single" collapsible key={experience.title}>
+                      <AccordionItem value={experience.title}>
+                        <AccordionTrigger>{experience.title}</AccordionTrigger>
+                        <AccordionContent>
+                          <ListEntryCard
+                            date={{
+                              startDate: experience.startDate,
+                              ongoing: experience.ongoing,
+                              endDate: experience.endDate,
+                            }}
+                            content={[
+                              {
+                                value: experience.title,
+                                label:
+                                  components.ExperienceSection.COMPANY_NAME,
+                              },
+                              {
+                                value: experience.workDescription,
+                                label: components.EducationSection.DESCRIPTION,
+                              },
+                            ]}
+                            removeEntry={removeExperience}
+                            index={index}
+                          />
+                        </AccordionContent>
+                      </AccordionItem>
+                    </Accordion>
+                  );
+                }
+              )}
+            </>
+          )}
+        </>
+      </ListEntryContainer>
     </div>
   );
 }
