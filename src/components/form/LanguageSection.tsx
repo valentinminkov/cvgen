@@ -34,7 +34,7 @@ import {
 } from "@/components/ui/accordion";
 import { content } from "@/config/content";
 import { sectionClasses } from "./config";
-import { ListEntryCard, ListEntryTitle } from "./ListEntry";
+import { ListEntryCard, ListEntryContainer, ListEntryTitle } from "./ListEntry";
 
 const {
   content: {
@@ -69,46 +69,48 @@ export default function LanguageSectionComponent() {
     <div className="flex gap-10">
       {languagesStore?.language.otherLanguages &&
         languagesStore.language.otherLanguages?.length > 0 && (
-          <div className="bg-gray-500 p-4 w-4/12">
-            <ListEntryTitle
-              entriesLength={languagesStore.language.otherLanguages.length}
-            />
-            {languagesStore?.language?.otherLanguages.map(
-              (curLang, index: number) => {
-                return (
-                  <Accordion type="single" collapsible key={curLang.language}>
-                    <AccordionItem value={curLang.language}>
-                      <AccordionTrigger>{curLang.language}</AccordionTrigger>
-                      <AccordionContent>
-                        <ListEntryCard
-                          content={[
-                            {
-                              label: LanguageSection.LANGUAGE,
-                              value: curLang.language,
-                            },
-                            {
-                              label: LanguageSection.READING,
-                              value: curLang.skills.reading,
-                            },
-                            {
-                              label: LanguageSection.LISTENING,
-                              value: curLang.skills.listening,
-                            },
-                            {
-                              label: LanguageSection.WRITING,
-                              value: curLang.skills.writing,
-                            },
-                          ]}
-                          removeEntry={removeLanguage}
-                          index={index}
-                        />
-                      </AccordionContent>
-                    </AccordionItem>
-                  </Accordion>
-                );
-              }
-            )}
-          </div>
+          <ListEntryContainer>
+            <>
+              <ListEntryTitle
+                entriesLength={languagesStore.language.otherLanguages.length}
+              />
+              {languagesStore?.language?.otherLanguages.map(
+                (curLang, index: number) => {
+                  return (
+                    <Accordion type="single" collapsible key={curLang.language}>
+                      <AccordionItem value={curLang.language}>
+                        <AccordionTrigger>{curLang.language}</AccordionTrigger>
+                        <AccordionContent>
+                          <ListEntryCard
+                            content={[
+                              {
+                                label: LanguageSection.LANGUAGE,
+                                value: curLang.language,
+                              },
+                              {
+                                label: LanguageSection.READING,
+                                value: curLang.skills.reading,
+                              },
+                              {
+                                label: LanguageSection.LISTENING,
+                                value: curLang.skills.listening,
+                              },
+                              {
+                                label: LanguageSection.WRITING,
+                                value: curLang.skills.writing,
+                              },
+                            ]}
+                            removeEntry={removeLanguage}
+                            index={index}
+                          />
+                        </AccordionContent>
+                      </AccordionItem>
+                    </Accordion>
+                  );
+                }
+              )}
+            </>
+          </ListEntryContainer>
         )}
       <div className="w-full">
         <Form {...languageForm}>

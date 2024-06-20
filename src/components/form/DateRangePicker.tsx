@@ -23,7 +23,7 @@ export default function DateRangePicker({ form }: Props) {
   } = content;
 
   return (
-    <div className="flex items-center">
+    <div className="flex items-center gap-5 ">
       <FormField
         control={form.control}
         name="startDate"

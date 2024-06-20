@@ -34,7 +34,7 @@ import {
 import { getRandomString } from "@/lib/utils";
 import { content } from "@/config/content";
 import { sectionClasses } from "@/components/form/config";
-import { ListEntryCard, ListEntryTitle } from "./ListEntry";
+import { ListEntryCard, ListEntryContainer, ListEntryTitle } from "./ListEntry";
 
 const {
   content: {
@@ -79,32 +79,34 @@ export default function SkillsSectionComponent() {
   return (
     <div className="flex gap-10 w-full">
       {skillsStore?.skills && skillsStore.skills?.length > 0 && (
-        <div className="bg-gray-500 p-4 w-4/12">
-          <ListEntryTitle entriesLength={skillsStore.skills.length} />
-          {skillsStore?.skills?.map((curSkill, index: number) => {
-            return (
-              <Accordion type="single" collapsible key={curSkill.type}>
-                <AccordionItem value="item-1">
-                  <AccordionTrigger>{curSkill.type}</AccordionTrigger>
-                  <AccordionContent>
-                    <ListEntryCard
-                      index={index}
-                      removeEntry={removeSkill}
-                      content={[
-                        { label: SkillsSection.SKILL, value: curSkill.type },
-                        { label: SkillsSection.LEVEL, value: curSkill.level },
-                        {
-                          label: SkillsSection.SKILLS,
-                          value: curSkill.skills?.join(", ") ?? "",
-                        },
-                      ]}
-                    />
-                  </AccordionContent>
-                </AccordionItem>
-              </Accordion>
-            );
-          })}
-        </div>
+        <ListEntryContainer>
+          <>
+            <ListEntryTitle entriesLength={skillsStore.skills.length} />
+            {skillsStore?.skills?.map((curSkill, index: number) => {
+              return (
+                <Accordion type="single" collapsible key={curSkill.type}>
+                  <AccordionItem value="item-1">
+                    <AccordionTrigger>{curSkill.type}</AccordionTrigger>
+                    <AccordionContent>
+                      <ListEntryCard
+                        index={index}
+                        removeEntry={removeSkill}
+                        content={[
+                          { label: SkillsSection.SKILL, value: curSkill.type },
+                          { label: SkillsSection.LEVEL, value: curSkill.level },
+                          {
+                            label: SkillsSection.SKILLS,
+                            value: curSkill.skills?.join(", ") ?? "",
+                          },
+                        ]}
+                      />
+                    </AccordionContent>
+                  </AccordionItem>
+                </Accordion>
+              );
+            })}
+          </>
+        </ListEntryContainer>
       )}
       <div className="w-full">
         <Form {...skillForm}>

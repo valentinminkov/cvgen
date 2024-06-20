@@ -25,6 +25,10 @@ interface ListEntryTitleProps {
 }
 
 const ENTRIES_DEFAUL_LABEL = "Entries";
+
+export function ListEntryContainer({ children }: { children: JSX.Element }) {
+  return <div className={`${"bg-gray-500 p-4 w-4/12"}`}>{children}</div>;
+}
 export function ListEntryTitle({
   entriesLabel,
   entriesLength,

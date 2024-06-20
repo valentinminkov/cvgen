@@ -33,7 +33,11 @@ import { CountrySelector } from "@/components/form/CountrySelector";
 import { Textarea } from "@/components/ui/textarea";
 import { useState } from "react";
 import { content } from "@/config/content";
-import { ListEntryCard, ListEntryTitle } from "@/components/form/ListEntry";
+import {
+  ListEntryCard,
+  ListEntryContainer,
+  ListEntryTitle,
+} from "@/components/form/ListEntry";
 import DateRangePicker from "@/components/form/DateRangePicker";
 
 const {
@@ -72,41 +76,50 @@ export default function ExperienceSection() {
 
   return (
     <div className="flex gap-10">
-      {experiencesStore?.experiences.length > 0 && (
-        <div className="bg-gray-500 p-4 w-4/12">
-          <ListEntryTitle entriesLength={experiencesStore.experiences.length} />
-          {experiencesStore?.experiences.map((experience, index: number) => {
-            return (
-              <Accordion type="single" collapsible key={experience.title}>
-                <AccordionItem value={experience.title}>
-                  <AccordionTrigger>{experience.title}</AccordionTrigger>
-                  <AccordionContent>
-                    <ListEntryCard
-                      date={{
-                        startDate: experience.startDate,
-                        ongoing: experience.ongoing,
-                        endDate: experience.endDate,
-                      }}
-                      content={[
-                        {
-                          value: experience.title,
-                          label: components.ExperienceSection.COMPANY_NAME,
-                        },
-                        {
-                          value: experience.workDescription,
-                          label: components.EducationSection.DESCRIPTION,
-                        },
-                      ]}
-                      removeEntry={removeExperience}
-                      index={index}
-                    />
-                  </AccordionContent>
-                </AccordionItem>
-              </Accordion>
-            );
-          })}
-        </div>
-      )}
+      <ListEntryContainer>
+        <>
+          {experiencesStore?.experiences.length > 0 && (
+            <>
+              <ListEntryTitle
+                entriesLength={experiencesStore.experiences.length}
+              />
+              {experiencesStore?.experiences.map(
+                (experience, index: number) => {
+                  return (
+                    <Accordion type="single" collapsible key={experience.title}>
+                      <AccordionItem value={experience.title}>
+                        <AccordionTrigger>{experience.title}</AccordionTrigger>
+                        <AccordionContent>
+                          <ListEntryCard
+                            date={{
+                              startDate: experience.startDate,
+                              ongoing: experience.ongoing,
+                              endDate: experience.endDate,
+                            }}
+                            content={[
+                              {
+                                value: experience.title,
+                                label:
+                                  components.ExperienceSection.COMPANY_NAME,
+                              },
+                              {
+                                value: experience.workDescription,
+                                label: components.EducationSection.DESCRIPTION,
+                              },
+                            ]}
+                            removeEntry={removeExperience}
+                            index={index}
+                          />
+                        </AccordionContent>
+                      </AccordionItem>
+                    </Accordion>
+                  );
+                }
+              )}
+            </>
+          )}
+        </>
+      </ListEntryContainer>
       <div className="w-full">
         <Form {...form}>
           <form

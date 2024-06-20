@@ -41,8 +41,7 @@ import { content } from "@/config/content";
 import { useState, type ChangeEvent } from "react";
 import { sectionClasses } from "@/components/form/config";
 import AddSocialMedia from "@/components/form/AddSocialMedia";
-import { CrossCircledIcon } from "@radix-ui/react-icons";
-import { ListEntryCard, ListEntryTitle } from "./ListEntry";
+import { ListEntryCard, ListEntryContainer, ListEntryTitle } from "./ListEntry";
 
 const FormSchema = z.object({
   firstName: z.string().min(2, {
@@ -135,12 +134,12 @@ export default function PersonalSection({ defaultFormValues }: Props) {
       >
         <div className="flex flex-col gap-4">
           {userStore?.picture && (
-            <div className="w-[100px] h-[100px] self-center">
+            <div className="w-[100px] h-[100px]">
               <AspectRatio ratio={1 / 1}>
                 <img
                   src={userStore.picture}
                   alt="Image"
-                  className="rounded-full object-cover"
+                  className="rounded-s object-cover"
                 />
               </AspectRatio>
             </div>
@@ -381,31 +380,32 @@ export default function PersonalSection({ defaultFormValues }: Props) {
             />
           </div>
 
-          <div className={"flex gap-20"}>
-            {userStore?.socialMedia && !!userStore.socialMedia.length && (
-              <div className="">
-                <ListEntryTitle
-                  entriesLabel={PersonalSection.SOCIAL_MEDIA_ENTRIES}
-                  entriesLength={userStore.socialMedia.length}
-                />
-                <div className="flex flex-col gap-5  max-h-56	p-4 relative overflow-y-auto">
-                  {userStore.socialMedia?.map((socialMediaEntry, i) => {
-                    return (
-                      <ListEntryCard
-                        removeEntry={removeSocialMediaByIndex}
-                        index={i}
-                        content={[
-                          { label: "Name", value: socialMediaEntry.name },
-                          { label: "url", value: socialMediaEntry.url },
-                        ]}
-                      />
-                    );
-                  })}
+          <ListEntryContainer>
+            <>
+              {userStore?.socialMedia && !!userStore.socialMedia.length && (
+                <div className="">
+                  <ListEntryTitle
+                    entriesLabel={PersonalSection.SOCIAL_MEDIA_ENTRIES}
+                    entriesLength={userStore.socialMedia.length}
+                  />
+                  <div className="flex flex-col gap-5  max-h-56	p-4 relative overflow-y-auto">
+                    {userStore.socialMedia?.map((socialMediaEntry, i) => {
+                      return (
+                        <ListEntryCard
+                          removeEntry={removeSocialMediaByIndex}
+                          index={i}
+                          content={[
+                            { label: "Name", value: socialMediaEntry.name },
+                            { label: "url", value: socialMediaEntry.url },
+                          ]}
+                        />
+                      );
+                    })}
+                  </div>
                 </div>
-              </div>
-            )}
-          </div>
-
+              )}
+            </>
+          </ListEntryContainer>
           <AddSocialMedia addSocialMedia={addSocialMedia} />
         </div>
         <div className={sectionRow}>

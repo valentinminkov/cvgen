@@ -1,6 +1,7 @@
 const elementsContent = {
   SECTION_FORM_SUBMIT_BUTTON: "Save",
   RESET_BUTTON: "Reset",
+  FORM_CONTAINER: "",
 };
 
 const componentsContent = {
