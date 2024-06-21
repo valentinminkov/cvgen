@@ -8,3 +8,10 @@ export const sectionClasses = {
     "flex flex-col max-h-[26rem] relative overflow-y-auto align-center",
   listEntryContainerContent: "flex flex-col justify-between h-full",
 };
+
+const inputAccordionTextColor = "text-white";
+
+export const inputAccordion = {
+  accordionItem: `${inputAccordionTextColor} text-white`,
+  accordionTrigger: `${inputAccordionTextColor} text-white`,
+};

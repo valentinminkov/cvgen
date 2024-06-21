@@ -20,6 +20,7 @@ import {
   $languagesEntered,
 } from "@/stores/computed";
 import { useStore } from "@nanostores/react";
+import { inputAccordion } from "@/components/form/classes";
 
 export default function InputAccordion() {
   const skillsEntered = useStore($skillsEntered);
@@ -50,8 +51,11 @@ export default function InputAccordion() {
   return (
     <Accordion type="single" collapsible>
       {/* Personal data */}
-      <AccordionItem value={PERSONAL_DATA_SECTION}>
-        <AccordionTrigger>
+      <AccordionItem
+        value={PERSONAL_DATA_SECTION}
+        className={inputAccordion.accordionItem}
+      >
+        <AccordionTrigger className={inputAccordion.accordionTrigger}>
           {PERSONAL_DATA_SECTION}
           {isPersonalDataFilled && <p>{FILLED_MARK_PERSONAL_SECTION}</p>}
         </AccordionTrigger>
@@ -60,8 +64,11 @@ export default function InputAccordion() {
         </AccordionContent>
       </AccordionItem>
       {/* Work experience */}
-      <AccordionItem value={WORK_EXPERIENCE_SECTION}>
-        <AccordionTrigger>
+      <AccordionItem
+        value={WORK_EXPERIENCE_SECTION}
+        className={inputAccordion.accordionItem}
+      >
+        <AccordionTrigger className={inputAccordion.accordionTrigger}>
           {WORK_EXPERIENCE_SECTION}
           {!!experiencesEntered && (
             <div>
@@ -74,11 +81,14 @@ export default function InputAccordion() {
         </AccordionContent>
       </AccordionItem>
       {/* Education and training */}
-      <AccordionItem value={EDUCATION_TRAINING_SECTION}>
-        <AccordionTrigger>
+      <AccordionItem
+        value={EDUCATION_TRAINING_SECTION}
+        className={inputAccordion.accordionItem}
+      >
+        <AccordionTrigger className={inputAccordion.accordionTrigger}>
           {EDUCATION_TRAINING_SECTION}
           {!!educationsEntered && (
-            <div>
+            <div className="text-white">
               {educationsEntered} {EDUCATIONS_LABEL}
             </div>
           )}
@@ -88,8 +98,11 @@ export default function InputAccordion() {
         </AccordionContent>
       </AccordionItem>
       {/* Language skills */}
-      <AccordionItem value={LANGUAGE_TRAINING_SECTION}>
-        <AccordionTrigger>
+      <AccordionItem
+        value={LANGUAGE_TRAINING_SECTION}
+        className={inputAccordion.accordionItem}
+      >
+        <AccordionTrigger className={inputAccordion.accordionTrigger}>
           {LANGUAGE_TRAINING_SECTION}
           {!!languagesEntered && (
             <div>
@@ -102,7 +115,10 @@ export default function InputAccordion() {
         </AccordionContent>
       </AccordionItem>
       {/* Job skills */}
-      <AccordionItem value={JOB_SKILLS_SECTION}>
+      <AccordionItem
+        value={JOB_SKILLS_SECTION}
+        className={inputAccordion.accordionItem}
+      >
         <AccordionTrigger>
           {JOB_SKILLS_SECTION}
           {!!skillsEntered && (
