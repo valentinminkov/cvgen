@@ -34,7 +34,7 @@ export default function AddSocialMedia({ addSocialMedia }: Props) {
   };
 
   return (
-    <div className="flex flex-col gap-4">
+    <div className="flex flex-col gap-4 w-6/12">
       <h3>{AddSocialMedia.ENTER_SOCIAL_MEDIA}</h3>
       <div>
         <Label>{AddSocialMedia.NAME}</Label>

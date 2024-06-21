@@ -64,8 +64,6 @@ const FormSchema = z.object({
     message: "Email must be an email",
   }),
   phoneNumber: z.string(),
-  // to do social media
-  // to do instant messaging
   website: z.string(),
   addressType: z.string(),
   addressLine1: z.string(),
@@ -216,7 +214,7 @@ export default function PersonalSection({ defaultFormValues }: Props) {
               control={form.control}
               name="dateOfBirth"
               render={({ field }) => (
-                <FormItem>
+                <FormItem className="flex flex-col">
                   <FormLabel>{PersonalSection.DATE_OF_BIRTH}</FormLabel>
                   <FormControl>
                     <DatePicker placeholder="01/08/1935" field={field} />
@@ -528,7 +526,7 @@ export default function PersonalSection({ defaultFormValues }: Props) {
               className={`flex ${
                 hasSocialMediaEntries ? "justify-between" : ""
               } justify-between 
-              w-full`}
+              w-full gap-10`}
             >
               <AddSocialMedia addSocialMedia={addSocialMedia} />
               {hasSocialMediaEntries && (
