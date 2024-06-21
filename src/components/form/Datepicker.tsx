@@ -25,7 +25,7 @@ export function DatePicker({ placeholder, field }: Props) {
       <PopoverTrigger asChild>
         <FormControl>
           <Button
-            variant={"outline"}
+            variant={"datePicker"}
             className={cn(
               "w-[240px] pl-3 text-left font-normal",
               !field.value && "text-muted-foreground"

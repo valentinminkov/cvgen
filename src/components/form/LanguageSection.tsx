@@ -33,7 +33,7 @@ import {
   AccordionTrigger,
 } from "@/components/ui/accordion";
 import { content } from "@/config/content";
-import { sectionClasses } from "./config";
+import { sectionClasses } from "./classes";
 import { ListEntryCard, ListEntryContainer, ListEntryTitle } from "./ListEntry";
 
 const {

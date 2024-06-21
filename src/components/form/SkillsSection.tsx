@@ -33,7 +33,7 @@ import {
 } from "@/stores/skillsStore";
 import { getRandomString } from "@/lib/utils";
 import { content } from "@/config/content";
-import { sectionClasses } from "@/components/form/config";
+import { sectionClasses } from "@/components/form/classes";
 import { ListEntryCard, ListEntryContainer, ListEntryTitle } from "./ListEntry";
 
 const {

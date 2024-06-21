@@ -38,7 +38,7 @@ import {
 } from "@/stores/userStore";
 import { content } from "@/config/content";
 import { useState, type ChangeEvent } from "react";
-import { sectionClasses } from "@/components/form/config";
+import { sectionClasses } from "@/components/form/classes";
 import AddSocialMedia from "@/components/form/AddSocialMedia";
 import { ListEntryCard, ListEntryContainer, ListEntryTitle } from "./ListEntry";
 import {
