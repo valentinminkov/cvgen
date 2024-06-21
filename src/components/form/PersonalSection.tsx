@@ -41,6 +41,12 @@ import { useState, type ChangeEvent } from "react";
 import { sectionClasses } from "@/components/form/config";
 import AddSocialMedia from "@/components/form/AddSocialMedia";
 import { ListEntryCard, ListEntryContainer, ListEntryTitle } from "./ListEntry";
+import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from "@/components/ui/accordion";
 
 const FormSchema = z.object({
   firstName: z.string().min(2, {
@@ -87,6 +93,8 @@ export default function PersonalSection({ defaultFormValues }: Props) {
     defaultValues: {},
   });
   const [fileData, setFileData] = useState<string>("");
+  const hasSocialMediaEntries =
+    !!userStore.socialMedia?.length && userStore.socialMedia.length > 0;
 
   function onSubmit(data: PersonalFormType) {
     const updatedData: PersonalFormType = { ...data, picture: fileData };
@@ -516,35 +524,73 @@ export default function PersonalSection({ defaultFormValues }: Props) {
             </div>
           </div>
           <div className={sectionClasses.sectionCol}>
-            <div className="flex justify-between">
+            <div
+              className={`flex ${
+                hasSocialMediaEntries ? "justify-between" : ""
+              } justify-between 
+              w-full`}
+            >
               <AddSocialMedia addSocialMedia={addSocialMedia} />
-
-              <ListEntryContainer>
-                <>
-                  {userStore?.socialMedia && !!userStore.socialMedia.length && (
-                    <div className="">
-                      <ListEntryTitle
-                        entriesLabel={PersonalSection.SOCIAL_MEDIA_ENTRIES}
-                        entriesLength={userStore.socialMedia.length}
-                      />
-                      <div className="flex flex-col gap-5  max-h-56	p-4 relative overflow-y-auto">
-                        {userStore.socialMedia?.map((socialMediaEntry, i) => {
-                          return (
-                            <ListEntryCard
-                              removeEntry={removeSocialMediaByIndex}
-                              index={i}
-                              content={[
-                                { label: "Name", value: socialMediaEntry.name },
-                                { label: "url", value: socialMediaEntry.url },
-                              ]}
-                            />
-                          );
-                        })}
-                      </div>
-                    </div>
-                  )}
-                </>
-              </ListEntryContainer>
+              {hasSocialMediaEntries && (
+                <ListEntryContainer classes="w-6/12">
+                  <div className={sectionClasses.listEntryContainerContent}>
+                    {userStore?.socialMedia &&
+                      !!userStore.socialMedia.length && (
+                        <div
+                          className={sectionClasses.listEntryContainerContent}
+                        >
+                          <ListEntryTitle
+                            entriesLabel={PersonalSection.SOCIAL_MEDIA_ENTRIES}
+                            entriesLength={userStore.socialMedia.length}
+                          />
+                          <div
+                            className={
+                              sectionClasses.listEntryAccordionContainer
+                            }
+                          >
+                            {userStore.socialMedia?.map(
+                              (socialMediaEntry, i) => {
+                                return (
+                                  <Accordion
+                                    type="single"
+                                    collapsible
+                                    key={socialMediaEntry.name}
+                                  >
+                                    <AccordionItem
+                                      value={socialMediaEntry.name}
+                                    >
+                                      <AccordionTrigger>
+                                        {socialMediaEntry.name}
+                                      </AccordionTrigger>
+                                      <AccordionContent>
+                                        <ListEntryCard
+                                          removeEntry={() =>
+                                            removeSocialMediaByIndex(i)
+                                          }
+                                          index={i}
+                                          content={[
+                                            {
+                                              label: "Name",
+                                              value: socialMediaEntry.name,
+                                            },
+                                            {
+                                              label: "url",
+                                              value: socialMediaEntry.url,
+                                            },
+                                          ]}
+                                        />
+                                      </AccordionContent>
+                                    </AccordionItem>
+                                  </Accordion>
+                                );
+                              }
+                            )}
+                          </div>
+                        </div>
+                      )}
+                  </div>
+                </ListEntryContainer>
+              )}
             </div>
           </div>
         </div>

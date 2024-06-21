@@ -90,7 +90,8 @@ export function removeSocialMediaByIndex(indexToRemove: number) {
     indexToRemove >= 0 &&
     indexToRemove < store.socialMedia.length
   ) {
-    const updatedSocialMedias = store.socialMedia.splice(indexToRemove, 1);
+    const updatedSocialMedias = [...store.socialMedia];
+    updatedSocialMedias.splice(indexToRemove, 1);
     $user.set({ ...store, socialMedia: updatedSocialMedias });
     return true;
   }

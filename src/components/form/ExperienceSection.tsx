@@ -75,7 +75,7 @@ export default function ExperienceSection() {
   }
 
   return (
-    <div className="flex">
+    <div className={sectionClasses.sectionSplitContentContainer}>
       <div className="w-full">
         <Form {...form}>
           <form
@@ -147,44 +147,53 @@ export default function ExperienceSection() {
       <ListEntryContainer>
         <>
           {experiencesStore?.experiences.length > 0 && (
-            <>
+            <div className={sectionClasses.listEntryContainerContent}>
               <ListEntryTitle
                 entriesLength={experiencesStore.experiences.length}
               />
-              {experiencesStore?.experiences.map(
-                (experience, index: number) => {
-                  return (
-                    <Accordion type="single" collapsible key={experience.title}>
-                      <AccordionItem value={experience.title}>
-                        <AccordionTrigger>{experience.title}</AccordionTrigger>
-                        <AccordionContent>
-                          <ListEntryCard
-                            date={{
-                              startDate: experience.startDate,
-                              ongoing: experience.ongoing,
-                              endDate: experience.endDate,
-                            }}
-                            content={[
-                              {
-                                value: experience.title,
-                                label:
-                                  components.ExperienceSection.COMPANY_NAME,
-                              },
-                              {
-                                value: experience.workDescription,
-                                label: components.EducationSection.DESCRIPTION,
-                              },
-                            ]}
-                            removeEntry={removeExperience}
-                            index={index}
-                          />
-                        </AccordionContent>
-                      </AccordionItem>
-                    </Accordion>
-                  );
-                }
-              )}
-            </>
+              <div className={`${sectionClasses.listEntryAccordionContainer}`}>
+                {experiencesStore?.experiences.map(
+                  (experience, index: number) => {
+                    return (
+                      <Accordion
+                        type="single"
+                        collapsible
+                        key={experience.title}
+                      >
+                        <AccordionItem value={experience.title}>
+                          <AccordionTrigger>
+                            {experience.title}
+                          </AccordionTrigger>
+                          <AccordionContent>
+                            <ListEntryCard
+                              date={{
+                                startDate: experience.startDate,
+                                ongoing: experience.ongoing,
+                                endDate: experience.endDate,
+                              }}
+                              content={[
+                                {
+                                  value: experience.title,
+                                  label:
+                                    components.ExperienceSection.COMPANY_NAME,
+                                },
+                                {
+                                  value: experience.workDescription,
+                                  label:
+                                    components.EducationSection.DESCRIPTION,
+                                },
+                              ]}
+                              removeEntry={removeExperience}
+                              index={index}
+                            />
+                          </AccordionContent>
+                        </AccordionItem>
+                      </Accordion>
+                    );
+                  }
+                )}
+              </div>
+            </div>
           )}
         </>
       </ListEntryContainer>
