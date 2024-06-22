@@ -24,7 +24,7 @@ interface ListEntryTitleProps {
   entriesLabel?: string;
 }
 
-const ENTRIES_DEFAUL_LABEL = "Entries";
+const ENTRIES_DEFAULT_LABEL = "Entries";
 
 export function ListEntryContainer({
   children,
@@ -34,34 +34,39 @@ export function ListEntryContainer({
   classes?: string;
 }) {
   return (
-    <div className={`bg-gray-500 p-5 w-4/12 w-full ${classes}`}>{children}</div>
+    <div
+      className={`bg-gray-500 p-5 w-full border border-gray-400 rounded ${classes}`}
+    >
+      {children}
+    </div>
   );
 }
+
 export function ListEntryTitle({
   entriesLabel,
   entriesLength,
 }: ListEntryTitleProps) {
   return (
-    <p className="pb-4">
-      {entriesLabel ?? ENTRIES_DEFAUL_LABEL} ({entriesLength})
+    <p className="pb-4 text-lg font-semibold">
+      {entriesLabel ?? ENTRIES_DEFAULT_LABEL} ({entriesLength})
     </p>
   );
 }
 
 export function ListEntryCard({ index, removeEntry, content, date }: Props) {
   return (
-    <div className="bg-gray-600 p-5 flex flex-col gap-6">
+    <div className="bg-gray-600 p-5 flex flex-col gap-6 border border-gray-500 rounded shadow-md">
       <div
         onClick={() => {
           removeEntry(index);
         }}
-        className="cursor-pointer hover:opacity-50 p-2"
+        className="cursor-pointer hover:opacity-75 p-2 self-end"
       >
         <CrossCircledIcon />
       </div>
 
       {date && (
-        <div className="px-2 pb-2 ">
+        <div className="px-2 pb-2 text-sm text-gray-200">
           <span>
             {date.startDate?.toString()}{" "}
             {date?.ongoing ? "- ongoing" : ` - ${date?.endDate?.toString()}`}
@@ -69,14 +74,14 @@ export function ListEntryCard({ index, removeEntry, content, date }: Props) {
         </div>
       )}
 
-      {content.map((entry) => (
-        <div>
+      {content.map((entry, i) => (
+        <div key={i} className="px-2">
           {entry.label && (
-            <div>
-              <h2 className="flex flex-col gap-2 px-2">
+            <div className="flex flex-col gap-2">
+              <h2 className="text-md font-medium">
                 <Label>{entry.label}</Label>
               </h2>
-              <p className="flex flex-col gap-2 px-2">{entry.value}</p>
+              <p className="text-sm text-gray-300">{entry.value}</p>
             </div>
           )}
         </div>

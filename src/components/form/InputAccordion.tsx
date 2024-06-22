@@ -48,70 +48,67 @@ export default function InputAccordion() {
     },
   } = content;
 
+  const accordionTriggerLabel = (
+    label: string,
+    sublabel: string,
+    sublabelType: "success" | "normal" = "normal"
+  ) => {
+    const accordionClassesTriggerClasses = "text-base";
+    const accordionTriggerLabelClasses = {
+      success: "text-sm text-emerald-500",
+      normal: "text-sm text-blue-200",
+    };
+    return (
+      <>
+        <p className={accordionClassesTriggerClasses}>{label}</p>
+        {isPersonalDataFilled && (
+          <p className={accordionTriggerLabelClasses[sublabelType]}>
+            {sublabel}
+          </p>
+        )}
+      </>
+    );
+  };
+
   const accordionContent = [
     {
       label: PERSONAL_DATA_SECTION,
-      triggerContent: (
-        <>
-          {PERSONAL_DATA_SECTION}
-          {isPersonalDataFilled && <p>{FILLED_MARK_PERSONAL_SECTION}</p>}
-        </>
+      triggerContent: accordionTriggerLabel(
+        PERSONAL_DATA_SECTION,
+        FILLED_MARK_PERSONAL_SECTION,
+        "success"
       ),
       content: <PersonalSection />,
     },
     {
       label: WORK_EXPERIENCE_SECTION,
-      triggerContent: (
-        <>
-          {WORK_EXPERIENCE_SECTION}
-          {!!experiencesEntered && (
-            <div>
-              {experiencesEntered} {EXPERIENCES_LABEL}
-            </div>
-          )}
-        </>
+      triggerContent: accordionTriggerLabel(
+        WORK_EXPERIENCE_SECTION,
+        !!experiencesEntered ? `${experiencesEntered} ${EXPERIENCES_LABEL}` : ""
       ),
       content: <ExperienceSection />,
     },
     {
       label: EDUCATION_TRAINING_SECTION,
-      triggerContent: (
-        <>
-          {EDUCATION_TRAINING_SECTION}
-          {!!educationsEntered && (
-            <div className="text-white">
-              {educationsEntered} {EDUCATIONS_LABEL}
-            </div>
-          )}
-        </>
+      triggerContent: accordionTriggerLabel(
+        EDUCATION_TRAINING_SECTION,
+        !!educationsEntered ? `${educationsEntered} ${EDUCATIONS_LABEL}` : ""
       ),
       content: <EducationSection />,
     },
     {
       label: LANGUAGE_TRAINING_SECTION,
-      triggerContent: (
-        <>
-          {LANGUAGE_TRAINING_SECTION}
-          {!!languagesEntered && (
-            <div>
-              {languagesEntered} {LANGUAGES_LABEL}
-            </div>
-          )}
-        </>
+      triggerContent: accordionTriggerLabel(
+        LANGUAGE_TRAINING_SECTION,
+        !!languagesEntered ? `${languagesEntered} ${LANGUAGES_LABEL}` : ""
       ),
       content: <LanguageSection />,
     },
     {
       label: JOB_SKILLS_SECTION,
-      triggerContent: (
-        <>
-          {JOB_SKILLS_SECTION}
-          {!!skillsEntered && (
-            <div>
-              {skillsEntered} {SKILLS_LABEL}
-            </div>
-          )}
-        </>
+      triggerContent: accordionTriggerLabel(
+        JOB_SKILLS_SECTION,
+        !!skillsEntered ? `${skillsEntered} ${SKILLS_LABEL}` : ""
       ),
       content: <SkillsSection />,
     },
@@ -125,10 +122,14 @@ export default function InputAccordion() {
           value={accordionEntry.label}
           className={inputAccordion.accordionItem}
         >
-          <AccordionTrigger className={inputAccordion.accordionTrigger}>
+          <AccordionTrigger
+            className={`${inputAccordion.accordionTrigger} font-semibold`}
+          >
             {accordionEntry.triggerContent}
           </AccordionTrigger>
-          <AccordionContent>{accordionEntry.content}</AccordionContent>
+          <AccordionContent className="p-4 rounded-b-md">
+            {accordionEntry.content}
+          </AccordionContent>
         </AccordionItem>
       ))}
     </Accordion>
