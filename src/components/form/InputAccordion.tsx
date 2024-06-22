@@ -48,89 +48,89 @@ export default function InputAccordion() {
     },
   } = content;
 
-  return (
-    <Accordion type="single" collapsible>
-      {/* Personal data */}
-      <AccordionItem
-        value={PERSONAL_DATA_SECTION}
-        className={inputAccordion.accordionItem}
-      >
-        <AccordionTrigger className={inputAccordion.accordionTrigger}>
+  const accordionContent = [
+    {
+      label: PERSONAL_DATA_SECTION,
+      triggerContent: (
+        <>
           {PERSONAL_DATA_SECTION}
           {isPersonalDataFilled && <p>{FILLED_MARK_PERSONAL_SECTION}</p>}
-        </AccordionTrigger>
-        <AccordionContent>
-          <PersonalSection />
-        </AccordionContent>
-      </AccordionItem>
-      {/* Work experience */}
-      <AccordionItem
-        value={WORK_EXPERIENCE_SECTION}
-        className={inputAccordion.accordionItem}
-      >
-        <AccordionTrigger className={inputAccordion.accordionTrigger}>
+        </>
+      ),
+      content: <PersonalSection />,
+    },
+    {
+      label: WORK_EXPERIENCE_SECTION,
+      triggerContent: (
+        <>
           {WORK_EXPERIENCE_SECTION}
           {!!experiencesEntered && (
             <div>
               {experiencesEntered} {EXPERIENCES_LABEL}
             </div>
           )}
-        </AccordionTrigger>
-        <AccordionContent>
-          <ExperienceSection />
-        </AccordionContent>
-      </AccordionItem>
-      {/* Education and training */}
-      <AccordionItem
-        value={EDUCATION_TRAINING_SECTION}
-        className={inputAccordion.accordionItem}
-      >
-        <AccordionTrigger className={inputAccordion.accordionTrigger}>
+        </>
+      ),
+      content: <ExperienceSection />,
+    },
+    {
+      label: EDUCATION_TRAINING_SECTION,
+      triggerContent: (
+        <>
           {EDUCATION_TRAINING_SECTION}
           {!!educationsEntered && (
             <div className="text-white">
               {educationsEntered} {EDUCATIONS_LABEL}
             </div>
           )}
-        </AccordionTrigger>
-        <AccordionContent>
-          <EducationSection />
-        </AccordionContent>
-      </AccordionItem>
-      {/* Language skills */}
-      <AccordionItem
-        value={LANGUAGE_TRAINING_SECTION}
-        className={inputAccordion.accordionItem}
-      >
-        <AccordionTrigger className={inputAccordion.accordionTrigger}>
+        </>
+      ),
+      content: <EducationSection />,
+    },
+    {
+      label: LANGUAGE_TRAINING_SECTION,
+      triggerContent: (
+        <>
           {LANGUAGE_TRAINING_SECTION}
           {!!languagesEntered && (
             <div>
               {languagesEntered} {LANGUAGES_LABEL}
             </div>
           )}
-        </AccordionTrigger>
-        <AccordionContent>
-          <LanguageSection />
-        </AccordionContent>
-      </AccordionItem>
-      {/* Job skills */}
-      <AccordionItem
-        value={JOB_SKILLS_SECTION}
-        className={inputAccordion.accordionItem}
-      >
-        <AccordionTrigger>
+        </>
+      ),
+      content: <LanguageSection />,
+    },
+    {
+      label: JOB_SKILLS_SECTION,
+      triggerContent: (
+        <>
           {JOB_SKILLS_SECTION}
           {!!skillsEntered && (
             <div>
               {skillsEntered} {SKILLS_LABEL}
             </div>
           )}
-        </AccordionTrigger>
-        <AccordionContent>
-          <SkillsSection />
-        </AccordionContent>
-      </AccordionItem>
+        </>
+      ),
+      content: <SkillsSection />,
+    },
+  ];
+
+  return (
+    <Accordion type="single" collapsible>
+      {accordionContent.map((accordionEntry) => (
+        <AccordionItem
+          key={accordionEntry.label}
+          value={accordionEntry.label}
+          className={inputAccordion.accordionItem}
+        >
+          <AccordionTrigger className={inputAccordion.accordionTrigger}>
+            {accordionEntry.triggerContent}
+          </AccordionTrigger>
+          <AccordionContent>{accordionEntry.content}</AccordionContent>
+        </AccordionItem>
+      ))}
     </Accordion>
   );
 }
