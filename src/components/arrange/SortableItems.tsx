@@ -1,5 +1,5 @@
 "use client";
-import { viewComponentStyles } from "@/components/dataView/config";
+import { viewComponentStyles } from "@/components/arrange/config";
 import { DndContext, closestCenter, type DragEndEvent } from "@dnd-kit/core";
 import {
   SortableContext,

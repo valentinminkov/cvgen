@@ -4,7 +4,7 @@ import {
   type ExperienceFormValue,
 } from "@/stores/experienceStore";
 import { useStore } from "@nanostores/react";
-import { viewComponentStyles } from "@/components/dataView/config";
+import { viewComponentStyles } from "@/components/arrange/config";
 import SortableItems from "./SortableItems";
 
 const {

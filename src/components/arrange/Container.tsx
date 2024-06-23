@@ -1,9 +1,9 @@
 "use client";
-import Education from "@/components/dataView/Education";
-import Experience from "@/components/dataView/Experience";
-import Language from "@/components/dataView/Language";
-import Skills from "@/components/dataView/Skills";
-import Personal from "@/components/dataView/Personal";
+import Education from "@/components/arrange/Education";
+import Experience from "@/components/arrange/Experience";
+import Language from "@/components/arrange/Language";
+import Skills from "@/components/arrange/Skills";
+import Personal from "@/components/arrange/Personal";
 import { DndContext, closestCenter, type DragEndEvent } from "@dnd-kit/core";
 import {
   arrayMove,
@@ -12,7 +12,7 @@ import {
 } from "@dnd-kit/sortable";
 import SortableItemWrapper from "./SortableItemWrapper";
 import { useEffect } from "react";
-import { viewContainerStyles } from "@/components/dataView/config";
+import { viewContainerStyles } from "@/components/arrange/config";
 import { $settings, setSectionOrderItems } from "@/stores/settingsStore";
 import { useStore } from "@nanostores/react";
 

@@ -2,7 +2,7 @@
 
 import { useSortable } from "@dnd-kit/sortable";
 import { CSS } from "@dnd-kit/utilities";
-import { viewWrapperStyles } from "@/components/dataView/config";
+import { viewWrapperStyles } from "@/components/arrange/config";
 
 const { containerClass } = viewWrapperStyles;
 

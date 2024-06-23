@@ -4,7 +4,7 @@ export const viewComponentStyles = {
   headerClass: "text-2xl font-bold mb-4 text-gray-200",
   subheaderClass: "text-xl font-semibold text-gray-400",
   paragraphClass: "text-lg text-gray-700 mb-2",
-  listContainerClass: "text-slate-300",
+  listContainerClass: "text-slate-300 flex flex-col gap-6",
   listEntryContainerClass: "border p-4 rounded-md shadow-sm",
   dangerButtonClass: "text-red-500 hover:text-red-700",
   labelClass: "font-bold",
