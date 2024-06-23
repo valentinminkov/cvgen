@@ -1,5 +1,8 @@
 "use client";
-import { $experiences } from "@/stores/experienceStore";
+import {
+  $experiences,
+  type ExperienceFormValue,
+} from "@/stores/experienceStore";
 import { useStore } from "@nanostores/react";
 import { viewComponentStyles } from "@/components/dataView/config";
 import SortableItems from "./SortableItems";
@@ -13,7 +16,7 @@ const {
 } = viewComponentStyles;
 
 interface EntryProps {
-  entry: any;
+  entry: ExperienceFormValue;
   index: number;
   remove: (index: number) => void;
 }
@@ -45,7 +48,7 @@ export default function ExperienceView({}: Props) {
 
   const removeEntry = (index: number) => alert("remove experience");
 
-  const renderEntry = (experience: any, index: number) => (
+  const renderEntry = (experience: ExperienceFormValue, index: number) => (
     <Entry entry={experience} index={index} remove={removeEntry} />
   );
 

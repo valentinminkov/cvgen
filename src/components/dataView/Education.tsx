@@ -16,7 +16,7 @@ const {
 } = viewComponentStyles;
 
 interface EntryProps {
-  entry: any;
+  entry: EducationFormValue;
   index: number;
   remove: (index: number) => void;
 }

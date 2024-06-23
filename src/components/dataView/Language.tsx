@@ -1,6 +1,6 @@
 "use client";
 
-import { $language } from "@/stores/languageStore";
+import { $language, type Language } from "@/stores/languageStore";
 import { useStore } from "@nanostores/react";
 import { viewComponentStyles } from "@/components/dataView/config";
 import SortableItems from "./SortableItems";
@@ -16,7 +16,7 @@ const {
 } = viewComponentStyles;
 
 interface EntryProps {
-  entry: any;
+  entry: Language;
   index: number;
   remove: (index: number) => void;
 }
@@ -51,7 +51,7 @@ export default function LanguageView({}: Props) {
 
   const removeEntry = (index: number) => alert("remove language");
 
-  const renderEntry = (entry: any, index: number) => (
+  const renderEntry = (entry: Language, index: number) => (
     <Entry entry={entry} index={index} remove={removeEntry} />
   );
 

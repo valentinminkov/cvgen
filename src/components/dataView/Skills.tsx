@@ -1,6 +1,6 @@
 "use client";
 
-import { $skills, type SkillsFormValue } from "@/stores/skillsStore";
+import { $skills, type SkillGroup } from "@/stores/skillsStore";
 import { useStore } from "@nanostores/react";
 import { viewComponentStyles } from "@/components/dataView/config";
 import SortableItems from "./SortableItems";
@@ -20,7 +20,7 @@ const {
 } = viewComponentStyles;
 
 interface EntryProps {
-  entry: any;
+  entry: SkillGroup;
   index: number;
   remove: (index: number) => void;
 }
@@ -54,7 +54,7 @@ export default function SkillsView({}: Props) {
 
   const removeEntry = (index: number) => alert("Remove skill");
 
-  const renderEntry = (entry: SkillsFormValue, index: number) => (
+  const renderEntry = (entry: SkillGroup, index: number) => (
     <Entry entry={entry} index={index} remove={removeEntry} />
   );
 
