@@ -7,7 +7,9 @@ import {
   verticalListSortingStrategy,
 } from "@dnd-kit/sortable";
 import SortableItemWrapper from "./SortableItemWrapper";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { useStore } from "@nanostores/react";
+import { $settings, setOrderItems } from "@/stores/settingsStore";
 
 type ItemType = "education" | "skills" | "language" | "experiences";
 
@@ -20,22 +22,26 @@ interface Props {
 const { headerClass, listContainerClass } = viewComponentStyles;
 
 export default function SortableItems({ items, itemRender, itemType }: Props) {
+  const settings = useStore($settings);
+  const order = settings?.order;
+  const itemKeys = order && order[itemType] ? order[itemType] : [];
   const itemsSortableEntries = Object.fromEntries(
     items.map((item: any, index: number) => [index, item])
   );
 
-  const [itemKeys, setItemKeys] = useState(Object.keys(itemsSortableEntries));
+  useEffect(() => {
+    if (!itemKeys.length)
+      setOrderItems(itemType, Object.keys(itemsSortableEntries));
+  }, [itemKeys]);
 
   function handleDragEnd(event: DragEndEvent) {
     const { active, over } = event;
 
     if (over?.id && active.id !== over.id) {
-      setItemKeys((items: any) => {
-        const oldIndex = items.indexOf(active.id.toString());
-        const newIndex = items.indexOf(over.id.toString());
+      const oldIndex = itemKeys.indexOf(active.id.toString());
+      const newIndex = itemKeys.indexOf(over.id.toString());
 
-        return arrayMove(items, oldIndex, newIndex);
-      });
+      return setOrderItems(itemType, arrayMove(itemKeys, oldIndex, newIndex));
     }
   }
 

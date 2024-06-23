@@ -3,6 +3,7 @@ import { getStoreKey } from "@/stores/config";
 
 interface IOrder {
   sections: string[];
+  [key: string]: string[];
 }
 
 type SettingsStore = Record<string, any> & {
@@ -18,14 +19,22 @@ const $settings = persistentMap<SettingsStore>(
   }
 );
 
-const setSectionOrderItems = (items: string[]) => {
+const setOrderItems = (key: string, value: string[]) => {
   const settingsValue = $settings.get();
   $settings.set({
     ...settingsValue,
-    order: { ...settingsValue.order, sections: items },
+    order: {
+      ...settingsValue.order,
+      [key]: value,
+    },
   });
-  console.log($settings.get());
+
   return true;
 };
 
-export { $settings, setSectionOrderItems };
+// TODO To be removed
+const setSectionOrderItems = (items: string[]) => {
+  return setOrderItems("sections", items);
+};
+
+export { $settings, setSectionOrderItems, setOrderItems };
