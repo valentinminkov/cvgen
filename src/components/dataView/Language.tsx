@@ -3,6 +3,7 @@
 import { $language } from "@/stores/languageStore";
 import { useStore } from "@nanostores/react";
 import { viewComponentStyles } from "@/components/dataView/config";
+import SortableItems from "./SortableItems";
 
 interface Props {}
 
@@ -14,44 +15,56 @@ const {
   subheaderClass,
 } = viewComponentStyles;
 
+interface EntryProps {
+  entry: any;
+  index: number;
+  remove: (index: number) => void;
+}
+
+const Entry = ({ entry, index, remove }: EntryProps) => {
+  return (
+    <div key={index} className="py-4">
+      <h2 className={subheaderClass}>{entry.language}</h2>
+      <div className="grid grid-cols-3 gap-4 mt-2">
+        <div>
+          <p className={labelClass}>Listening:</p>
+          <p>{entry.skills.listening}</p>
+        </div>
+        <div>
+          <p className={labelClass}>Reading:</p>
+          <p>{entry.skills.reading}</p>
+        </div>
+        <div>
+          <p className={labelClass}>Writing:</p>
+          <p>{entry.skills.writing}</p>
+        </div>
+      </div>
+      <button onClick={() => remove(index)} className={dangerButtonClass}>
+        Remove Language
+      </button>
+    </div>
+  );
+};
+
 export default function LanguageView({}: Props) {
   const { language } = useStore($language);
 
-  const removeLanguage = (index: number) => alert("remove language");
+  const removeEntry = (index: number) => alert("remove language");
+
+  const renderEntry = (entry: any, index: number) => (
+    <Entry entry={entry} index={index} remove={removeEntry} />
+  );
 
   return (
     <div className={`${containerClass}`}>
-      <h1 className={headerClass}>Language Skills</h1>
-      {language.otherLanguages.length > 0 ? (
+      {!!language.otherLanguages.length && (
         <div className="divide-y divide-gray-200">
-          {language.otherLanguages.map((language, index) => (
-            <div key={index} className="py-4">
-              <h2 className={subheaderClass}>{language.language}</h2>
-              <div className="grid grid-cols-3 gap-4 mt-2">
-                <div>
-                  <p className={labelClass}>Listening:</p>
-                  <p>{language.skills.listening}</p>
-                </div>
-                <div>
-                  <p className={labelClass}>Reading:</p>
-                  <p>{language.skills.reading}</p>
-                </div>
-                <div>
-                  <p className={labelClass}>Writing:</p>
-                  <p>{language.skills.writing}</p>
-                </div>
-              </div>
-              <button
-                onClick={() => removeLanguage(index)}
-                className={dangerButtonClass}
-              >
-                Remove Language
-              </button>
-            </div>
-          ))}
+          <SortableItems
+            items={language.otherLanguages}
+            itemRender={renderEntry}
+            itemType="language"
+          ></SortableItems>
         </div>
-      ) : (
-        <p>No languages added yet.</p>
       )}
     </div>
   );

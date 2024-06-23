@@ -1,8 +1,9 @@
 "use client";
 
-import { $skills } from "@/stores/skillsStore";
+import { $skills, type SkillsFormValue } from "@/stores/skillsStore";
 import { useStore } from "@nanostores/react";
 import { viewComponentStyles } from "@/components/dataView/config";
+import SortableItems from "./SortableItems";
 
 interface Props {
   containerClass?: string;
@@ -18,44 +19,53 @@ const {
   labelClass,
 } = viewComponentStyles;
 
+interface EntryProps {
+  entry: any;
+  index: number;
+  remove: (index: number) => void;
+}
+const Entry = ({ entry, index, remove }: EntryProps) => {
+  return (
+    <div key={index} className="py-4">
+      <h2 className={subheaderClass}>{entry.type}</h2>
+      <div className="flex items-center mt-2">
+        <span className={labelClass}>Level:</span>
+        <span>{entry.level}</span>
+      </div>
+      <div>
+        <p className={labelClass}>Skills:</p>
+        <ul className={listContainerClass}>
+          {entry.skills?.map((skill: any, id: number) => (
+            <li key={id} className={listEntryContainerClass}>
+              {skill}
+            </li>
+          ))}
+        </ul>
+      </div>
+      <button onClick={() => remove(index)} className={dangerButtonClass}>
+        Remove Skill Group
+      </button>
+    </div>
+  );
+};
+
 export default function SkillsView({}: Props) {
   const { skills, sectionSkills } = useStore($skills);
 
-  const removeSkill = (index: number) => alert("Remove skill");
+  const removeEntry = (index: number) => alert("Remove skill");
+
+  const renderEntry = (entry: SkillsFormValue, index: number) => (
+    <Entry entry={entry} index={index} remove={removeEntry} />
+  );
 
   return (
     <div className={`${containerClass}`}>
-      <h1 className={headerClass}>Skills</h1>
-      {skills.length > 0 ? (
-        <div className="divide-y divide-gray-200">
-          {skills.map((skillGroup, index) => (
-            <div key={index} className="py-4">
-              <h2 className={subheaderClass}>{skillGroup.type}</h2>
-              <div className="flex items-center mt-2">
-                <span className={labelClass}>Level:</span>
-                <span>{skillGroup.level}</span>
-              </div>
-              <div>
-                <p className={labelClass}>Skills:</p>
-                <ul className={listContainerClass}>
-                  {skillGroup.skills?.map((skill, idx) => (
-                    <li key={idx} className={listEntryContainerClass}>
-                      {skill}
-                    </li>
-                  ))}
-                </ul>
-              </div>
-              <button
-                onClick={() => removeSkill(index)}
-                className={dangerButtonClass}
-              >
-                Remove Skill Group
-              </button>
-            </div>
-          ))}
-        </div>
-      ) : (
-        <p>No skills added yet.</p>
+      {!!skills.length && (
+        <SortableItems
+          items={skills}
+          itemRender={renderEntry}
+          itemType="skills"
+        />
       )}
     </div>
   );

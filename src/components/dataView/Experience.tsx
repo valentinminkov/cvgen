@@ -2,55 +2,61 @@
 import { $experiences } from "@/stores/experienceStore";
 import { useStore } from "@nanostores/react";
 import { viewComponentStyles } from "@/components/dataView/config";
-
-interface Props {}
+import SortableItems from "./SortableItems";
 
 const {
   paragraphClass,
   containerClass,
-  headerClass,
-  listContainerClass,
   dangerButtonClass,
   listEntryContainerClass,
   subheaderClass,
 } = viewComponentStyles;
 
+interface EntryProps {
+  entry: any;
+  index: number;
+  remove: (index: number) => void;
+}
+const Entry = ({ entry, index, remove }: EntryProps) => {
+  return (
+    <li key={index} className={listEntryContainerClass}>
+      <div className="flex justify-between items-center">
+        <div>
+          <h2 className={subheaderClass}>{entry.title}</h2>
+          <p className={paragraphClass}>{entry.country}</p>
+          <p className={paragraphClass}>
+            {entry.startDate.toString()} -{" "}
+            {entry.ongoing ? "Present" : entry.endDate?.toString()}
+          </p>
+          <p>{entry.workDescription}</p>
+        </div>
+        <button onClick={() => remove(index)} className={dangerButtonClass}>
+          Remove
+        </button>
+      </div>
+    </li>
+  );
+};
+
+interface Props {}
+
 export default function ExperienceView({}: Props) {
   const { experiences } = useStore($experiences);
 
-  const removeExperience = (index: number) => alert("remove experience");
+  const removeEntry = (index: number) => alert("remove experience");
+
+  const renderEntry = (experience: any, index: number) => (
+    <Entry entry={experience} index={index} remove={removeEntry} />
+  );
 
   return (
     <div className={`${containerClass}`}>
-      <h1 className={headerClass}>Experience</h1>
-      {experiences.length === 0 ? (
-        <p>No experience entries available.</p>
-      ) : (
-        <ul className={listContainerClass}>
-          {experiences.map((experience, index) => (
-            <li key={index} className={listEntryContainerClass}>
-              <div className="flex justify-between items-center">
-                <div>
-                  <h2 className={subheaderClass}>{experience.title}</h2>
-                  <p className={paragraphClass}>{experience.country}</p>
-                  <p className={paragraphClass}>
-                    {experience.startDate.toString()} -{" "}
-                    {experience.ongoing
-                      ? "Present"
-                      : experience.endDate?.toString()}
-                  </p>
-                  <p>{experience.workDescription}</p>
-                </div>
-                <button
-                  onClick={() => removeExperience(index)}
-                  className={dangerButtonClass}
-                >
-                  Remove
-                </button>
-              </div>
-            </li>
-          ))}
-        </ul>
+      {!!experiences.length && (
+        <SortableItems
+          items={experiences}
+          itemRender={renderEntry}
+          itemType="experiences"
+        ></SortableItems>
       )}
     </div>
   );

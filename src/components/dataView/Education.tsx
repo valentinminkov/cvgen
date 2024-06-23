@@ -1,13 +1,12 @@
 "use client";
-import { $education } from "@/stores/educationStore";
+import { $education, type EducationFormValue } from "@/stores/educationStore";
 import { useStore } from "@nanostores/react";
 import { viewComponentStyles } from "@/components/dataView/config";
+import SortableItems from "./SortableItems";
 
 interface Props {}
 const {
   containerClass,
-  headerClass,
-  listContainerClass,
   dangerButtonClass,
   listEntryContainerClass,
   subheaderClass,
@@ -16,57 +15,65 @@ const {
   flexContainerClass,
 } = viewComponentStyles;
 
+interface EntryProps {
+  entry: any;
+  index: number;
+  remove: (index: number) => void;
+}
+
+const Entry = ({ entry, index, remove }: EntryProps) => {
+  return (
+    <li key={index} className={listEntryContainerClass}>
+      <div className={flexContainerClass}>
+        <div>
+          <h2 className={subheaderClass}>{entry.title}</h2>
+          <p className={paragraphClass}>{entry.name}</p>
+          <p className={paragraphClass}>
+            {entry.startDate?.toString()} -{" "}
+            {entry.ongoing ? "Present" : entry.endDate?.toString()}
+          </p>
+          {entry.city && entry.country && (
+            <p
+              className={paragraphClass}
+            >{`${entry.city}, ${entry.country}`}</p>
+          )}
+          {entry.website && (
+            <a
+              href={entry.website}
+              target="_blank"
+              rel="noopener noreferrer"
+              className={hyperlinkClass}
+            >
+              {entry.website}
+            </a>
+          )}
+          {entry.description && <p>{entry.description}</p>}
+        </div>
+        <button onClick={() => remove(index)} className={dangerButtonClass}>
+          Remove
+        </button>
+      </div>
+    </li>
+  );
+};
+
 export default function EducationView({}: Props) {
   const { educations } = useStore($education);
 
-  const removeEducation = (index: number) => alert("Remove education");
+  const removeEntry = (index: number) => alert("Remove education");
+
+  const renderEntry = (education: EducationFormValue, index: number) => (
+    <Entry entry={education} index={index} remove={removeEntry} />
+  );
 
   return (
     <div className={`${containerClass}`}>
-      <h1 className={headerClass}>Education</h1>
-      {educations.length === 0 ? (
-        <p>No education entries available.</p>
-      ) : (
-        <ul className={listContainerClass}>
-          {educations.map((education, index) => (
-            <li key={index} className={listEntryContainerClass}>
-              <div className={flexContainerClass}>
-                <div>
-                  <h2 className={subheaderClass}>{education.title}</h2>
-                  <p className={paragraphClass}>{education.name}</p>
-                  <p className={paragraphClass}>
-                    {education.startDate?.toString()} -{" "}
-                    {education.ongoing
-                      ? "Present"
-                      : education.endDate?.toString()}
-                  </p>
-                  {education.city && education.country && (
-                    <p
-                      className={paragraphClass}
-                    >{`${education.city}, ${education.country}`}</p>
-                  )}
-                  {education.website && (
-                    <a
-                      href={education.website}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className={hyperlinkClass}
-                    >
-                      {education.website}
-                    </a>
-                  )}
-                  {education.description && <p>{education.description}</p>}
-                </div>
-                <button
-                  onClick={() => removeEducation(index)}
-                  className={dangerButtonClass}
-                >
-                  Remove
-                </button>
-              </div>
-            </li>
-          ))}
-        </ul>
+      {!!educations.length && (
+        <SortableItems
+          items={educations}
+          itemRender={renderEntry}
+          itemType="education"
+        />
       )}
     </div>
   );
