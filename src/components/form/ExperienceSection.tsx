@@ -59,8 +59,6 @@ const FormSchema = z.object({
 });
 
 export default function ExperienceSection() {
-  const [isWorkOngoing, setIsWorkOngoing] = useState(false);
-
   const experiencesStore = useStore($experiences);
   const form = useForm<z.infer<typeof FormSchema>>({
     resolver: zodResolver(FormSchema),

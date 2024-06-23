@@ -66,8 +66,6 @@ const FormSchema = z.object({
 });
 
 export default function EducationSectionComponent() {
-  const [isWorkOngoing, setIsWorkOngoing] = useState(false);
-
   const educationStore = useStore($education);
   const form = useForm<z.infer<typeof FormSchema>>({
     resolver: zodResolver(FormSchema),
