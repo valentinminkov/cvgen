@@ -1,9 +1,13 @@
 import { computed, type ReadableAtom } from "nanostores";
-import { $user } from "@/stores/userStore";
-import { $experiences } from "@/stores/experienceStore";
-import { $education } from "@/stores/educationStore";
-import { $language } from "@/stores/languageStore";
-import { $skills } from "@/stores/skillsStore";
+import { $user, type UserFormValue } from "@/stores/userStore";
+import {
+  $experiences,
+  type ExperienceFormValue,
+} from "@/stores/experienceStore";
+import { $education, type EducationFormValue } from "@/stores/educationStore";
+import { $language, type LanguageFormValue } from "@/stores/languageStore";
+import { $skills, type SkillGroup } from "@/stores/skillsStore";
+import { $settings } from "@/stores/settingsStore";
 
 export const $isPersonalDataFilled: ReadableAtom<boolean> = computed(
   $user,
@@ -29,4 +33,37 @@ export const $languagesEntered: ReadableAtom<number> = computed(
 export const $skillsEntered: ReadableAtom<number> = computed(
   $skills,
   ({ skills }) => skills.length ?? 0
+);
+
+export interface FullUserData {
+  [key: string]:
+    | UserFormValue
+    | EducationFormValue[]
+    | ExperienceFormValue[]
+    | LanguageFormValue
+    | SkillGroup[]
+    | string[];
+}
+
+export const $allEntriesSorted: ReadableAtom<FullUserData> = computed(
+  [$user, $experiences, $education, $language, $skills, $settings],
+  (user, experiences, educations, language, skills, settings) => {
+    const { order } = settings;
+    // TO DO Sort data before returning
+    // Check if order[sectionKey] exists and if it does sort the arrays before returning
+
+    const sortedData: FullUserData = {
+      user: user,
+      experiences: experiences.experiences,
+      educations: educations.educations,
+      language: {
+        motherLanguage: language.language.motherLanguage,
+        otherLanguages: language.language.otherLanguages,
+      },
+      skills: skills.skills,
+      sectionsOrder: order.sections,
+    };
+
+    return sortedData;
+  }
 );
