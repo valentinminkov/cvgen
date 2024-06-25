@@ -8,11 +8,12 @@ interface IOrder {
 
 type SettingsStore = Record<string, any> & {
   order: IOrder;
+  theme: string;
 };
 
 const $settings = persistentMap<SettingsStore>(
   getStoreKey("settings"),
-  { order: { sections: [] } },
+  { order: { sections: [] }, theme: "default" },
   {
     encode: JSON.stringify,
     decode: JSON.parse,
@@ -37,4 +38,10 @@ const setSectionOrderItems = (items: string[]) => {
   return setOrderItems("sections", items);
 };
 
-export { $settings, setSectionOrderItems, setOrderItems };
+const setTheme = (newTheme: string) => {
+  const settingsValue = $settings.get();
+  if (settingsValue.theme !== newTheme)
+    $settings.set({ ...settingsValue, theme: newTheme });
+};
+
+export { $settings, setSectionOrderItems, setOrderItems, setTheme };
