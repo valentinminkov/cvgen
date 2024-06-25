@@ -23,7 +23,7 @@ interface Sections {
 const { containerClass } = viewContainerStyles;
 
 const sortableSections: Sections = {
-  educaton: <Education />,
+  education: <Education />,
   languages: <Language />,
   skills: <Skills />,
   experience: <Experience />,

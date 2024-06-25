@@ -1,8 +1,9 @@
 import { persistentMap } from "@nanostores/persistent";
 import { getStoreKey } from "@/stores/config";
+import type { Sections } from "@/types";
 
 interface IOrder {
-  sections: string[];
+  sections: Sections[];
   [key: string]: string[];
 }
 
