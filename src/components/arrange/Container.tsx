@@ -22,6 +22,10 @@ interface Sections {
 
 const { containerClass } = viewContainerStyles;
 
+const notSortableSections: Sections = {
+  personal: <Personal />,
+};
+
 const sortableSections: Sections = {
   education: <Education />,
   languages: <Language />,
@@ -36,7 +40,11 @@ export default function Container() {
   } = settings;
 
   useEffect(() => {
-    if (!sections.length) setSectionOrderItems(Object.keys(sortableSections));
+    if (!sections.length)
+      setSectionOrderItems([
+        ...Object.keys(notSortableSections),
+        ...Object.keys(sortableSections),
+      ]);
   }, [sections]);
 
   return (
