@@ -1,7 +1,6 @@
 "use client";
 
 import { loadThemeComponents } from "@/lib/utils";
-import { $allEntriesSorted } from "@/stores/computed";
 import { $settings } from "@/stores/settingsStore";
 import type { ThemeComponents } from "@/types";
 import { useStore } from "@nanostores/react";
@@ -15,8 +14,8 @@ function LoadingComponent({ componentName }: { componentName: string }) {
 function ComponentNotAvailable({ componentName }: { componentName?: string }) {
   return (
     <div className="capitalize">{`${
-      componentName ? "component not found" : "components not found"
-    } component not found`}</div>
+      componentName ? `${componentName} ` : ""
+    }component not found`}</div>
   );
 }
 
@@ -46,73 +45,29 @@ export default function View() {
     return <ComponentNotAvailable />;
   }
 
+  const componentMapping = {
+    personal: components.personal,
+    skills: components.skills,
+    education: components.educations,
+    experience: components.experiences,
+    languages: components.language,
+  };
+
   return (
     <>
-      {/* TODO Make it dynamic */}
       {sections.map((section) => {
-        {
-          if (section === "personal") {
-            {
-              return components.personal ? (
-                <Suspense
-                  fallback={<LoadingComponent componentName={section} />}
-                >
-                  <components.personal />
-                </Suspense>
-              ) : (
-                <ComponentNotAvailable componentName={section} />
-              );
-            }
-          } else if (section === "skills") {
-            {
-              return components.skills ? (
-                <Suspense
-                  fallback={<LoadingComponent componentName={section} />}
-                >
-                  <components.skills />
-                </Suspense>
-              ) : (
-                <ComponentNotAvailable componentName={section} />
-              );
-            }
-          } else if (section === "education") {
-            {
-              return components.educations ? (
-                <Suspense
-                  fallback={<LoadingComponent componentName={section} />}
-                >
-                  <components.educations />
-                </Suspense>
-              ) : (
-                <ComponentNotAvailable componentName={section} />
-              );
-            }
-          } else if (section === "experience") {
-            {
-              return components.experiences ? (
-                <Suspense
-                  fallback={<LoadingComponent componentName={section} />}
-                >
-                  <components.experiences />
-                </Suspense>
-              ) : (
-                <ComponentNotAvailable componentName={section} />
-              );
-            }
-          } else if (section === "languages") {
-            {
-              return components.language ? (
-                <Suspense
-                  fallback={<LoadingComponent componentName={"languages"} />}
-                >
-                  <components.language />
-                </Suspense>
-              ) : (
-                <ComponentNotAvailable componentName={section} />
-              );
-            }
-          }
-        }
+        const Component = componentMapping[section];
+        return (
+          <div key={section}>
+            {Component ? (
+              <Suspense fallback={<LoadingComponent componentName={section} />}>
+                <Component />
+              </Suspense>
+            ) : (
+              <ComponentNotAvailable componentName={section} />
+            )}
+          </div>
+        );
       })}
     </>
   );
