@@ -22,24 +22,25 @@ export const loadThemeComponents = async (
     personal: null,
     experiences: null,
     educations: null,
-    language: null,
+    languages: null,
     skills: null,
   };
+
   switch (theme) {
     case "default":
       themeComponents.personal = lazy(
         () => import(`@/components/theme/themes/default/personal`)
       );
       themeComponents.experiences = lazy(
-        () => import(`@/components/theme/themes/default/experience`)
+        () => import(`@/components/theme/themes/default/experiences`)
       );
       themeComponents.educations = lazy(
-        () => import(`@/components/theme/themes/default/education`)
+        () => import(`@/components/theme/themes/default/educations`)
       );
       themeComponents.skills = lazy(
         () => import(`@/components/theme/themes/default/skills`)
       );
-      themeComponents.language = lazy(
+      themeComponents.languages = lazy(
         () => import(`@/components/theme/themes/default/languages`)
       );
       break;

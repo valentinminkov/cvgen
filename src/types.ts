@@ -1,18 +1,18 @@
-import type { LazyExoticComponent } from "react";
+import type { LazyExoticComponent, ComponentType } from "react";
 
-export type ThemeComponent = LazyExoticComponent<() => JSX.Element> | null;
+export type ThemeComponent = LazyExoticComponent<ComponentType<any>> | null;
 
 export interface ThemeComponents {
-  personal: ThemeComponent;
+  personal: ThemeComponent | null;
   experiences: ThemeComponent;
   educations: ThemeComponent;
-  language: ThemeComponent;
+  languages: ThemeComponent;
   skills: ThemeComponent;
 }
 
 export type Sections =
   | "personal"
   | "skills"
-  | "experience"
+  | "experiences"
   | "languages"
-  | "education";
+  | "educations";

@@ -27,10 +27,10 @@ const notSortableSections: Sections = {
 };
 
 const sortableSections: Sections = {
-  education: <Education />,
+  educations: <Education />,
   languages: <Language />,
   skills: <Skills />,
-  experience: <Experience />,
+  experiences: <Experience />,
 };
 
 export default function Container() {

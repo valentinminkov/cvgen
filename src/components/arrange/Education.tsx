@@ -72,7 +72,7 @@ export default function EducationView({}: Props) {
         <SortableItems
           items={educations}
           itemRender={renderEntry}
-          itemType="education"
+          itemType="educations"
         />
       )}
     </div>

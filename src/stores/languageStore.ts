@@ -32,7 +32,7 @@ type PersistentLanguageStore = Record<string, any> & {
 };
 
 const $language = persistentMap<PersistentLanguageStore>(
-  getStoreKey("language"),
+  getStoreKey("languages"),
   { language: { motherLanguage: "", otherLanguages: [] } },
   {
     encode: JSON.stringify,

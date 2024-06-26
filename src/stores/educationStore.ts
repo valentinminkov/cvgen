@@ -18,7 +18,7 @@ type PersistentEducationStore = Record<string, any> & {
 };
 
 const $education = persistentMap<PersistentEducationStore>(
-  getStoreKey("education"),
+  getStoreKey("educations"),
   { educations: [] },
   {
     encode: JSON.stringify,

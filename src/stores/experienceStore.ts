@@ -15,7 +15,7 @@ type PersistentExperienceStore = Record<string, any> & {
 };
 
 const $experiences = persistentMap<PersistentExperienceStore>(
-  getStoreKey("experience"),
+  getStoreKey("experiences"),
   { experiences: [] },
   {
     encode: JSON.stringify,

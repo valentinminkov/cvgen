@@ -11,7 +11,7 @@ import { useEffect, useState } from "react";
 import { useStore } from "@nanostores/react";
 import { $settings, setOrderItems } from "@/stores/settingsStore";
 
-type ItemType = "education" | "skills" | "language" | "experiences";
+type ItemType = "educations" | "skills" | "languages" | "experiences";
 
 interface Props {
   items: any;
