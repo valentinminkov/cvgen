@@ -74,7 +74,7 @@ export default function View() {
   };
 
   return (
-    <>
+    <div className="flex flex-col">
       {sections.map((section) => {
         const Component = componentMapping[section];
         const componentProps = componentPropsMapping[section];
@@ -91,6 +91,6 @@ export default function View() {
           </div>
         );
       })}
-    </>
+    </div>
   );
 }
