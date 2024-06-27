@@ -19,12 +19,7 @@ import {
   LanguageSelector,
 } from "@/components/form/LanguageSelector";
 import { useStore } from "@nanostores/react";
-import {
-  addLanguage,
-  removeLanguage,
-  $language,
-  type LanguageSubmitFormPayload,
-} from "@/stores/languageStore";
+import { addLanguage, removeLanguage, $language } from "@/stores/languageStore";
 import {
   Accordion,
   AccordionContent,
@@ -34,6 +29,7 @@ import {
 import { content } from "@/config/content";
 import { sectionClasses } from "./classes";
 import { ListEntryCard, ListEntryContainer, ListEntryTitle } from "./ListEntry";
+import type { LanguageSubmitFormPayload } from "@/types";
 
 const {
   content: {

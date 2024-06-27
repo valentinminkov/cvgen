@@ -3,34 +3,11 @@ import { toast } from "@/components/ui/use-toast";
 import { getStoreKey } from "@/stores/config";
 import type { UseFormReturn } from "react-hook-form";
 import type { PersonalFormType } from "@/components/form/PersonalSection";
-
-export interface SocialMedia {
-  name: string;
-  url: string;
-  icon?: string;
-}
-
-export interface UserFormValue {
-  firstName: string;
-  secondName: string;
-  email: string;
-  nationality: string;
-  phoneNumber: string;
-  addressType: string;
-  addressLine1: string;
-  addressLine2: string;
-  postCode: string;
-  gender: string;
-  city: string;
-  country: string;
-  website?: string;
-  socialMedia?: SocialMedia[];
-  aboutMe?: string;
-  picture?: string;
-  dateOfBirth?: Date | string;
-}
-
-type PersistentUserFormValue = UserFormValue & Record<string, any>;
+import type {
+  SocialMedia,
+  UserFormValue,
+  PersistentUserFormValue,
+} from "@/types";
 
 const initialState: PersistentUserFormValue = {
   firstName: "",

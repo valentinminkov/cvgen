@@ -21,7 +21,6 @@ import {
   $experiences,
   addExperience,
   removeExperience,
-  type ExperienceFormValue,
 } from "@/stores/experienceStore";
 import {
   Accordion,
@@ -39,6 +38,7 @@ import {
   ListEntryTitle,
 } from "@/components/form/ListEntry";
 import DateRangePicker from "@/components/form/DateRangePicker";
+import type { ExperienceFormValue } from "@/types";
 
 const {
   content: { components },

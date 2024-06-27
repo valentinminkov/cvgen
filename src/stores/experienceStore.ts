@@ -1,18 +1,6 @@
 import { persistentMap } from "@nanostores/persistent";
 import { getStoreKey } from "@/stores/config";
-
-export interface ExperienceFormValue {
-  title: string;
-  country: string;
-  workDescription: string;
-  startDate: Date;
-  ongoing?: boolean;
-  endDate?: Date;
-}
-
-type PersistentExperienceStore = Record<string, any> & {
-  experiences: ExperienceFormValue[];
-};
+import type { ExperienceFormValue, PersistentExperienceStore } from "@/types";
 
 const $experiences = persistentMap<PersistentExperienceStore>(
   getStoreKey("experiences"),

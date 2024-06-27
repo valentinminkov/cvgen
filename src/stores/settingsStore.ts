@@ -1,16 +1,6 @@
 import { persistentMap } from "@nanostores/persistent";
 import { getStoreKey } from "@/stores/config";
-import type { Sections } from "@/types";
-
-interface IOrder {
-  sections: Sections[];
-  [key: string]: string[];
-}
-
-type SettingsStore = Record<string, any> & {
-  order: IOrder;
-  theme: string;
-};
+import type { SettingsStore } from "@/types";
 
 const $settings = persistentMap<SettingsStore>(
   getStoreKey("settings"),

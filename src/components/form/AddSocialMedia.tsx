@@ -3,7 +3,7 @@ import { useState, type FormEvent } from "react";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Button } from "@/components/ui/button";
-import type { SocialMedia } from "@/stores/userStore";
+import type { SocialMedia } from "@/types";
 import { content } from "@/config/content";
 
 interface Props {

@@ -1,21 +1,6 @@
 import { persistentMap } from "@nanostores/persistent";
 import { getStoreKey } from "@/stores/config";
-
-export interface EducationFormValue {
-  title: string;
-  name: string;
-  startDate: Date;
-  website?: string;
-  country?: string;
-  city?: string;
-  description: string;
-  ongoing?: boolean;
-  endDate?: Date;
-}
-
-type PersistentEducationStore = Record<string, any> & {
-  educations: EducationFormValue[];
-};
+import type { EducationFormValue, PersistentEducationStore } from "@/types";
 
 const $education = persistentMap<PersistentEducationStore>(
   getStoreKey("educations"),

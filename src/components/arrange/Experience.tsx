@@ -1,11 +1,9 @@
 "use client";
-import {
-  $experiences,
-  type ExperienceFormValue,
-} from "@/stores/experienceStore";
+import { $experiences } from "@/stores/experienceStore";
 import { useStore } from "@nanostores/react";
 import { viewComponentStyles } from "@/components/arrange/config";
 import SortableItems from "./SortableItems";
+import type { ExperienceFormValue } from "@/types";
 
 const {
   paragraphClass,

@@ -1,21 +1,7 @@
 import { persistentMap } from "@nanostores/persistent";
 import { toast } from "@/components/ui/use-toast";
 import { getStoreKey } from "@/stores/config";
-
-interface SkillGroup {
-  type: string;
-  level: string;
-  skills?: string[];
-}
-
-export interface SkillsFormValue {
-  skills: SkillGroup[];
-}
-
-type PersistentSkillsStore = Record<string, any> & {
-  skills: SkillGroup[];
-  sectionSkills: string[];
-};
+import type { PersistentSkillsStore, SkillGroup } from "@/types";
 
 const $skills = persistentMap<PersistentSkillsStore>(
   getStoreKey("skills"),
@@ -73,7 +59,6 @@ export {
   $skills,
   addSkill,
   removeSkill,
-  type SkillGroup,
   addSectionSkill,
   removeSectionSkill,
   resetSectionSkills,

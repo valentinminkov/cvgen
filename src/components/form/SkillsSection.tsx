@@ -29,12 +29,12 @@ import {
   removeSectionSkill,
   $skills,
   addSkill,
-  type SkillGroup,
 } from "@/stores/skillsStore";
 import { getRandomString } from "@/lib/utils";
 import { content } from "@/config/content";
 import { sectionClasses } from "@/components/form/classes";
 import { ListEntryCard, ListEntryContainer, ListEntryTitle } from "./ListEntry";
+import type { SkillGroup } from "@/types";
 
 const {
   content: {

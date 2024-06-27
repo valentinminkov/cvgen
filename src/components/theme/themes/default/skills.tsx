@@ -1,5 +1,5 @@
 import { shuffleString } from "@/lib/utils";
-import type { SkillGroup } from "@/stores/skillsStore";
+import type { SkillGroup } from "@/types";
 
 interface SkillsProps {
   data: SkillGroup[];

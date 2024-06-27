@@ -21,7 +21,6 @@ import {
   $education,
   addEducation,
   removeEducation,
-  type EducationFormValue,
 } from "@/stores/educationStore";
 import {
   Accordion,
@@ -35,6 +34,7 @@ import { useState } from "react";
 import { content } from "@/config/content";
 import { ListEntryCard, ListEntryContainer, ListEntryTitle } from "./ListEntry";
 import DateRangePicker from "@/components/form/DateRangePicker";
+import type { EducationFormValue } from "@/types";
 
 const {
   content: {

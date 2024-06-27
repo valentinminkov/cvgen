@@ -1,9 +1,10 @@
 "use client";
 
-import { $skills, type SkillGroup } from "@/stores/skillsStore";
+import { $skills } from "@/stores/skillsStore";
 import { useStore } from "@nanostores/react";
 import { viewComponentStyles } from "@/components/arrange/config";
 import SortableItems from "./SortableItems";
+import type { SkillGroup } from "@/types";
 
 interface Props {
   containerClass?: string;

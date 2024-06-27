@@ -1,35 +1,10 @@
 import { persistentMap } from "@nanostores/persistent";
 import { getStoreKey } from "@/stores/config";
-
-// type SkillLevel = "A1" | "A2" | "B1" | "B2" | "C1" | "C2";
-
-interface LanguageSkills {
-  listening: string;
-  reading: string;
-  writing: string;
-}
-
-interface Language {
-  language: string;
-  skills: LanguageSkills;
-}
-
-interface LanguageSubmitFormPayload {
-  language: string;
-  listening: string;
-  reading: string;
-  writing: string;
-  motherLanguage?: string;
-}
-
-interface LanguageFormValue {
-  motherLanguage: string;
-  otherLanguages: Language[];
-}
-
-type PersistentLanguageStore = Record<string, any> & {
-  language: LanguageFormValue;
-};
+import type {
+  Language,
+  LanguageSubmitFormPayload,
+  PersistentLanguageStore,
+} from "@/types";
 
 const $language = persistentMap<PersistentLanguageStore>(
   getStoreKey("languages"),
@@ -93,12 +68,4 @@ function removeLanguage(index: number) {
   });
 }
 
-export {
-  addLanguage,
-  removeLanguage,
-  $language,
-  type LanguageFormValue,
-  addMotherLanguage,
-  type LanguageSubmitFormPayload,
-  type Language,
-};
+export { addLanguage, removeLanguage, $language, addMotherLanguage };

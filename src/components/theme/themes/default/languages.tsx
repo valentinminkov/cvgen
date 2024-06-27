@@ -1,5 +1,5 @@
 import { shuffleString } from "@/lib/utils";
-import type { LanguageFormValue } from "@/stores/languageStore";
+import type { LanguageFormValue } from "@/types";
 
 interface LanguagesProps {
   data: LanguageFormValue;

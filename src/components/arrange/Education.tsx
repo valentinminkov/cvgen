@@ -1,8 +1,9 @@
 "use client";
-import { $education, type EducationFormValue } from "@/stores/educationStore";
+import { $education } from "@/stores/educationStore";
 import { useStore } from "@nanostores/react";
 import { viewComponentStyles } from "@/components/arrange/config";
 import SortableItems from "./SortableItems";
+import type { EducationFormValue } from "@/types";
 
 interface Props {}
 const {

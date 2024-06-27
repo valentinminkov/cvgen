@@ -1,5 +1,5 @@
-import type { EducationFormValue } from "@/stores/educationStore";
 import { shuffleString } from "@/lib/utils";
+import type { EducationFormValue } from "@/types";
 
 interface EducationProps {
   data: EducationFormValue[];

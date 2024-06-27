@@ -33,9 +33,9 @@ import {
   updateUserData,
   addNewSocialMedia,
   resetUserData,
-  type SocialMedia,
   removeSocialMediaByIndex,
 } from "@/stores/userStore";
+import { type SocialMedia } from "@/types";
 import { content } from "@/config/content";
 import { useState, type ChangeEvent } from "react";
 import { sectionClasses } from "@/components/form/classes";
