@@ -2,6 +2,7 @@
 
 import { loadThemeComponents } from "@/lib/utils";
 import { $settings } from "@/stores/settingsStore";
+import { $allEntriesSorted } from "@/stores/computed";
 import type { ThemeComponents } from "@/types";
 import { useStore } from "@nanostores/react";
 import { Suspense, useEffect, useState } from "react";
@@ -26,6 +27,7 @@ export default function View() {
   } = useStore($settings);
   const [components, setComponents] = useState<ThemeComponents | null>(null);
   const [loading, setLoading] = useState(true);
+  const entries = useStore($allEntriesSorted);
 
   useEffect(() => {
     const loadComponents = async () => {
@@ -45,23 +47,43 @@ export default function View() {
     return <ComponentNotAvailable />;
   }
 
-  const componentMapping = {
+  const componentMapping: Partial<ThemeComponents> = {
     personal: components.personal,
     skills: components.skills,
-    education: components.educations,
-    experience: components.experiences,
-    languages: components.language,
+    educations: components.educations,
+    experiences: components.experiences,
+    languages: components.languages,
+  };
+
+  const componentPropsMapping: Partial<Record<string, any>> = {
+    personal: {
+      data: entries.user,
+    },
+    skills: {
+      data: entries.skills,
+    },
+    educations: {
+      data: entries.educations,
+    },
+    experiences: {
+      data: entries.experiences,
+    },
+    languages: {
+      data: entries.languages,
+    },
   };
 
   return (
     <>
       {sections.map((section) => {
         const Component = componentMapping[section];
+        const componentProps = componentPropsMapping[section];
+
         return (
           <div key={section}>
             {Component ? (
               <Suspense fallback={<LoadingComponent componentName={section} />}>
-                <Component />
+                <Component {...componentProps} />
               </Suspense>
             ) : (
               <ComponentNotAvailable componentName={section} />
