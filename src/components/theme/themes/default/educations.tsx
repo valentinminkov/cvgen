@@ -1,11 +1,7 @@
 import { shuffleString } from "@/lib/utils";
-import type { EducationFormValue } from "@/types";
+import type { EducationViewProps } from "@/types";
 
-interface EducationProps {
-  data: EducationFormValue[];
-}
-
-export default function Education({ data }: EducationProps) {
+export default function Education({ data }: EducationViewProps) {
   return (
     <div className="w-full mx-auto bg-white shadow-md overflow-hidden">
       <div className="p-6">

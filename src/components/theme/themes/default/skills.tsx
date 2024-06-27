@@ -1,11 +1,7 @@
 import { shuffleString } from "@/lib/utils";
-import type { SkillGroup } from "@/types";
+import type { SkillsViewsProps } from "@/types";
 
-interface SkillsProps {
-  data: SkillGroup[];
-}
-
-export default function Skills({ data }: SkillsProps) {
+export default function Skills({ data }: SkillsViewsProps) {
   return (
     <div className="w-full mx-auto bg-white shadow-md overflow-hidden">
       <div className="p-6">

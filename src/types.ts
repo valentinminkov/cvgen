@@ -23,6 +23,8 @@ export interface SocialMedia {
   icon?: string;
 }
 
+// Persistent store props
+
 export interface UserFormValue {
   firstName: string;
   secondName: string;
@@ -68,6 +70,7 @@ export interface IOrder {
 export type SettingsStore = Record<string, any> & {
   order: IOrder;
   theme: string;
+  darkMode?: boolean;
 };
 
 // type SkillLevel = "A1" | "A2" | "B1" | "B2" | "C1" | "C2";
@@ -128,3 +131,29 @@ export interface EducationFormValue {
 export type PersistentEducationStore = Record<string, any> & {
   educations: EducationFormValue[];
 };
+
+// View theme component props
+
+export interface ViewThemeComponentDefaultProps {
+  darkMode?: boolean;
+}
+
+export interface PersonalViewProps extends ViewThemeComponentDefaultProps {
+  data: UserFormValue;
+}
+
+export interface SkillsViewsProps extends ViewThemeComponentDefaultProps {
+  data: SkillGroup[];
+}
+
+export interface LanguagesViewProps extends ViewThemeComponentDefaultProps {
+  data: LanguageFormValue;
+}
+
+export interface ExperiencesViewProps extends ViewThemeComponentDefaultProps {
+  data: ExperienceFormValue[];
+}
+
+export interface EducationViewProps extends ViewThemeComponentDefaultProps {
+  data: EducationFormValue[];
+}

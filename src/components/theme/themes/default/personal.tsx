@@ -1,10 +1,6 @@
-import type { UserFormValue } from "@/types";
+import type { PersonalViewProps } from "@/types";
 
-interface PersonalProps {
-  data: UserFormValue;
-}
-
-export default function Personal({ data }: PersonalProps) {
+export default function Personal({ data }: PersonalViewProps) {
   return (
     <div className="w-full mx-auto bg-white shadow-md overflow-hidden">
       <div className="p-6">

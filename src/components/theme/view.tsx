@@ -23,6 +23,7 @@ function ComponentNotAvailable({ componentName }: { componentName?: string }) {
 export default function View() {
   const {
     theme,
+    darkMode,
     order: { sections },
   } = useStore($settings);
   const [components, setComponents] = useState<ThemeComponents | null>(null);
@@ -58,18 +59,23 @@ export default function View() {
   const componentPropsMapping: Partial<Record<string, any>> = {
     personal: {
       data: entries.user,
+      darkMode,
     },
     skills: {
       data: entries.skills,
+      darkMode,
     },
     educations: {
       data: entries.educations,
+      darkMode,
     },
     experiences: {
       data: entries.experiences,
+      darkMode,
     },
     languages: {
       data: entries.languages,
+      darkMode,
     },
   };
 

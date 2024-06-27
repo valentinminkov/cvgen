@@ -4,7 +4,7 @@ import type { SettingsStore } from "@/types";
 
 const $settings = persistentMap<SettingsStore>(
   getStoreKey("settings"),
-  { order: { sections: [] }, theme: "default" },
+  { order: { sections: [] }, theme: "default", darkMode: false },
   {
     encode: JSON.stringify,
     decode: JSON.parse,

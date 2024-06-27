@@ -1,11 +1,7 @@
 import { shuffleString } from "@/lib/utils";
-import type { ExperienceFormValue } from "@/types";
+import type { ExperiencesViewProps } from "@/types";
 
-export interface ExperiencesProps {
-  data: ExperienceFormValue[];
-}
-
-export default function Experiences({ data }: ExperiencesProps) {
+export default function Experiences({ data }: ExperiencesViewProps) {
   return (
     <div className="w-full mx-auto bg-white shadow-md overflow-hidden">
       <div className="p-6">

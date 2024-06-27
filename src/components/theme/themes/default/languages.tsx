@@ -1,11 +1,7 @@
 import { shuffleString } from "@/lib/utils";
-import type { LanguageFormValue } from "@/types";
+import type { LanguagesViewProps } from "@/types";
 
-interface LanguagesProps {
-  data: LanguageFormValue;
-}
-
-export default function Languages({ data }: LanguagesProps) {
+export default function Languages({ data }: LanguagesViewProps) {
   return (
     <div className="w-full mx-auto bg-white shadow-md overflow-hidden">
       <div className="p-6">
