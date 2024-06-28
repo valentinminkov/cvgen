@@ -157,3 +157,26 @@ export interface ExperiencesViewProps extends ViewThemeComponentDefaultProps {
 export interface EducationViewProps extends ViewThemeComponentDefaultProps {
   data: EducationFormValue[];
 }
+
+// Styles / Theme
+
+export interface CustomStyles {
+  light: Partial<ThemeStyles>;
+  dark: Partial<ThemeStyles>;
+}
+
+export interface ThemeStyles {
+  container: string;
+  innerContainer: string;
+  sectionTitle: string;
+  sectionHeader: string;
+  card: string;
+  cardTitle: string;
+  text: string;
+  list: string;
+  picture?: string;
+  pictureContainer?: string;
+  name?: string;
+  dateOfBirth?: string;
+  link?: string;
+}

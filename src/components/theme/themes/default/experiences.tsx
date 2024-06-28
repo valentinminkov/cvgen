@@ -1,25 +1,25 @@
 import { shuffleString } from "@/lib/utils";
 import type { ExperiencesViewProps } from "@/types";
+import { experiencesStyles } from "@/components/theme/themes/default/styles";
 
-export default function Experiences({ data }: ExperiencesViewProps) {
+export default function Experiences({ data, darkMode }: ExperiencesViewProps) {
+  const { darkThemeStyles, lightThemeStyles } = experiencesStyles;
+  const styles = darkMode ? darkThemeStyles : lightThemeStyles;
+
   return (
-    <div className="w-full mx-auto bg-white shadow-md overflow-hidden">
-      <div className="p-6">
-        <h2 className="text-2xl font-semibold text-center text-indigo-600 mb-6">
-          Experiences
-        </h2>
+    <div className={styles.container}>
+      <div className={styles.innerContainer}>
+        <h2 className={styles.sectionTitle}>Experiences</h2>
         <div className="space-y-6">
           {data.map((experience) => (
             <div
               key={shuffleString(
                 experience.title + experience.startDate.toString()
               )}
-              className="bg-gray-100 p-4 rounded-lg shadow-sm"
+              className={styles.card}
             >
-              <h3 className="text-xl font-medium text-gray-800">
-                {experience.title}
-              </h3>
-              <p className="text-gray-600">
+              <h3 className={styles.cardTitle}>{experience.title}</h3>
+              <p className={styles.text}>
                 {new Date(experience.startDate).toLocaleDateString()} -{" "}
                 {experience.ongoing
                   ? "Ongoing"
@@ -27,8 +27,8 @@ export default function Experiences({ data }: ExperiencesViewProps) {
                   ? new Date(experience.endDate).toLocaleDateString()
                   : "Unknown End Date"}
               </p>
-              <p className="text-gray-600">{experience.country}</p>
-              <p className="text-gray-600">{experience.workDescription}</p>
+              <p className={styles.text}>{experience.country}</p>
+              <p className={styles.text}>{experience.workDescription}</p>
             </div>
           ))}
         </div>

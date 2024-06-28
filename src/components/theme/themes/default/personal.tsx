@@ -1,61 +1,59 @@
 import type { PersonalViewProps } from "@/types";
+import { personalStyles } from "@/components/theme/themes/default/styles";
 
-export default function Personal({ data }: PersonalViewProps) {
+export default function Personal({ data, darkMode }: PersonalViewProps) {
+  const { darkThemeStyles, lightThemeStyles } = personalStyles;
+  const styles = darkMode ? darkThemeStyles : lightThemeStyles;
+
   return (
-    <div className="w-full mx-auto bg-white shadow-md overflow-hidden">
-      <div className="p-6">
+    <div className={styles.container}>
+      <div className={styles.innerContainer}>
         {data.picture && (
-          <div className="flex justify-center mb-4">
+          <div className={styles.pictureContainer}>
             <img
               src={data.picture}
               alt={`${data.firstName} ${data.secondName}`}
-              className="w-32 h-32 rounded-full border-2 border-indigo-500"
+              className={styles.picture}
             />
           </div>
         )}
-        <h2 className="text-2xl font-semibold text-center text-indigo-600">
+        <h2 className={styles.name}>
           {data.firstName} {data.secondName}
         </h2>
         {data.dateOfBirth && (
-          <p className="text-center text-gray-600 mb-4">
+          <p className={styles.dateOfBirth}>
             Date of Birth: {new Date(data.dateOfBirth).toLocaleDateString()}
           </p>
         )}
         <div className="space-y-4">
           <div>
-            <h3 className="text-lg font-medium text-gray-700">
-              Contact Information
-            </h3>
-            <p className="text-gray-600">Email: {data.email}</p>
-            <p className="text-gray-600">Phone: {data.phoneNumber}</p>
+            <h3 className={styles.sectionHeader}>Contact Information</h3>
+            <p className={styles.text}>Email: {data.email}</p>
+            <p className={styles.text}>Phone: {data.phoneNumber}</p>
             {data.website && (
-              <p className="text-gray-600">Website: {data.website}</p>
+              <p className={styles.text}>Website: {data.website}</p>
             )}
           </div>
           <div>
-            <h3 className="text-lg font-medium text-gray-700">Address</h3>
-            <p className="text-gray-600">{data.addressType}</p>
-            <p className="text-gray-600">{data.addressLine1}</p>
+            <h3 className={styles.sectionHeader}>Address</h3>
+            <p className={styles.text}>{data.addressType}</p>
+            <p className={styles.text}>{data.addressLine1}</p>
             {data.addressLine2 && (
-              <p className="text-gray-600">{data.addressLine2}</p>
+              <p className={styles.text}>{data.addressLine2}</p>
             )}
-            <p className="text-gray-600">
+            <p className={styles.text}>
               {data.city}, {data.postCode}, {data.country}
             </p>
           </div>
           <div>
-            <h3 className="text-lg font-medium text-gray-700">
-              Personal Details
-            </h3>
-            <p className="text-gray-600">Nationality: {data.nationality}</p>
-            <p className="text-gray-600">Gender: {data.gender}</p>
+            <h3 className={styles.sectionHeader}>Personal Details</h3>
+            <p className={styles.text}>Nationality: {data.nationality}</p>
+            <p className={styles.text}>Gender: {data.gender}</p>
           </div>
           {data.socialMedia && data.socialMedia.length > 0 && (
             <div>
-              <h3 className="text-lg font-medium text-gray-700">
-                Social Media
-              </h3>
-              <ul className="list-disc list-inside text-gray-600">
+              <h3 className={styles.sectionHeader}>Social Media</h3>
+              <ul className={styles.list}>
                 {data.socialMedia.map((account, index) => (
                   <li key={index}>
                     {account.name}: {account.url}
@@ -66,8 +64,8 @@ export default function Personal({ data }: PersonalViewProps) {
           )}
           {data.aboutMe && (
             <div>
-              <h3 className="text-lg font-medium text-gray-700">About Me</h3>
-              <p className="text-gray-600">{data.aboutMe}</p>
+              <h3 className={styles.sectionHeader}>About Me</h3>
+              <p className={styles.text}>{data.aboutMe}</p>
             </div>
           )}
         </div>

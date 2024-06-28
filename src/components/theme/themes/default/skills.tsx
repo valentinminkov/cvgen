@@ -1,31 +1,33 @@
 import { shuffleString } from "@/lib/utils";
 import type { SkillsViewsProps } from "@/types";
+import { skillsStyles } from "@/components/theme/themes/default/styles";
 
-export default function Skills({ data }: SkillsViewsProps) {
+export default function Skills({ data, darkMode }: SkillsViewsProps) {
+  const { darkThemeStyles, lightThemeStyles } = skillsStyles;
+  const styles = darkMode ? darkThemeStyles : lightThemeStyles;
+
   return (
-    <div className="w-full mx-auto bg-white shadow-md overflow-hidden">
-      <div className="p-6">
-        <h1 className="text-2xl font-semibold text-center text-indigo-600 mb-6">
-          Skills
-        </h1>
+    <div className={styles.container}>
+      <div className={styles.innerContainer}>
+        <h1 className={styles.sectionTitle}>Skills</h1>
         <div className="space-y-6">
           {data.map((skillSet) => (
             <div
               key={shuffleString(skillSet.type + skillSet.level)}
-              className="bg-gray-100 p-4 rounded-lg shadow-sm"
+              className={styles.card}
             >
-              <p className="text-lg font-medium text-gray-800">
+              <p className={styles.cardTitle}>
                 <span className="font-semibold">Skill Type: </span>{" "}
                 {skillSet.type}
               </p>
-              <p className="text-gray-600">
+              <p className={styles.text}>
                 <span className="font-semibold">Skill Level: </span>{" "}
                 {skillSet.level}
               </p>
               {skillSet.skills && skillSet.skills.length > 0 && (
                 <div className="mt-2">
-                  <p className="text-lg font-medium text-gray-800">Skills:</p>
-                  <ul className="list-disc list-inside text-gray-600">
+                  <p className={styles.cardTitle}>Skills:</p>
+                  <ul className={styles.list}>
                     {skillSet.skills.map((curSkill) => (
                       <li key={shuffleString(curSkill)}>{curSkill}</li>
                     ))}
