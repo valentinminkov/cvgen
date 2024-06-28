@@ -1,18 +1,14 @@
 ---
 import { Button } from "@/components/ui/button";
 import Layout from "@/layouts/Layout.astro";
-import Arrange from "@/components/arrange/Container";
+import DataView from "@/components/theme/view";
 ---
 
 <Layout title="CV Generator">
   <main class="flex flex-col gap-8">
+    <DataView client:only="react" />
     <div>
-      <div>
-        <Arrange client:only="react" />
-        <Button>
-          <a href="/create/arrange/theme">Continue</a>
-        </Button>
-      </div>
+      <Button><a href="/fill/arrange/theme">Continue</a></Button>
     </div>
   </main>
 </Layout>
