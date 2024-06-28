@@ -35,4 +35,17 @@ const setTheme = (newTheme: string) => {
     $settings.set({ ...settingsValue, theme: newTheme });
 };
 
-export { $settings, setSectionOrderItems, setOrderItems, setTheme };
+const setDarkMode = (newDarkModeValue: boolean) => {
+  const settings = $settings.get();
+  if (settings?.darkMode !== newDarkModeValue)
+    $settings.set({ ...settings, darkMode: newDarkModeValue });
+  return newDarkModeValue;
+};
+
+export {
+  $settings,
+  setSectionOrderItems,
+  setOrderItems,
+  setTheme,
+  setDarkMode,
+};
