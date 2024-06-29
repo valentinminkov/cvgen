@@ -7,7 +7,7 @@ import {
   verticalListSortingStrategy,
 } from "@dnd-kit/sortable";
 import SortableItemWrapper from "./SortableItemWrapper";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { useStore } from "@nanostores/react";
 import { $settings, setOrderItems } from "@/stores/settingsStore";
 
@@ -30,9 +30,13 @@ export default function SortableItems({ items, itemRender, itemType }: Props) {
   );
 
   useEffect(() => {
-    if (!itemKeys.length)
+    if (
+      !itemKeys.length ||
+      itemKeys.length !== Object.keys(itemsSortableEntries).length
+    ) {
       setOrderItems(itemType, Object.keys(itemsSortableEntries));
-  }, [itemKeys]);
+    }
+  }, [itemKeys, itemsSortableEntries]);
 
   function handleDragEnd(event: DragEndEvent) {
     const { active, over } = event;
