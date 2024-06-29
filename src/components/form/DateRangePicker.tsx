@@ -9,7 +9,7 @@ import {
 import { DatePicker } from "@/components/form/Datepicker";
 import { Switch } from "@/components/ui/switch";
 import { useState } from "react";
-import { content } from "@/config/content";
+import { content, translations } from "@/config/content";
 import type { UseFormReturn } from "react-hook-form";
 
 interface Props {
@@ -43,7 +43,7 @@ export default function DateRangePicker({ form }: Props) {
         name="ongoing"
         render={({ field }) => (
           <FormItem className={formItemClass}>
-            <FormLabel>{components.DateRangePicker.ONGOING}</FormLabel>
+            <FormLabel>{translations.ONGOING}</FormLabel>
             <FormControl>
               <Switch
                 checked={field.value}
@@ -64,7 +64,7 @@ export default function DateRangePicker({ form }: Props) {
           name="endDate"
           render={({ field }) => (
             <FormItem className={formItemClass}>
-              <FormLabel>{components.DateRangePicker.END_DATE}</FormLabel>
+              <FormLabel>{translations.END_DATE}</FormLabel>
               <FormControl>
                 <DatePicker placeholder="" field={field} />
               </FormControl>

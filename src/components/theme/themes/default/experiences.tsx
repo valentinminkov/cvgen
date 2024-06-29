@@ -1,6 +1,7 @@
 import { shuffleString } from "@/lib/utils";
 import type { ExperiencesViewProps } from "@/types";
 import { experiencesStyles } from "@/components/theme/themes/default/styles";
+import { translations } from "@/config/content";
 
 export default function Experiences({ data, darkMode }: ExperiencesViewProps) {
   const { darkThemeStyles, lightThemeStyles } = experiencesStyles;
@@ -9,7 +10,7 @@ export default function Experiences({ data, darkMode }: ExperiencesViewProps) {
   return (
     <div className={styles.container}>
       <div className={styles.innerContainer}>
-        <h2 className={styles.sectionTitle}>Experiences</h2>
+        <h2 className={styles.sectionTitle}>{translations.EXPERIENCES}</h2>
         <div className="space-y-6">
           {data.map((experience) => (
             <div

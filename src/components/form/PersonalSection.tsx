@@ -36,7 +36,7 @@ import {
   removeSocialMediaByIndex,
 } from "@/stores/userStore";
 import { type SocialMedia } from "@/types";
-import { content } from "@/config/content";
+import { translations } from "@/config/content";
 import { useState, type ChangeEvent } from "react";
 import { sectionClasses } from "@/components/form/classes";
 import AddSocialMedia from "@/components/form/AddSocialMedia";
@@ -80,11 +80,6 @@ interface Props {
 }
 
 export default function PersonalSection({ defaultFormValues }: Props) {
-  const {
-    content: {
-      components: { PersonalSection },
-    },
-  } = content;
   const userStore = useStore($user);
   const form = useForm<PersonalFormType>({
     resolver: zodResolver(FormSchema),
@@ -154,7 +149,7 @@ export default function PersonalSection({ defaultFormValues }: Props) {
             name="picture"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>{PersonalSection.PICTURE}</FormLabel>
+                <FormLabel>{translations.PICTURE}</FormLabel>
                 <FormControl onChange={handlePictureFileChange}>
                   <Input id="picture" type="file" {...field} />
                 </FormControl>
@@ -176,7 +171,7 @@ export default function PersonalSection({ defaultFormValues }: Props) {
               name="firstName"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>{PersonalSection.FIRST_NAME}</FormLabel>
+                  <FormLabel>{translations.FIRST_NAME}</FormLabel>
                   <FormControl>
                     <Input placeholder="John" {...field} />
                   </FormControl>
@@ -195,7 +190,7 @@ export default function PersonalSection({ defaultFormValues }: Props) {
               name="secondName"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>{PersonalSection.SECOND_NAME}</FormLabel>
+                  <FormLabel>{translations.SECOND_NAME}</FormLabel>
                   <FormControl>
                     <Input placeholder="Doe" {...field} />
                   </FormControl>
@@ -215,7 +210,7 @@ export default function PersonalSection({ defaultFormValues }: Props) {
               name="dateOfBirth"
               render={({ field }) => (
                 <FormItem className="flex flex-col">
-                  <FormLabel>{PersonalSection.DATE_OF_BIRTH}</FormLabel>
+                  <FormLabel>{translations.DATE_OF_BIRTH}</FormLabel>
                   <FormControl>
                     <DatePicker placeholder="01/08/1935" field={field} />
                   </FormControl>
@@ -237,7 +232,7 @@ export default function PersonalSection({ defaultFormValues }: Props) {
               }
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>{PersonalSection.GENDER}</FormLabel>
+                  <FormLabel>{translations.GENDER}</FormLabel>
                   <Select
                     onValueChange={field.onChange}
                     defaultValue={field.value}
@@ -248,14 +243,12 @@ export default function PersonalSection({ defaultFormValues }: Props) {
                       </SelectTrigger>
                     </FormControl>
                     <SelectContent>
-                      <SelectItem value="male">
-                        {PersonalSection.MALE}
-                      </SelectItem>
+                      <SelectItem value="male">{translations.MALE}</SelectItem>
                       <SelectItem value="female">
-                        {PersonalSection.FEMALE}
+                        {translations.FEMALE}
                       </SelectItem>
                       <SelectItem value="other">
-                        {PersonalSection.OTHER}
+                        {translations.OTHER}
                       </SelectItem>
                     </SelectContent>
                   </Select>
@@ -274,7 +267,7 @@ export default function PersonalSection({ defaultFormValues }: Props) {
               name="nationality"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>{PersonalSection.NATIONALITY}</FormLabel>
+                  <FormLabel>{translations.NATIONALITY}</FormLabel>
                   <Select
                     onValueChange={field.onChange}
                     defaultValue={field.value}
@@ -308,7 +301,7 @@ export default function PersonalSection({ defaultFormValues }: Props) {
               name="phoneNumber"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>{PersonalSection.PHONE_NUMBER}</FormLabel>
+                  <FormLabel>{translations.PHONE_NUMBER}</FormLabel>
                   <FormControl>
                     <Input placeholder="+123 456 789 10" {...field} />
                   </FormControl>
@@ -329,7 +322,7 @@ export default function PersonalSection({ defaultFormValues }: Props) {
               name="email"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>{PersonalSection.EMAIL_ADDRESS}</FormLabel>
+                  <FormLabel>{translations.EMAIL_ADDRESS}</FormLabel>
                   <FormControl>
                     <Input placeholder="john@doe.com" {...field} />
                   </FormControl>
@@ -350,7 +343,7 @@ export default function PersonalSection({ defaultFormValues }: Props) {
               name="website"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>{PersonalSection.WEBSITE}</FormLabel>
+                  <FormLabel>{translations.WEBSITE}</FormLabel>
                   <FormControl>
                     <Input placeholder="Enter your website" {...field} />
                   </FormControl>
@@ -373,7 +366,7 @@ export default function PersonalSection({ defaultFormValues }: Props) {
               name="addressType"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>{PersonalSection.ADDRESS_TYPE}</FormLabel>
+                  <FormLabel>{translations.ADDRESS_TYPE}</FormLabel>
                   <FormControl>
                     <Input
                       placeholder="e.g. House / Mountain  / Dog"
@@ -395,7 +388,7 @@ export default function PersonalSection({ defaultFormValues }: Props) {
               name="addressLine1"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>{PersonalSection.ADDRESS_LINE_1}</FormLabel>
+                  <FormLabel>{translations.ADDRESS_LINE_1}</FormLabel>
                   <FormControl>
                     <Input
                       placeholder="First line of your address"
@@ -417,7 +410,7 @@ export default function PersonalSection({ defaultFormValues }: Props) {
               name="addressLine2"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>{PersonalSection.ADDRESS_LINE_2}</FormLabel>
+                  <FormLabel>{translations.ADDRESS_LINE_2}</FormLabel>
                   <FormControl>
                     <Input
                       placeholder="Second line of your address"
@@ -442,7 +435,7 @@ export default function PersonalSection({ defaultFormValues }: Props) {
               name="postCode"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>{PersonalSection.POSTAL_CODE}</FormLabel>
+                  <FormLabel>{translations.POSTAL_CODE}</FormLabel>
                   <FormControl>
                     <Input placeholder="1324" {...field} />
                   </FormControl>
@@ -459,7 +452,7 @@ export default function PersonalSection({ defaultFormValues }: Props) {
               name="city"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>{PersonalSection.CITY}</FormLabel>
+                  <FormLabel>{translations.CITY}</FormLabel>
                   <FormControl>
                     <Input placeholder="Berlin" {...field} />
                   </FormControl>
@@ -479,7 +472,7 @@ export default function PersonalSection({ defaultFormValues }: Props) {
               name="country"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>{PersonalSection.COUNTRY}</FormLabel>
+                  <FormLabel>{translations.COUNTRY}</FormLabel>
                   <CountrySelector field={field} placeholder="Select" />
                   <FormDescription></FormDescription>
                   <FormMessage />
@@ -501,7 +494,7 @@ export default function PersonalSection({ defaultFormValues }: Props) {
               name="aboutMe"
               render={({ field }) => (
                 <FormItem className="h-4/5">
-                  <FormLabel>{PersonalSection.ABOUT}</FormLabel>
+                  <FormLabel>{translations.ABOUT}</FormLabel>
                   <FormControl className="h-4/5">
                     <Textarea
                       className="h-4/5"
@@ -515,9 +508,9 @@ export default function PersonalSection({ defaultFormValues }: Props) {
               )}
             />
             <div className={sectionClasses.controlBtnContainer}>
-              <Button type="submit">{PersonalSection.SUBMIT}</Button>
+              <Button type="submit">{translations.SUBMIT}</Button>
               <Button type="reset" variant={"ghost"} onClick={onReset}>
-                {PersonalSection.RESET}
+                {translations.RESET}
               </Button>
             </div>
           </div>
@@ -538,7 +531,7 @@ export default function PersonalSection({ defaultFormValues }: Props) {
                           className={sectionClasses.listEntryContainerContent}
                         >
                           <ListEntryTitle
-                            entriesLabel={PersonalSection.SOCIAL_MEDIA_ENTRIES}
+                            entriesLabel={translations.SOCIAL_MEDIA_ENTRIES}
                             entriesLength={userStore.socialMedia.length}
                           />
                           <div

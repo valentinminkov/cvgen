@@ -26,16 +26,10 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
-import { content } from "@/config/content";
+import { content, translations } from "@/config/content";
 import { sectionClasses } from "./classes";
 import { ListEntryCard, ListEntryContainer, ListEntryTitle } from "./ListEntry";
 import type { LanguageSubmitFormPayload } from "@/types";
-
-const {
-  content: {
-    components: { LanguageSection },
-  },
-} = content;
 
 const LanguageFormSchema = z.object({
   motherLanguage: z.string(),
@@ -75,7 +69,7 @@ export default function LanguageSectionComponent() {
                 name="motherLanguage"
                 render={({ field }) => (
                   <FormItem className="w-full">
-                    <FormLabel>{LanguageSection.MOTHER_LANGUAGES}</FormLabel>
+                    <FormLabel>{translations.MOTHER_LANGUAGES}</FormLabel>
                     <FormControl>
                       <LanguageSelector field={field} />
                     </FormControl>
@@ -91,7 +85,7 @@ export default function LanguageSectionComponent() {
                   name="language"
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel>{LanguageSection.LANGUAGE}</FormLabel>
+                      <FormLabel>{translations.LANGUAGE}</FormLabel>
                       <FormControl>
                         <LanguageSelector field={field} />
                       </FormControl>
@@ -107,7 +101,7 @@ export default function LanguageSectionComponent() {
                     name="listening"
                     render={({ field }) => (
                       <FormItem className="w-full">
-                        <FormLabel>{LanguageSection.LISTENING}</FormLabel>
+                        <FormLabel>{translations.LISTENING}</FormLabel>
                         <FormControl>
                           <LanguageLevelSelector field={field} />
                         </FormControl>
@@ -123,7 +117,7 @@ export default function LanguageSectionComponent() {
                     name="reading"
                     render={({ field }) => (
                       <FormItem className="w-full">
-                        <FormLabel>{LanguageSection.READING}</FormLabel>
+                        <FormLabel>{translations.READING}</FormLabel>
                         <FormControl>
                           <LanguageLevelSelector field={field} />
                         </FormControl>
@@ -139,7 +133,7 @@ export default function LanguageSectionComponent() {
                     name="writing"
                     render={({ field }) => (
                       <FormItem className="w-full">
-                        <FormLabel>{LanguageSection.WRITING}</FormLabel>
+                        <FormLabel>{translations.WRITING}</FormLabel>
                         <FormControl>
                           <LanguageLevelSelector field={field} />
                         </FormControl>
@@ -151,7 +145,7 @@ export default function LanguageSectionComponent() {
                 </div>
               </div>
               <div className={sectionClasses.controlBtnContainer}>
-                <Button type="submit">{LanguageSection.SUBMIT}</Button>
+                <Button type="submit">{translations.SUBMIT}</Button>
               </div>
             </div>
           </form>
@@ -181,19 +175,19 @@ export default function LanguageSectionComponent() {
                             <ListEntryCard
                               content={[
                                 {
-                                  label: LanguageSection.LANGUAGE,
+                                  label: translations.LANGUAGE,
                                   value: curLang.language,
                                 },
                                 {
-                                  label: LanguageSection.READING,
+                                  label: translations.READING,
                                   value: curLang.skills.reading,
                                 },
                                 {
-                                  label: LanguageSection.LISTENING,
+                                  label: translations.LISTENING,
                                   value: curLang.skills.listening,
                                 },
                                 {
-                                  label: LanguageSection.WRITING,
+                                  label: translations.WRITING,
                                   value: curLang.skills.writing,
                                 },
                               ]}

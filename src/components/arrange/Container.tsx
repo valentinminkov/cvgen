@@ -12,7 +12,7 @@ import {
 } from "@dnd-kit/sortable";
 import SortableItemWrapper from "./SortableItemWrapper";
 import { useEffect } from "react";
-import { viewContainerStyles } from "@/components/arrange/config";
+import { viewContainerStyles } from "@/components/arrange/classes";
 import {
   $settings,
   setSectionOrderItems,

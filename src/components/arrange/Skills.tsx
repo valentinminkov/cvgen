@@ -2,9 +2,10 @@
 
 import { $skills } from "@/stores/skillsStore";
 import { useStore } from "@nanostores/react";
-import { viewComponentStyles } from "@/components/arrange/config";
+import { viewComponentStyles } from "@/components/arrange/classes";
 import SortableItems from "./SortableItems";
 import type { SkillGroup } from "@/types";
+import { translations } from "@/config/content";
 
 interface Props {
   containerClass?: string;
@@ -34,7 +35,7 @@ const Entry = ({ entry, index, remove }: EntryProps) => {
         <span>{entry.level}</span>
       </div>
       <div>
-        <p className={labelClass}>Skills:</p>
+        <p className={labelClass}>{translations.SKILLS}:</p>
         <ul className={listContainerClass}>
           {entry.skills?.map((skill: any, id: number) => (
             <li key={id} className={listEntryContainerClass}>
@@ -44,7 +45,7 @@ const Entry = ({ entry, index, remove }: EntryProps) => {
         </ul>
       </div>
       <button onClick={() => remove(index)} className={dangerButtonClass}>
-        Remove Skill Group
+        {translations.REMOVE_SKILL}
       </button>
     </div>
   );

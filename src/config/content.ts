@@ -1,9 +1,78 @@
-const elementsContent = {
+export const translations = {
   SECTION_FORM_SUBMIT_BUTTON: "Save",
   RESET_BUTTON: "Reset",
+  GENERATE: "Generate",
+  CONTINUE: "Continue",
+  ENTRIES: "Entries",
+  LANGUAGES: "Languages",
+  MOTHER_LANGUAGES: "Mother languages",
+  LANGUAGE: "Language",
+  LISTENING: "Listening",
+  READING: "Reading",
+  WRITING: "Writing",
+  SUBMIT: "Submit",
+  REMOVE_LANGUAGE: "Remove Language",
+  PERSONAL_INFORMATION: "Personal Information",
+  WORK_EXPERIENCE: "Work experience",
+  EDUCATION_TRAINING: "Education and training",
+  LANGUAGE_TRAINING: "Languages",
+  JOB_SKILLS: "Job skills",
+  FILLED: "Filled",
+  EXPERIENCES: "Experiences",
+  EDUCATIONS: "Education and trainings",
+  SKILLS: "Skill",
+  FIRST_NAME: "First name",
+  SECOND_NAME: "Second name",
+  MALE: "Male",
+  PICTURE: "Picture",
+  FEMALE: "Female",
+  OTHER: "Other",
+  OTHER_LANGUAGES: "Other languages",
+  ABOUT: "About",
+  DATE_OF_BIRTH: "Date of birth",
+  GENDER: "Gender",
+  NATIONALITY: "Nationality",
+  EMAIL_ADDRESS: "Email address",
+  PHONE_NUMBER: "Phone number",
+  WEBSITE: "Website",
+  ADDRESS: "Address",
+  ADDRESS_TYPE: "Address type",
+  ADDRESS_LINE_1: "Address line 1",
+  ADDRESS_LINE_2: "Address line 2",
+  POSTAL_CODE: "Postal code",
+  CITY: "City",
+  COUNTRY: "Country",
+  RESET: "Reset",
+  SOCIAL_MEDIA_ENTRIES: "Social media entries",
+  ENTER_SOCIAL_MEDIA: "Enter Social Media",
+  NAME: "Name",
+  URL: "Url",
+  SOCIAL_MEDIAL_URL: "Social media",
+  ADD_SOCIAL_MEDIA: "Add social media",
+  COMPANY_NAME: "Company name",
+  LOCATION: "Location",
+  WORK_DESCRIPTION: "Work description",
+  TITLE: "Title",
+  DESCRIPTION: "Description",
+  START_DATE: "Start date",
+  ONGOING: "Ongoing",
+  END_DATE: "End date",
+  REMOVE_SKILL: "Remove skill",
+  TYPE: "Type",
+  LEVEL: "Level",
+  SKILL: "Skill",
+  CONTACT_INFORMATION: "Contact Information",
+};
+
+export const elementsContent = {
+  SECTION_FORM_SUBMIT_BUTTON: "Save",
+  RESET_BUTTON: "Reset",
+  GENERATE: "Generate",
+  CONTINUE: "Continue",
   FORM_CONTAINER: "",
 };
 
+// to do refactor to use translations
 const componentsContent = {
   InputAccordion: {
     PERSONAL_DATA_SECTION: "Personal data",
@@ -90,7 +159,7 @@ const componentsContent = {
     END_DATE: "End date",
   },
 };
-
+// TODO Refactor this, this is uneeded.
 export const content = {
   content: {
     elements: elementsContent,

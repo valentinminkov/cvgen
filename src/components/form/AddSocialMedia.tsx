@@ -4,7 +4,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Button } from "@/components/ui/button";
 import type { SocialMedia } from "@/types";
-import { content } from "@/config/content";
+import { content, translations } from "@/config/content";
 
 interface Props {
   addSocialMedia: (socialMedia: SocialMedia) => boolean;
@@ -35,20 +35,20 @@ export default function AddSocialMedia({ addSocialMedia }: Props) {
 
   return (
     <div className="flex flex-col gap-4 w-6/12">
-      <h3>{AddSocialMedia.ENTER_SOCIAL_MEDIA}</h3>
+      <h3>{translations.ENTER_SOCIAL_MEDIA}</h3>
       <div>
-        <Label>{AddSocialMedia.NAME}</Label>
+        <Label>{translations.NAME}</Label>
         <Input
           value={name}
           onChange={(e) => setName(e?.currentTarget?.value)}
         />
       </div>
       <div>
-        <Label>{AddSocialMedia.URL}</Label>
+        <Label>{translations.URL}</Label>
         <Input value={url} onChange={(e) => setUrl(e?.currentTarget?.value)} />
       </div>
       <div>
-        <Label>{AddSocialMedia.SOCIAL_MEDIAL_URL}</Label>
+        <Label>{translations.SOCIAL_MEDIAL_URL}</Label>
         <Input
           value={icon}
           onChange={(e) => setIcon(e?.currentTarget?.value)}
@@ -63,7 +63,7 @@ export default function AddSocialMedia({ addSocialMedia }: Props) {
             submitSocialMedia();
           }}
         >
-          {AddSocialMedia.ADD_SOCIAL_MEDIA}
+          {translations.ADD_SOCIAL_MEDIA}
         </Button>
       </div>
     </div>

@@ -1,7 +1,7 @@
 "use client";
 import { $education } from "@/stores/educationStore";
 import { useStore } from "@nanostores/react";
-import { viewComponentStyles } from "@/components/arrange/config";
+import { viewComponentStyles } from "@/components/arrange/classes";
 import SortableItems from "./SortableItems";
 import type { EducationFormValue } from "@/types";
 

@@ -11,7 +11,7 @@ import ExperienceSection from "@/components/form/ExperienceSection";
 import EducationSection from "@/components/form/EducationSection";
 import LanguageSection from "@/components/form/LanguageSection";
 import SkillsSection from "@/components/form/SkillsSection";
-import { content } from "@/config/content";
+import { translations } from "@/config/content";
 import {
   $skillsEntered,
   $educationsEntered,
@@ -28,25 +28,6 @@ export default function InputAccordion() {
   const experiencesEntered = useStore($experiencesEntered);
   const isPersonalDataFilled = useStore($isPersonalDataFilled);
   const languagesEntered = useStore($languagesEntered);
-
-  const {
-    content: {
-      components: {
-        InputAccordion: {
-          PERSONAL_DATA_SECTION,
-          WORK_EXPERIENCE_SECTION,
-          EDUCATION_TRAINING_SECTION,
-          LANGUAGE_TRAINING_SECTION,
-          JOB_SKILLS_SECTION,
-          FILLED_MARK_PERSONAL_SECTION,
-          SKILLS_LABEL,
-          LANGUAGES_LABEL,
-          EDUCATIONS_LABEL,
-          EXPERIENCES_LABEL,
-        },
-      },
-    },
-  } = content;
 
   const accordionTriggerLabel = (
     label: string,
@@ -72,43 +53,47 @@ export default function InputAccordion() {
 
   const accordionContent = [
     {
-      label: PERSONAL_DATA_SECTION,
+      label: translations.PERSONAL_INFORMATION,
       triggerContent: accordionTriggerLabel(
-        PERSONAL_DATA_SECTION,
-        FILLED_MARK_PERSONAL_SECTION,
+        translations.PERSONAL_INFORMATION,
+        translations.FILLED,
         "success"
       ),
       content: <PersonalSection />,
     },
     {
-      label: WORK_EXPERIENCE_SECTION,
+      label: translations.EXPERIENCES,
       triggerContent: accordionTriggerLabel(
-        WORK_EXPERIENCE_SECTION,
-        !!experiencesEntered ? `${experiencesEntered} ${EXPERIENCES_LABEL}` : ""
+        translations.WORK_EXPERIENCE,
+        !!experiencesEntered
+          ? `${experiencesEntered} ${translations.EXPERIENCES}`
+          : ""
       ),
       content: <ExperienceSection />,
     },
     {
-      label: EDUCATION_TRAINING_SECTION,
+      label: translations.EDUCATIONS,
       triggerContent: accordionTriggerLabel(
-        EDUCATION_TRAINING_SECTION,
-        !!educationsEntered ? `${educationsEntered} ${EDUCATIONS_LABEL}` : ""
+        translations.LANGUAGE_TRAINING,
+        !!educationsEntered
+          ? `${educationsEntered} ${translations.EDUCATIONS}`
+          : ""
       ),
       content: <EducationSection />,
     },
     {
-      label: LANGUAGE_TRAINING_SECTION,
+      label: translations.LANGUAGE_TRAINING,
       triggerContent: accordionTriggerLabel(
-        LANGUAGE_TRAINING_SECTION,
-        !!languagesEntered ? `${languagesEntered} ${LANGUAGES_LABEL}` : ""
+        translations.LANGUAGE_TRAINING,
+        !!languagesEntered ? `${languagesEntered} ${translations.LANGUAGE}` : ""
       ),
       content: <LanguageSection />,
     },
     {
-      label: JOB_SKILLS_SECTION,
+      label: translations.JOB_SKILLS,
       triggerContent: accordionTriggerLabel(
-        JOB_SKILLS_SECTION,
-        !!skillsEntered ? `${skillsEntered} ${SKILLS_LABEL}` : ""
+        translations.JOB_SKILLS,
+        !!skillsEntered ? `${skillsEntered} ${translations.SKILLS}` : ""
       ),
       content: <SkillsSection />,
     },

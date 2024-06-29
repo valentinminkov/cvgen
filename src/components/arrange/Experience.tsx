@@ -1,7 +1,7 @@
 "use client";
 import { $experiences } from "@/stores/experienceStore";
 import { useStore } from "@nanostores/react";
-import { viewComponentStyles } from "@/components/arrange/config";
+import { viewComponentStyles } from "@/components/arrange/classes";
 import SortableItems from "./SortableItems";
 import type { ExperienceFormValue } from "@/types";
 

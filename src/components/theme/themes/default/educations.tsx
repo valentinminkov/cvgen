@@ -1,6 +1,7 @@
 import { shuffleString } from "@/lib/utils";
 import type { EducationViewProps } from "@/types";
 import { educationStyles } from "@/components/theme/themes/default/styles";
+import { translations } from "@/config/content";
 
 export default function Education({ data, darkMode }: EducationViewProps) {
   const { darkThemeStyles, lightThemeStyles } = educationStyles;
@@ -9,7 +10,7 @@ export default function Education({ data, darkMode }: EducationViewProps) {
   return (
     <div className={styles.container}>
       <div className={styles.innerContainer}>
-        <h2 className={styles.sectionTitle}>Education</h2>
+        <h2 className={styles.sectionTitle}>{translations.EDUCATIONS}</h2>
         <div className="space-y-6">
           {data.map((education) => (
             <div

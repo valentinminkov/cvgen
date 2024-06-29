@@ -1,6 +1,7 @@
 import { shuffleString } from "@/lib/utils";
 import type { LanguagesViewProps } from "@/types";
 import { languagesStyles } from "@/components/theme/themes/default/styles";
+import { translations } from "@/config/content";
 
 export default function Languages({ data, darkMode }: LanguagesViewProps) {
   const { darkThemeStyles, lightThemeStyles } = languagesStyles;
@@ -9,14 +10,16 @@ export default function Languages({ data, darkMode }: LanguagesViewProps) {
   return (
     <div className={styles.container}>
       <div className={styles.innerContainer}>
-        <h1 className={styles.sectionTitle}>Languages</h1>
+        <h1 className={styles.sectionTitle}>{translations.LANGUAGES}</h1>
         <div className="space-y-6">
           <div className={styles.card}>
-            <h3 className={styles.cardTitle}>Mother Language</h3>
+            <h3 className={styles.cardTitle}>
+              {translations.MOTHER_LANGUAGES}
+            </h3>
             <p className={styles.text}>{data.motherLanguage}</p>
           </div>
           <div>
-            <h3 className={styles.cardTitle}>Other Languages</h3>
+            <h3 className={styles.cardTitle}>{translations.OTHER_LANGUAGES}</h3>
             {data.otherLanguages.map((language) => (
               <div
                 key={shuffleString(language.language)}

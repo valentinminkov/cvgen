@@ -31,7 +31,7 @@ import {
 import { CountrySelector } from "@/components/form/CountrySelector";
 import { Textarea } from "@/components/ui/textarea";
 import { useState } from "react";
-import { content } from "@/config/content";
+import { content, translations } from "@/config/content";
 import {
   ListEntryCard,
   ListEntryContainer,
@@ -87,9 +87,7 @@ export default function ExperienceSection() {
                 name="title"
                 render={({ field }) => (
                   <FormItem className="w-full">
-                    <FormLabel>
-                      {components.ExperienceSection.COMPANY_NAME}
-                    </FormLabel>
+                    <FormLabel>{translations.COMPANY_NAME}</FormLabel>
                     <FormControl>
                       <Input placeholder="Acme" {...field} />
                     </FormControl>
@@ -121,9 +119,7 @@ export default function ExperienceSection() {
                 name="workDescription"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>
-                      {components.ExperienceSection.WORK_DESCRIPTION}
-                    </FormLabel>
+                    <FormLabel>{translations.WORK_DESCRIPTION}</FormLabel>
                     <FormControl>
                       <Textarea placeholder="Work description" {...field} />
                     </FormControl>
@@ -134,9 +130,7 @@ export default function ExperienceSection() {
               />
               <DateRangePicker form={form} />
               <div className={sectionClasses.controlBtnContainer}>
-                <Button type="submit">
-                  {components.ExperienceSection.SUBMIT}
-                </Button>
+                <Button type="submit">{translations.SUBMIT}</Button>
               </div>
             </div>
           </form>
@@ -172,13 +166,11 @@ export default function ExperienceSection() {
                               content={[
                                 {
                                   value: experience.title,
-                                  label:
-                                    components.ExperienceSection.COMPANY_NAME,
+                                  label: translations.COMPANY_NAME,
                                 },
                                 {
                                   value: experience.workDescription,
-                                  label:
-                                    components.EducationSection.DESCRIPTION,
+                                  label: translations.DESCRIPTION,
                                 },
                               ]}
                               removeEntry={removeExperience}

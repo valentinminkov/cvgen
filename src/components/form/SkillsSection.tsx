@@ -31,16 +31,10 @@ import {
   addSkill,
 } from "@/stores/skillsStore";
 import { getRandomString } from "@/lib/utils";
-import { content } from "@/config/content";
+import { content, translations } from "@/config/content";
 import { sectionClasses } from "@/components/form/classes";
 import { ListEntryCard, ListEntryContainer, ListEntryTitle } from "./ListEntry";
 import type { SkillGroup } from "@/types";
-
-const {
-  content: {
-    components: { SkillsSection },
-  },
-} = content;
 
 const SkillFormSchema = z.object({
   type: z.string().min(1, { message: "Skills cannot be empty" }),
@@ -93,7 +87,7 @@ export default function SkillsSectionComponent() {
                   name="type"
                   render={({ field }) => (
                     <FormItem className="w-full">
-                      <FormLabel>{SkillsSection.TYPE}</FormLabel>
+                      <FormLabel>{translations.TYPE}</FormLabel>
                       <FormControl>
                         <Input placeholder="Acme" {...field} />
                       </FormControl>
@@ -109,7 +103,7 @@ export default function SkillsSectionComponent() {
                   name="level"
                   render={({ field }) => (
                     <FormItem className="w-full">
-                      <FormLabel>{SkillsSection.LEVEL}</FormLabel>
+                      <FormLabel>{translations.LEVEL}</FormLabel>
                       <FormControl>
                         <Input placeholder="Acme" {...field} />
                       </FormControl>
@@ -146,7 +140,7 @@ export default function SkillsSectionComponent() {
                   name="skill"
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel>{SkillsSection.SKILL}</FormLabel>
+                      <FormLabel>{translations.SKILL}</FormLabel>
                       <FormControl>
                         <Input
                           placeholder=""
@@ -163,7 +157,7 @@ export default function SkillsSectionComponent() {
                 />
               </div>
               <div className={sectionClasses.controlBtnContainer}>
-                <Button type="submit">{SkillsSection.SUBMIT}</Button>
+                <Button type="submit">{translations.SUBMIT}</Button>
               </div>
             </div>
           </form>
@@ -185,15 +179,15 @@ export default function SkillsSectionComponent() {
                           removeEntry={removeSkill}
                           content={[
                             {
-                              label: SkillsSection.SKILL,
+                              label: translations.SKILL,
                               value: curSkill.type,
                             },
                             {
-                              label: SkillsSection.LEVEL,
+                              label: translations.LEVEL,
                               value: curSkill.level,
                             },
                             {
-                              label: SkillsSection.SKILLS,
+                              label: translations.SKILLS,
                               value: curSkill.skills?.join(", ") ?? "",
                             },
                           ]}

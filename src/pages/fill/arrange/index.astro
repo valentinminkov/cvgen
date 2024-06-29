@@ -2,6 +2,7 @@
 import { Button } from "@/components/ui/button";
 import Layout from "@/layouts/Layout.astro";
 import Arrange from "@/components/arrange/Container";
+import { translations } from "@/config/content";
 ---
 
 <Layout title="CV Generator">
@@ -10,7 +11,7 @@ import Arrange from "@/components/arrange/Container";
       <div>
         <Arrange client:only="react" />
         <Button>
-          <a href="/fill/arrange/theme">Continue</a>
+          <a href="/fill/arrange/theme">{translations.CONTINUE}</a>
         </Button>
       </div>
     </div>

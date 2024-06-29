@@ -2,8 +2,9 @@
 
 import { $user } from "@/stores/userStore";
 import { useStore } from "@nanostores/react";
-import { viewComponentStyles } from "@/components/arrange/config";
+import { viewComponentStyles } from "@/components/arrange/classes";
 import { AspectRatio } from "@/components/ui/aspect-ratio";
+import { translations } from "@/config/content";
 
 interface Props {}
 
@@ -23,27 +24,33 @@ export default function PersonalView({}: Props) {
     <div className={`${containerClass}`}>
       <div className={flexRowClass}>
         <div>
-          <h1 className={headerClass}>Personal Information</h1>
+          <h1 className={headerClass}>{translations.PERSONAL_INFORMATION}</h1>
           <p className={paragraphClass}>
-            <span className={labelClass}>First Name:</span> {user.firstName}
+            <span className={labelClass}>{translations.FIRST_NAME}:</span>
+            {user.firstName}
           </p>
           <p className={paragraphClass}>
-            <span className={labelClass}>Second Name:</span> {user.secondName}
+            <span className={labelClass}>{translations.SECOND_NAME}:</span>{" "}
+            {user.secondName}
           </p>
           <p className={paragraphClass}>
-            <span className={labelClass}>Email:</span> {user.email}
+            <span className={labelClass}>{translations.EMAIL_ADDRESS}:</span>{" "}
+            {user.email}
           </p>
           <p className={paragraphClass}>
-            <span className={labelClass}>Phone Number:</span> {user.phoneNumber}
+            <span className={labelClass}>{translations.PHONE_NUMBER}:</span>{" "}
+            {user.phoneNumber}
           </p>
           <p className={paragraphClass}>
-            <span className={labelClass}>Website:</span> {user.website}
+            <span className={labelClass}>{translations.WEBSITE}:</span>{" "}
+            {user.website}
           </p>
           <p className={paragraphClass}>
-            <span className={labelClass}>Gender:</span> {user.gender}
+            <span className={labelClass}>{translations.GENDER}:</span>{" "}
+            {user.gender}
           </p>
           <p className={paragraphClass}>
-            <span className={labelClass}>Date of Birth:</span>{" "}
+            <span className={labelClass}>{translations.DATE_OF_BIRTH}:</span>{" "}
             {user?.dateOfBirth?.toString()}
           </p>
         </div>
@@ -63,7 +70,7 @@ export default function PersonalView({}: Props) {
         <div
           className={`${flexRowClass} flex flex-col gap-2 border-solid border-y-2 p-2`}
         >
-          <h3>Social Medias</h3>
+          <h3>{translations.SOCIAL_MEDIAL_URL}</h3>
           <>
             {user.socialMedia.map((socialMedia) => (
               <div>
@@ -75,34 +82,38 @@ export default function PersonalView({}: Props) {
       )}
       <div className={flexRowClass}>
         <div>
-          <h2 className={subheaderClass}>Address</h2>
+          <h2 className={subheaderClass}>{translations.ADDRESS}</h2>
           <p className={paragraphClass}>
-            <span className={labelClass}>Address Type:</span> {user.addressType}
+            <span className={labelClass}>{translations.ADDRESS_TYPE}</span>{" "}
+            {user.addressType}
           </p>
           <p className={paragraphClass}>
-            <span className={labelClass}>Address Line 1:</span>{" "}
+            <span className={labelClass}>{translations.ADDRESS_LINE_1}:</span>{" "}
             {user.addressLine1}
           </p>
           <p className={paragraphClass}>
-            <span className={labelClass}>Address Line 2:</span>{" "}
+            <span className={labelClass}>{translations.ADDRESS_LINE_2}:</span>{" "}
             {user.addressLine2}
           </p>
           <p className={paragraphClass}>
-            <span className={labelClass}>Post Code:</span> {user.postCode}
+            <span className={labelClass}>{translations.POSTAL_CODE}:</span>{" "}
+            {user.postCode}
           </p>
           <p className={paragraphClass}>
-            <span className={labelClass}>City:</span> {user.city}
+            <span className={labelClass}>{translations.CITY}:</span> {user.city}
           </p>
           <p className={paragraphClass}>
-            <span className={labelClass}>Country:</span> {user.country}
+            <span className={labelClass}>{translations.COUNTRY}:</span>{" "}
+            {user.country}
           </p>
           <p className={paragraphClass}>
-            <span className={labelClass}>Nationality:</span> {user.nationality}
+            <span className={labelClass}>{translations.NATIONALITY}:</span>{" "}
+            {user.nationality}
           </p>
         </div>
         {user.aboutMe && (
           <div>
-            <h2 className={subheaderClass}>About Me</h2>
+            <h2 className={subheaderClass}>{translations.ABOUT}</h2>
             <p className={paragraphClass}>{user.aboutMe}</p>
           </div>
         )}

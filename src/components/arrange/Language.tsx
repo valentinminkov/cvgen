@@ -2,19 +2,15 @@
 
 import { $language } from "@/stores/languageStore";
 import { useStore } from "@nanostores/react";
-import { viewComponentStyles } from "@/components/arrange/config";
+import { translations } from "@/config/content";
+import { viewComponentStyles } from "@/components/arrange/classes";
 import SortableItems from "./SortableItems";
 import type { Language } from "@/types";
 
 interface Props {}
 
-const {
-  containerClass,
-  headerClass,
-  labelClass,
-  dangerButtonClass,
-  subheaderClass,
-} = viewComponentStyles;
+const { containerClass, labelClass, dangerButtonClass, subheaderClass } =
+  viewComponentStyles;
 
 interface EntryProps {
   entry: Language;
@@ -28,20 +24,20 @@ const Entry = ({ entry, index, remove }: EntryProps) => {
       <h2 className={subheaderClass}>{entry.language}</h2>
       <div className="grid grid-cols-3 gap-4 mt-2">
         <div>
-          <p className={labelClass}>Listening:</p>
+          <p className={labelClass}></p>
           <p>{entry.skills.listening}</p>
         </div>
         <div>
-          <p className={labelClass}>Reading:</p>
+          <p className={labelClass}>{translations.READING}</p>
           <p>{entry.skills.reading}</p>
         </div>
         <div>
-          <p className={labelClass}>Writing:</p>
+          <p className={labelClass}>{translations.WRITING}</p>
           <p>{entry.skills.writing}</p>
         </div>
       </div>
       <button onClick={() => remove(index)} className={dangerButtonClass}>
-        Remove Language
+        {translations.REMOVE_LANGUAGE}
       </button>
     </div>
   );

@@ -31,7 +31,7 @@ import {
 import { CountrySelector } from "@/components/form/CountrySelector";
 import { Textarea } from "@/components/ui/textarea";
 import { useState } from "react";
-import { content } from "@/config/content";
+import { content, translations } from "@/config/content";
 import { ListEntryCard, ListEntryContainer, ListEntryTitle } from "./ListEntry";
 import DateRangePicker from "@/components/form/DateRangePicker";
 import type { EducationFormValue } from "@/types";
@@ -95,7 +95,7 @@ export default function EducationSectionComponent() {
                   name="title"
                   render={({ field }) => (
                     <FormItem className="w-full">
-                      <FormLabel>{EducationSection.TITLE}</FormLabel>
+                      <FormLabel>{translations.TITLE}</FormLabel>
                       <FormControl>
                         <Input placeholder="Acme" {...field} />
                       </FormControl>
@@ -110,7 +110,7 @@ export default function EducationSectionComponent() {
                   name="name"
                   render={({ field }) => (
                     <FormItem className="w-full">
-                      <FormLabel>{EducationSection.NAME}</FormLabel>
+                      <FormLabel>{translations.NAME}</FormLabel>
                       <FormControl>
                         <Input placeholder="Acme" {...field} />
                       </FormControl>
@@ -127,7 +127,7 @@ export default function EducationSectionComponent() {
                   name="website"
                   render={({ field }) => (
                     <FormItem className="w-full">
-                      <FormLabel>{EducationSection.WEBSITE}</FormLabel>
+                      <FormLabel>{translations.WEBSITE}</FormLabel>
                       <FormControl>
                         <Input placeholder="" {...field} />
                       </FormControl>
@@ -142,7 +142,7 @@ export default function EducationSectionComponent() {
                   name="country"
                   render={({ field }) => (
                     <FormItem className="w-full">
-                      <FormLabel>{EducationSection.COUNTRY}</FormLabel>
+                      <FormLabel>{translations.COUNTRY}</FormLabel>
                       <FormControl>
                         <CountrySelector field={field} />
                       </FormControl>
@@ -159,7 +159,7 @@ export default function EducationSectionComponent() {
                   name="city"
                   render={({ field }) => (
                     <FormItem className="w-full">
-                      <FormLabel>{EducationSection.CITY}</FormLabel>
+                      <FormLabel>{translations.CITY}</FormLabel>
                       <FormControl>
                         <Input placeholder="Acme" {...field} />
                       </FormControl>
@@ -174,7 +174,7 @@ export default function EducationSectionComponent() {
                   name="description"
                   render={({ field }) => (
                     <FormItem className="w-full">
-                      <FormLabel>{EducationSection.DESCRIPTION}</FormLabel>
+                      <FormLabel>{translations.DESCRIPTION}</FormLabel>
                       <FormControl>
                         <Textarea
                           placeholder="Description"
@@ -190,7 +190,7 @@ export default function EducationSectionComponent() {
               </div>
               <DateRangePicker form={form} />
               <div className={sectionClasses.controlBtnContainer}>
-                <Button type="submit">{EducationSection.SUBMIT}</Button>
+                <Button type="submit">{translations.SUBMIT}</Button>
               </div>
             </div>
           </form>
