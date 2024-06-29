@@ -1,9 +1,10 @@
 "use client";
 
-import { $language, type Language } from "@/stores/languageStore";
+import { $language } from "@/stores/languageStore";
 import { useStore } from "@nanostores/react";
 import { viewComponentStyles } from "@/components/arrange/config";
 import SortableItems from "./SortableItems";
+import type { Language } from "@/types";
 
 interface Props {}
 
@@ -62,7 +63,7 @@ export default function LanguageView({}: Props) {
           <SortableItems
             items={language.otherLanguages}
             itemRender={renderEntry}
-            itemType="language"
+            itemType="languages"
           ></SortableItems>
         </div>
       )}

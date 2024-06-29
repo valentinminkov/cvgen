@@ -11,6 +11,8 @@ import { $experiences } from "@/stores/experienceStore";
 import { $education } from "@/stores/educationStore";
 import { $language } from "@/stores/languageStore";
 import { $skills } from "@/stores/skillsStore";
+import { $settings } from "@/stores/settingsStore";
+import { sortArray } from "@/lib/utils";
 
 export const $isPersonalDataFilled: ReadableAtom<boolean> = computed(
   $user,
@@ -49,20 +51,24 @@ export interface FullUserData {
 }
 
 export const $allEntriesSorted: ReadableAtom<FullUserData> = computed(
-  [$user, $experiences, $education, $language, $skills],
-  (user, experiences, educations, language, skills) => {
+  [$user, $experiences, $education, $language, $skills, $settings],
+  (user, experiences, educations, language, skills, settings) => {
+    const { order } = settings;
     // TO DO Sort data before returning
     // Check if order[sectionKey] exists and if it does sort the arrays before returning
 
     const sortedData: FullUserData = {
       user: user,
-      experiences: experiences.experiences,
-      educations: educations.educations,
+      experiences: sortArray(experiences.experiences, order["experiences"]),
+      educations: sortArray(educations.educations, order["educations"]),
       languages: {
         motherLanguage: language.language.motherLanguage,
-        otherLanguages: language.language.otherLanguages,
+        otherLanguages: sortArray(
+          language.language.otherLanguages,
+          order["languages"]
+        ),
       },
-      skills: skills.skills,
+      skills: sortArray(skills.skills, order["skills"]),
     };
 
     return sortedData;

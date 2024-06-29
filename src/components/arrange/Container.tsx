@@ -69,8 +69,10 @@ export default function Container() {
     const { active, over } = event;
 
     if (over?.id && active.id !== over.id) {
-      const oldIndex = sections.indexOf(active.id.toString());
-      const newIndex = sections.indexOf(over.id.toString());
+      // @ts-ignore
+      const oldIndex = sections.indexOf(active.id as unknown as string);
+      // @ts-ignore
+      const newIndex = sections.indexOf(over.id as unknown as string);
       setSectionOrderItems(arrayMove(sections, oldIndex, newIndex));
     }
   }

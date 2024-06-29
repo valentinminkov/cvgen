@@ -64,3 +64,9 @@ export function shuffleString(str: string) {
   // Convert the array back to a string
   return arr.join("");
 }
+
+export const sortArray = (array: any[], order: string[]) => {
+  const orderIndexes = order.map(Number);
+  const sortedArray = orderIndexes.map((index) => array[index]);
+  return sortedArray;
+};
