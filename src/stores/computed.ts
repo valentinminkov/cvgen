@@ -4,6 +4,7 @@ import {
   type EducationFormValue,
   type ExperienceFormValue,
   type LanguageFormValue,
+  type Sections,
   type SkillGroup,
   type UserFormValue,
 } from "@/types";
@@ -50,12 +51,21 @@ export interface FullUserData {
     | string[];
 }
 
+export const $allSections: ReadableAtom<Sections[]> = computed(
+  [$settings],
+  (settings) => {
+    const {
+      order: { sections, staticSections },
+    } = settings;
+
+    return [...staticSections, ...sections];
+  }
+);
+
 export const $allEntriesSorted: ReadableAtom<FullUserData> = computed(
   [$user, $experiences, $education, $language, $skills, $settings],
   (user, experiences, educations, language, skills, settings) => {
     const { order } = settings;
-    // TO DO Sort data before returning
-    // Check if order[sectionKey] exists and if it does sort the arrays before returning
 
     const sortedData: FullUserData = {
       user: user,

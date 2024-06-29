@@ -4,7 +4,11 @@ import type { SettingsStore } from "@/types";
 
 const $settings = persistentMap<SettingsStore>(
   getStoreKey("settings"),
-  { order: { sections: [] }, theme: "default", darkMode: false },
+  {
+    order: { sections: [], staticSections: [] },
+    theme: "default",
+    darkMode: false,
+  },
   {
     encode: JSON.stringify,
     decode: JSON.parse,
@@ -24,9 +28,12 @@ const setOrderItems = (key: string, value: string[]) => {
   return true;
 };
 
-// TODO To be removed
 const setSectionOrderItems = (items: string[]) => {
   return setOrderItems("sections", items);
+};
+
+const setSectionUnordableItems = (items: string[]) => {
+  return setOrderItems("staticSections", items);
 };
 
 const setTheme = (newTheme: string) => {
@@ -48,4 +55,5 @@ export {
   setOrderItems,
   setTheme,
   setDarkMode,
+  setSectionUnordableItems,
 };

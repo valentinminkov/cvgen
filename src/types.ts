@@ -64,6 +64,7 @@ export type PersistentSkillsStore = Record<string, any> & {
 
 export interface IOrder {
   sections: Sections[];
+  staticSections: Sections[];
   [key: string]: string[];
 }
 

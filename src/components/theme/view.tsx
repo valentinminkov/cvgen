@@ -2,7 +2,7 @@
 
 import { loadThemeComponents } from "@/lib/utils";
 import { $settings } from "@/stores/settingsStore";
-import { $allEntriesSorted } from "@/stores/computed";
+import { $allEntriesSorted, $allSections } from "@/stores/computed";
 import type { ThemeComponents } from "@/types";
 import { useStore } from "@nanostores/react";
 import { Suspense, useEffect, useState } from "react";
@@ -21,11 +21,8 @@ function ComponentNotAvailable({ componentName }: { componentName?: string }) {
 }
 
 export default function View() {
-  const {
-    theme,
-    darkMode,
-    order: { sections },
-  } = useStore($settings);
+  const { theme, darkMode } = useStore($settings);
+  const sections = useStore($allSections);
   const [components, setComponents] = useState<ThemeComponents | null>(null);
   const [loading, setLoading] = useState(true);
   const entries = useStore($allEntriesSorted);

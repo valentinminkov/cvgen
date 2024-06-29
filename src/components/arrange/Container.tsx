@@ -13,7 +13,11 @@ import {
 import SortableItemWrapper from "./SortableItemWrapper";
 import { useEffect } from "react";
 import { viewContainerStyles } from "@/components/arrange/config";
-import { $settings, setSectionOrderItems } from "@/stores/settingsStore";
+import {
+  $settings,
+  setSectionOrderItems,
+  setSectionUnordableItems,
+} from "@/stores/settingsStore";
 import { useStore } from "@nanostores/react";
 
 interface Sections {
@@ -36,32 +40,45 @@ const sortableSections: Sections = {
 export default function Container() {
   const settings = useStore($settings);
   const {
-    order: { sections },
+    order: { sections, staticSections },
   } = settings;
 
   useEffect(() => {
-    if (!sections.length)
-      setSectionOrderItems([
-        ...Object.keys(notSortableSections),
-        ...Object.keys(sortableSections),
-      ]);
-  }, [sections]);
+    // TO DO this shouldn't be done here :D
+    // Set sections order
+    if (
+      !sections?.length ||
+      sections.length !== Object.keys(sortableSections).length
+    )
+      setSectionOrderItems(Object.keys(sortableSections));
+
+    if (
+      !staticSections?.length ||
+      staticSections.length !== Object.keys(notSortableSections).length
+    )
+      setSectionUnordableItems(Object.keys(notSortableSections));
+  }, [sortableSections, notSortableSections]);
 
   return (
     <div className={containerClass}>
       <Personal />
-      <DndContext collisionDetection={closestCenter} onDragEnd={handleDragEnd}>
-        <SortableContext
-          items={sections}
-          strategy={verticalListSortingStrategy}
+      {sections && sections.length && (
+        <DndContext
+          collisionDetection={closestCenter}
+          onDragEnd={handleDragEnd}
         >
-          {sections.map((sectionKey: string) => (
-            <SortableItemWrapper id={sectionKey} key={sectionKey}>
-              {sortableSections[sectionKey]}
-            </SortableItemWrapper>
-          ))}
-        </SortableContext>
-      </DndContext>
+          <SortableContext
+            items={sections}
+            strategy={verticalListSortingStrategy}
+          >
+            {sections?.map((sectionKey: string) => (
+              <SortableItemWrapper id={sectionKey} key={sectionKey}>
+                {sortableSections[sectionKey]}
+              </SortableItemWrapper>
+            ))}
+          </SortableContext>
+        </DndContext>
+      )}
     </div>
   );
 
