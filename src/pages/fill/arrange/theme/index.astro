@@ -1,15 +1,14 @@
 ---
-import { Button } from "@/components/ui/button";
 import Layout from "@/layouts/Layout.astro";
 import DataView from "@/components/theme/view";
-import { translations } from "@/config/content";
+import GeneratePdf from "@/components/GeneratePdf";
 ---
 
 <Layout title="CV Generator">
   <main class="flex flex-col gap-8">
     <DataView client:only="react" />
     <div>
-      <Button><a href="/fill/arrange/theme">{translations.GENERATE}</a></Button>
+      <GeneratePdf />
     </div>
   </main>
 </Layout>
