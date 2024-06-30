@@ -1,12 +1,10 @@
 ---
 import Layout from "@/layouts/Layout.astro";
 import DataView from "@/components/theme/view";
-import GeneratePdf from "@/components/GeneratePdf";
 ---
 
 <Layout title="CV Generator">
   <main class="flex flex-col gap-8">
-    <GeneratePdf client:load />
     <DataView client:only="react" />
   </main>
 </Layout>
