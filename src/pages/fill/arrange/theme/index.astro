@@ -6,9 +6,7 @@ import GeneratePdf from "@/components/GeneratePdf";
 
 <Layout title="CV Generator">
   <main class="flex flex-col gap-8">
+    <GeneratePdf client:load />
     <DataView client:only="react" />
-    <div>
-      <GeneratePdf />
-    </div>
   </main>
 </Layout>

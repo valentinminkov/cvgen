@@ -74,7 +74,7 @@ export default function InputAccordion() {
     {
       label: translations.EDUCATIONS,
       triggerContent: accordionTriggerLabel(
-        translations.LANGUAGE_TRAINING,
+        translations.EDUCATIONS,
         !!educationsEntered
           ? `${educationsEntered} ${translations.EDUCATIONS}`
           : ""
