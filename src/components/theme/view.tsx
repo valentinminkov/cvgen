@@ -76,18 +76,26 @@ export default function View() {
   };
 
   useEffect(() => {
-    if (
-      pdfHeight &&
-      pdfWidth &&
-      sections.length === sectionRefs.current.length
-    ) {
-      const BUFFER = 50;
-      const htmlPagesElements = formatPages(
-        Math.floor(pdfHeight) + BUFFER,
-        Math.floor(pdfWidth) + BUFFER
-      );
-      setPagesHTML(htmlPagesElements);
-    }
+    if (!sectionRefs?.current[0]) return;
+    // On first render the component size might be smaller than actual
+    // which messes with the pages size. Set a observer watching the component height
+    // to avoid such cases
+    const resizeObserver = new ResizeObserver(() => {
+      if (
+        pdfHeight &&
+        pdfWidth &&
+        sections.length === sectionRefs.current.length
+      ) {
+        const BUFFER = 50;
+        const htmlPagesElements = formatPages(
+          Math.floor(pdfHeight) + BUFFER,
+          Math.floor(pdfWidth) + BUFFER
+        );
+        setPagesHTML(htmlPagesElements);
+      }
+    });
+    resizeObserver.observe(sectionRefs.current[0]);
+    return () => resizeObserver.disconnect(); // clean up
   }, [pdfHeight, pdfWidth, sections.length, sectionRefs.current.length]);
 
   const generatePDF = async (e: MouseEvent<HTMLButtonElement>) => {
@@ -233,7 +241,6 @@ export default function View() {
       <div className="w-full"></div>
       {!pagesHTML.length && (
         <div
-          style={{ opacity: 0 }}
           ref={(ref) => {
             if (ref) {
               containerRef.current = ref;
