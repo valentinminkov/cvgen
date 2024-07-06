@@ -1,6 +1,6 @@
 "use client";
 
-import { loadThemeComponents } from "@/lib/utils";
+import { cn, loadThemeComponents } from "@/lib/utils";
 import { $settings } from "@/stores/settingsStore";
 import { $allEntriesSorted, $allSections } from "@/stores/computed";
 import type { Sections, ThemeComponents } from "@/types";
@@ -12,8 +12,6 @@ import html2PDF from "jspdf-html2canvas";
 import type { MouseEvent } from "react";
 import { toast } from "@/components/ui/use-toast";
 import { translations } from "@/config/content";
-
-const A4_PAGE_HEIGHT_PX = 1500;
 
 function LoadingComponent({ componentName }: { componentName: string }) {
   return <div>Loading {componentName} data component</div>;
@@ -29,7 +27,7 @@ function ComponentNotAvailable({ componentName }: { componentName?: string }) {
 
 const classes = {
   pageContainer: "",
-  page: "pb-4",
+  page: "pb-4 bg-gray-800 shadow-xl",
 };
 
 export default function View() {
@@ -38,10 +36,12 @@ export default function View() {
   const [components, setComponents] = useState<ThemeComponents | null>(null);
   const [loading, setLoading] = useState(true);
   const entries = useStore($allEntriesSorted);
-  const containerRef = useRef<HTMLDivElement>(null);
+  const containerRef = useRef<HTMLDivElement>();
   const sectionRefs = useRef<HTMLDivElement[]>([]);
   const pageRefs = useRef<HTMLDivElement[]>([]);
   const [pagesHTML, setPagesHTML] = useState<JSX.Element[]>([]);
+  const [pdfHeight, setPdfHeight] = useState<number | null>(null);
+  const [pdfWidth, setPdfWidth] = useState<number | null>(null);
 
   useEffect(() => {
     const loadComponents = async () => {
@@ -53,26 +53,42 @@ export default function View() {
     loadComponents();
   }, [theme]);
 
-  // load pages html based on section component height
-  // which is rendered before the 'pages'
-  useEffect(() => {
-    if (containerRef.current) {
-      //  ensure that the height of elements is captured after they have been fully rendered
-      const observer = new MutationObserver(() => {
-        if (sectionRefs.current.length === sections.length) {
-          const htmlPagesElements = formatPages();
-          setPagesHTML(htmlPagesElements);
-        }
+  const calculatePdfDimensions = async (element: HTMLElement) => {
+    try {
+      await html2PDF(element, {
+        jsPDF: {
+          format: "a4",
+          unit: "pt",
+        },
+        autoResize: true,
+        success: (pdf) => {
+          const A4_PAGE_HEIGHT_PT = pdf.internal.pageSize.getHeight();
+          const A4_PAGE_WIDTH_PT = pdf.internal.pageSize.getWidth();
+          const A4_PAGE_HEIGHT_PX = A4_PAGE_HEIGHT_PT * 1.333;
+          const A4_PAGE_WIDTH_PX = A4_PAGE_WIDTH_PT * 1.333;
+          setPdfHeight(A4_PAGE_HEIGHT_PX);
+          setPdfWidth(A4_PAGE_WIDTH_PX);
+        },
       });
-
-      observer.observe(containerRef.current, {
-        childList: true,
-        subtree: true,
-      });
-
-      return () => observer.disconnect();
+    } catch (error) {
+      console.error("Error generating PDF", error);
     }
-  }, [sections, entries, components]);
+  };
+
+  useEffect(() => {
+    if (
+      pdfHeight &&
+      pdfWidth &&
+      sections.length === sectionRefs.current.length
+    ) {
+      const BUFFER = 50;
+      const htmlPagesElements = formatPages(
+        Math.floor(pdfHeight) + BUFFER,
+        Math.floor(pdfWidth) + BUFFER
+      );
+      setPagesHTML(htmlPagesElements);
+    }
+  }, [pdfHeight, pdfWidth, sections.length, sectionRefs.current.length]);
 
   const generatePDF = async (e: MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
@@ -85,17 +101,17 @@ export default function View() {
     }
     try {
       await html2PDF(pageRefs.current, {
-        jsPDF: { format: "a4" },
+        jsPDF: { format: "a4", unit: "pt" },
         success: (pagesPdf) => {
           pagesPdf.save();
         },
       });
     } catch (error) {
-      console.log("error generating pdf", error);
+      console.error("Error generating PDF", error);
     }
   };
 
-  const formatPages = () => {
+  const formatPages = (maxPageHeight: number, maxPageWidth: number) => {
     const newPages: JSX.Element[] = [];
     let currentPageHeight = 0;
     let currentPageElements: JSX.Element[] = [];
@@ -104,11 +120,13 @@ export default function View() {
       if (sectionRef) {
         const sectionHeight = sectionRef.offsetHeight;
         const sectionHtml = getSectionHtml(sections[i], i);
-        if (currentPageHeight + sectionHeight > A4_PAGE_HEIGHT_PX) {
-          // Complete the current page and start a new one
+        if (currentPageHeight + sectionHeight > maxPageHeight) {
           newPages.push(
             <div
-              className={`page-${newPages.length + 1} ${classes.page}`}
+              style={{
+                width: Math.floor(maxPageWidth),
+              }}
+              className={cn(`page-${newPages.length + 1}`)}
               key={newPages.length}
               ref={(newPageRef) => {
                 if (newPageRef) pageRefs.current.push(newPageRef);
@@ -120,7 +138,6 @@ export default function View() {
           currentPageElements = [sectionHtml];
           currentPageHeight = sectionHeight;
         } else {
-          // Add to the current page
           currentPageElements.push(sectionHtml);
           currentPageHeight += sectionHeight;
         }
@@ -130,7 +147,11 @@ export default function View() {
     if (currentPageElements.length) {
       newPages.push(
         <div
-          className={`page-${newPages.length + 1} ${classes.page}`}
+          style={{
+            minHeight: Math.floor(maxPageHeight),
+            width: Math.floor(maxPageWidth),
+          }}
+          className={cn(`page-${newPages.length + 1}`, classes.page)}
           key={newPages.length}
           ref={(newPageRef) => {
             if (newPageRef) pageRefs.current.push(newPageRef);
@@ -208,20 +229,44 @@ export default function View() {
   };
 
   return (
-    <div>
-      <GeneratePdf
-        onClick={(e: MouseEvent<HTMLButtonElement>) => generatePDF(e)}
-      />
-
+    <div className="flex flex-col gap-4 items-center">
+      <div className="w-full"></div>
       {!pagesHTML.length && (
-        <div ref={containerRef}>
+        <div
+          style={{ opacity: 0 }}
+          ref={(ref) => {
+            if (ref) {
+              containerRef.current = ref;
+              if (!pdfHeight || !pdfWidth) {
+                calculatePdfDimensions(ref);
+              }
+            }
+          }}
+        >
           <div className="flex flex-col page">
             {sections.map((section, index) => getSectionHtml(section, index))}
           </div>
         </div>
       )}
 
-      {pagesHTML.length && pagesHTML}
+      <div>
+        <GeneratePdf
+          onClick={(e: MouseEvent<HTMLButtonElement>) => generatePDF(e)}
+        />
+        <div className="flex flex-col gap-8 items-center">
+          {!!pagesHTML.length &&
+            pagesHTML.map((page) => {
+              return (
+                <div
+                  style={pdfHeight ? { minHeight: pdfHeight } : {}}
+                  className={classes.page}
+                >
+                  {page}
+                </div>
+              );
+            })}
+        </div>
+      </div>
     </div>
   );
 }

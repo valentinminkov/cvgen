@@ -1,7 +1,7 @@
 import type { CustomStyles } from "@/types";
 
 const defaultStyles = {
-  container: "w-full mx-auto shadow-md overflow-hidden",
+  container: "w-full mx-auto overflow-hidden",
   innerContainer: "p-6",
   sectionTitle: "text-2xl font-semibold text-center mb-6",
   sectionHeader: "text-lg font-medium",
