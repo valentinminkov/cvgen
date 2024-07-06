@@ -17,12 +17,13 @@ const {
 } = viewComponentStyles;
 
 interface EntryProps {
-  entry: EducationFormValue;
+  entry: EducationFormValue | undefined;
   index: number;
   remove: (index: number) => void;
 }
 
 const Entry = ({ entry, index, remove }: EntryProps) => {
+  if (!entry) return;
   return (
     <li key={index} className={listEntryContainerClass}>
       <div className={flexContainerClass}>

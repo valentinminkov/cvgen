@@ -121,6 +121,8 @@ export default function View() {
 
   const formatPages = (maxPageHeight: number, maxPageWidth: number) => {
     const newPages: JSX.Element[] = [];
+    // We do not want pageRefs building up
+    pageRefs.current = [];
     let currentPageHeight = 0;
     let currentPageElements: JSX.Element[] = [];
 
