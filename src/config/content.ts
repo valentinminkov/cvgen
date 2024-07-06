@@ -18,6 +18,11 @@ export const translations = {
   LANGUAGE_TRAINING: "Languages",
   JOB_SKILLS: "Job skills",
   FILLED: "Filled",
+  CV_GENERATE_FAIL:
+    "Coudn't generate CV. Drink a glass of cold water and try again.",
+  GENERATE_PDF: "Generate pdf",
+  GENERATE_PDF_DESCRIPTION: "Generate pdf lorem ipsum",
+  CANCEL: "Cancel",
   EXPERIENCES: "Experiences",
   EDUCATIONS: "Education and trainings",
   SKILLS: "Skill",

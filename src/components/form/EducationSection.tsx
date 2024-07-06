@@ -30,7 +30,6 @@ import {
 } from "@/components/ui/accordion";
 import { CountrySelector } from "@/components/form/CountrySelector";
 import { Textarea } from "@/components/ui/textarea";
-import { useState } from "react";
 import { content, translations } from "@/config/content";
 import { ListEntryCard, ListEntryContainer, ListEntryTitle } from "./ListEntry";
 import DateRangePicker from "@/components/form/DateRangePicker";
