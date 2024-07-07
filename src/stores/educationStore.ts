@@ -2,9 +2,11 @@ import { persistentMap } from "@nanostores/persistent";
 import { getStoreKey } from "@/stores/config";
 import type { EducationFormValue, PersistentEducationStore } from "@/types";
 
+const educationDefault: PersistentEducationStore = { educations: [] };
+
 const $education = persistentMap<PersistentEducationStore>(
   getStoreKey("educations"),
-  { educations: [] },
+  educationDefault,
   {
     encode: JSON.stringify,
     decode: JSON.parse,
@@ -27,4 +29,8 @@ function removeEducation(index: number) {
   $education.set({ educations: newItems });
 }
 
-export { $education, addEducation, removeEducation };
+function resetEducation() {
+  $education.set(educationDefault);
+}
+
+export { $education, addEducation, removeEducation, resetEducation };

@@ -2,9 +2,11 @@ import { persistentMap } from "@nanostores/persistent";
 import { getStoreKey } from "@/stores/config";
 import type { ExperienceFormValue, PersistentExperienceStore } from "@/types";
 
+const defaultExperiences: PersistentExperienceStore = { experiences: [] };
+
 const $experiences = persistentMap<PersistentExperienceStore>(
   getStoreKey("experiences"),
-  { experiences: [] },
+  defaultExperiences,
   {
     encode: JSON.stringify,
     decode: JSON.parse,
@@ -27,4 +29,8 @@ function removeExperience(index: number) {
   $experiences.set({ experiences: newItems });
 }
 
-export { $experiences, addExperience, removeExperience };
+function resetExperiences() {
+  $experiences.set(defaultExperiences);
+}
+
+export { $experiences, addExperience, removeExperience, resetExperiences };

@@ -18,6 +18,7 @@ export type Sections =
   | "educations";
 
 export interface SocialMedia {
+  // TODO 'platform' sounds better, current naming is confusing
   name: string;
   url: string;
   icon?: string;

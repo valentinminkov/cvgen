@@ -3,9 +3,11 @@ import { toast } from "@/components/ui/use-toast";
 import { getStoreKey } from "@/stores/config";
 import type { PersistentSkillsStore, SkillGroup } from "@/types";
 
+const defaultSkills: PersistentSkillsStore = { skills: [], sectionSkills: [] };
+
 const $skills = persistentMap<PersistentSkillsStore>(
   getStoreKey("skills"),
-  { skills: [], sectionSkills: [] },
+  defaultSkills,
   {
     encode: JSON.stringify,
     decode: JSON.parse,
@@ -55,6 +57,11 @@ function removeSectionSkill(sectionSkillForRemoval: string) {
 function resetSectionSkills() {
   $skills.set({ skills: $skills.get().skills, sectionSkills: [] });
 }
+
+function resetSkills() {
+  $skills.set(defaultSkills);
+}
+
 export {
   $skills,
   addSkill,
@@ -62,4 +69,5 @@ export {
   addSectionSkill,
   removeSectionSkill,
   resetSectionSkills,
+  resetSkills,
 };

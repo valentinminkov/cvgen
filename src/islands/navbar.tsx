@@ -10,14 +10,26 @@ import {
   NavigationMenuTrigger,
 } from "@/components/ui/navigation-menu";
 import { $settings, setDarkMode } from "@/stores/settingsStore";
-import { Switch } from "@/components/ui/switch";
 import { useStore } from "@nanostores/react";
+import { Switch } from "@/components/ui/switch";
+import DevTools from "@/components/DevTools";
 
-export default function Navbar() {
+interface Props {
+  isProd?: boolean;
+}
+
+export default function Navbar({ isProd }: Props) {
   return (
-    <div className="flex justify-between">
-      <Nav />
-      <DarkModeControll />
+    <div>
+      <div className="flex justify-between">
+        <Nav />
+        <DarkModeControll />
+      </div>
+      {!isProd && (
+        <div>
+          <DevTools />
+        </div>
+      )}
     </div>
   );
 }

@@ -6,9 +6,13 @@ import type {
   PersistentLanguageStore,
 } from "@/types";
 
+const defaultStore: PersistentLanguageStore = {
+  language: { motherLanguage: "", otherLanguages: [] },
+};
+
 const $language = persistentMap<PersistentLanguageStore>(
   getStoreKey("languages"),
-  { language: { motherLanguage: "", otherLanguages: [] } },
+  defaultStore,
   {
     encode: JSON.stringify,
     decode: JSON.parse,
@@ -68,4 +72,14 @@ function removeLanguage(index: number) {
   });
 }
 
-export { addLanguage, removeLanguage, $language, addMotherLanguage };
+function resetLanguages() {
+  $language.set(defaultStore);
+}
+
+export {
+  addLanguage,
+  removeLanguage,
+  $language,
+  addMotherLanguage,
+  resetLanguages,
+};

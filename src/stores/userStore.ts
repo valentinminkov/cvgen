@@ -86,8 +86,8 @@ export function updateUserData(newData: Partial<UserFormValue>) {
   return true;
 }
 
-export function resetUserData(htmlForm: UseFormReturn<PersonalFormType>) {
+export function resetUserData(htmlForm?: UseFormReturn<PersonalFormType>) {
   $user.set(initialState);
 
-  htmlForm.reset(initialState as PersonalFormType);
+  htmlForm?.reset(initialState as PersonalFormType);
 }
