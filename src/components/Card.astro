@@ -10,32 +10,22 @@ const { href, title, body, disabled } = Astro.props;
 ---
 
 <li
-  class={`link-card ${disabled ? "disabled" : ""} list-none flex p-0.5 transition-transform duration-700 ease-out shadow-inner border border-gray-700 ${disabled ? "bg-gray-900" : "bg-gray-800"}`}
+  class={`list-none flex p-0.5 transition-transform duration-700 ease-out shadow-inner border border-gray-700 ${
+    disabled ? "bg-gray-900" : "bg-gray-800"
+  }`}
 >
   <a
     href={disabled ? "javascript:void(0)" : href}
-    class="w-full no-underline leading-tight p-6 text-white bg-gray-800 opacity-80 hover:opacity-100 focus:opacity-100 transition-opacity duration-500"
+    class={`group w-full no-underline leading-tight p-6 text-white bg-gray-600 opacity-80 hover:opacity-100 focus:opacity-100 transition-opacity duration-500 ${
+      disabled ? "pointer-events-none cursor-not-allowed" : ""
+    }`}
   >
-    <h2 class="m-0 text-xl transition-colors duration-500">
+    <h2
+      class="m-0 text-xl transition-colors duration-500 group-hover:text-accent group-focus-within:text-accent"
+    >
       {title}
       <span class="ml-2">&rarr;</span>
     </h2>
-    <p class="mt-2 mb-0">
-      {body}
-    </p>
+    <p class="mt-2 mb-0">{body}</p>
   </a>
 </li>
-<style>
-  .link-card:hover,
-  .link-card:focus-within {
-    background-image: var(--accent-gradient);
-  }
-  .link-card:hover h2,
-  .link-card:focus-within h2 {
-    color: rgb(var(--accent-light));
-  }
-  .disabled:hover,
-  .disabled:focus-within {
-    cursor: not-allowed;
-  }
-</style>
