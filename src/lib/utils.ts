@@ -14,43 +14,6 @@ export const getRandomString = (length: number) =>
     )
   ).join("");
 
-// TODO Make it dynamic
-export const loadThemeComponents = async (
-  theme: string
-): Promise<ThemeComponents> => {
-  const themeComponents: ThemeComponents = {
-    personal: null,
-    experiences: null,
-    educations: null,
-    languages: null,
-    skills: null,
-  };
-
-  switch (theme) {
-    case "default":
-      themeComponents.personal = lazy(
-        () => import(`@/components/theme/themes/default/personal`)
-      );
-      themeComponents.experiences = lazy(
-        () => import(`@/components/theme/themes/default/experiences`)
-      );
-      themeComponents.educations = lazy(
-        () => import(`@/components/theme/themes/default/educations`)
-      );
-      themeComponents.skills = lazy(
-        () => import(`@/components/theme/themes/default/skills`)
-      );
-      themeComponents.languages = lazy(
-        () => import(`@/components/theme/themes/default/languages`)
-      );
-      break;
-    default:
-      break;
-  }
-
-  return themeComponents;
-};
-
 export function shuffleString(str: string) {
   // Convert the string into an array of characters
   let arr = str.split("");

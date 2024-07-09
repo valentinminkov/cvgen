@@ -1,20 +1,43 @@
-"use client";
-
-import { cn, loadThemeComponents } from "@/lib/utils";
+import { cn } from "@/lib/utils";
 import { $settings } from "@/stores/settingsStore";
 import { $allEntriesSorted, $allSections } from "@/stores/computed";
-import type { Sections, ThemeComponents } from "@/types";
+import type { Sections } from "@/types";
 import { useStore } from "@nanostores/react";
-import { Suspense, useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Loading from "@/components/Loading";
 import GeneratePdf from "@/components/GeneratePdf";
 import html2PDF from "jspdf-html2canvas";
 import type { MouseEvent } from "react";
 import { toast } from "@/components/ui/use-toast";
 import { translations } from "@/config/content";
+import {
+  getEducationsHtml,
+  getExperiencesHtml,
+  getLanguagesHtml,
+  getPersonalHtml,
+  getSkillsHtml,
+} from "@/components/theme/themes/default/components";
 
-function LoadingComponent({ componentName }: { componentName: string }) {
-  return <div>Loading {componentName} data component</div>;
+function loadThemeComponents(section: Sections): JSX.Element[] {
+  switch (section) {
+    case "personal":
+      //@ts-ignore
+      return getPersonalHtml(entries?.user, darkMode);
+    case "skills":
+      //@ts-ignore
+      return getSkillsHtml(entries?.skills, darkMode);
+    case "educations":
+      //@ts-ignore
+      return getEducationsHtml(entries?.educations, darkMode);
+    case "experiences":
+      //@ts-ignore
+      return getExperiencesHtml(entries?.experiences, darkMode);
+    case "languages":
+      //@ts-ignore
+      return getLanguagesHtml(entries?.languages, darkMode);
+    default:
+      return [];
+  }
 }
 
 function ComponentNotAvailable({ componentName }: { componentName?: string }) {
@@ -33,25 +56,14 @@ const classes = {
 export default function View() {
   const { theme, darkMode } = useStore($settings);
   const sections = useStore($allSections);
-  const [components, setComponents] = useState<ThemeComponents | null>(null);
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(false);
   const entries = useStore($allEntriesSorted);
-  const containerRef = useRef<HTMLDivElement>();
+  const containerRef = useRef<HTMLDivElement>(null);
   const sectionRefs = useRef<HTMLDivElement[]>([]);
   const pageRefs = useRef<HTMLDivElement[]>([]);
   const [pagesHTML, setPagesHTML] = useState<JSX.Element[]>([]);
   const [pdfHeight, setPdfHeight] = useState<number | null>(null);
   const [pdfWidth, setPdfWidth] = useState<number | null>(null);
-
-  useEffect(() => {
-    const loadComponents = async () => {
-      const loadedComponents = await loadThemeComponents(theme);
-      setComponents(loadedComponents);
-      setLoading(false);
-    };
-
-    loadComponents();
-  }, [theme]);
 
   const calculatePdfDimensions = async (element: HTMLElement) => {
     try {
@@ -76,10 +88,7 @@ export default function View() {
   };
 
   useEffect(() => {
-    if (!sectionRefs?.current[0]) return;
-    // On first render the component size might be smaller than actual
-    // which messes with the pages size. Set a observer watching the component height
-    // to avoid such cases
+    if (!sectionRefs.current[0]) return;
     const resizeObserver = new ResizeObserver(() => {
       if (
         pdfHeight &&
@@ -95,13 +104,13 @@ export default function View() {
       }
     });
     resizeObserver.observe(sectionRefs.current[0]);
-    return () => resizeObserver.disconnect(); // clean up
+    return () => resizeObserver.disconnect();
   }, [pdfHeight, pdfWidth, sections.length, sectionRefs.current.length]);
 
   const generatePDF = async (e: MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
 
-    if (!pageRefs?.current.length) {
+    if (!pageRefs.current.length) {
       toast({
         title: translations.CV_GENERATE_FAIL,
       });
@@ -121,12 +130,11 @@ export default function View() {
 
   const formatPages = (maxPageHeight: number, maxPageWidth: number) => {
     const newPages: JSX.Element[] = [];
-    // We do not want pageRefs building up
     pageRefs.current = [];
     let currentPageHeight = 0;
     let currentPageElements: JSX.Element[] = [];
 
-    sectionRefs.current?.forEach((sectionRef, i) => {
+    sectionRefs.current.forEach((sectionRef, i) => {
       if (sectionRef) {
         const sectionHeight = sectionRef.offsetHeight;
         const sectionHtml = getSectionHtml(sections[i], i);
@@ -145,10 +153,10 @@ export default function View() {
               {currentPageElements}
             </div>
           );
-          currentPageElements = [sectionHtml];
+          currentPageElements = [...sectionHtml];
           currentPageHeight = sectionHeight;
         } else {
-          currentPageElements.push(sectionHtml);
+          currentPageElements.push(...sectionHtml);
           currentPageHeight += sectionHeight;
         }
       }
@@ -179,63 +187,25 @@ export default function View() {
     return <Loading />;
   }
 
-  if (!components) {
-    return <ComponentNotAvailable />;
-  }
+  const getSectionHtml = (section: Sections, index?: number): JSX.Element[] => {
+    const sectionHtml = loadThemeComponents(section);
 
-  const componentMapping: Partial<ThemeComponents> = {
-    personal: components.personal,
-    skills: components.skills,
-    educations: components.educations,
-    experiences: components.experiences,
-    languages: components.languages,
-  };
+    if (!sectionHtml) {
+      return [<ComponentNotAvailable componentName={section} key={section} />];
+    }
 
-  const componentPropsMapping: Partial<Record<string, any>> = {
-    personal: {
-      data: entries?.user,
-      darkMode,
-    },
-    skills: {
-      data: entries?.skills,
-      darkMode,
-    },
-    educations: {
-      data: entries?.educations,
-      darkMode,
-    },
-    experiences: {
-      data: entries?.experiences,
-      darkMode,
-    },
-    languages: {
-      data: entries?.languages,
-      darkMode,
-    },
-  };
-
-  const getSectionHtml = (section: Sections, index?: number) => {
-    const Component = componentMapping[section];
-    const componentProps = componentPropsMapping[section];
-
-    return (
+    return sectionHtml?.map((div: JSX.Element, i: number) => (
       <div
-        key={section}
+        key={`${section}-${i}`}
         ref={(curRef) => {
           if (index !== undefined && curRef) {
             sectionRefs.current[index] = curRef;
           }
         }}
       >
-        {Component ? (
-          <Suspense fallback={<LoadingComponent componentName={section} />}>
-            <Component {...componentProps} />
-          </Suspense>
-        ) : (
-          <ComponentNotAvailable componentName={section} />
-        )}
+        {div}
       </div>
-    );
+    ));
   };
 
   return (
@@ -245,6 +215,7 @@ export default function View() {
         <div
           ref={(ref) => {
             if (ref) {
+              //@ts-ignore
               containerRef.current = ref;
               if (!pdfHeight || !pdfWidth) {
                 calculatePdfDimensions(ref);
@@ -264,16 +235,15 @@ export default function View() {
         />
         <div className="flex flex-col gap-8 items-center">
           {!!pagesHTML.length &&
-            pagesHTML.map((page) => {
-              return (
-                <div
-                  style={pdfHeight ? { minHeight: pdfHeight } : {}}
-                  className={classes.page}
-                >
-                  {page}
-                </div>
-              );
-            })}
+            pagesHTML.map((page, index) => (
+              <div
+                key={index}
+                style={pdfHeight ? { minHeight: pdfHeight } : {}}
+                className={classes.page}
+              >
+                {page}
+              </div>
+            ))}
         </div>
       </div>
     </div>
