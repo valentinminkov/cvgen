@@ -1,6 +1,10 @@
 import { cn } from "@/lib/utils";
 import { $settings } from "@/stores/settingsStore";
-import { $allEntriesSorted, $allSections } from "@/stores/computed";
+import {
+  $allEntriesSorted,
+  $allSections,
+  type FullUserData,
+} from "@/stores/computed";
 import type { Sections } from "@/types";
 import { useStore } from "@nanostores/react";
 import { useEffect, useRef, useState } from "react";
@@ -18,7 +22,11 @@ import {
   getSkillsHtml,
 } from "@/components/theme/themes/default/components";
 
-function loadThemeComponents(section: Sections): JSX.Element[] {
+function loadThemeComponents(
+  entries: FullUserData,
+  section: Sections,
+  darkMode?: boolean
+): JSX.Element[] {
   switch (section) {
     case "personal":
       //@ts-ignore
@@ -188,7 +196,7 @@ export default function View() {
   }
 
   const getSectionHtml = (section: Sections, index?: number): JSX.Element[] => {
-    const sectionHtml = loadThemeComponents(section);
+    const sectionHtml = loadThemeComponents(entries, section, darkMode);
 
     if (!sectionHtml) {
       return [<ComponentNotAvailable componentName={section} key={section} />];
