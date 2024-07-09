@@ -36,16 +36,19 @@ export default function InputAccordion() {
   ) => {
     const accordionClassesTriggerClasses = "text-base";
     const accordionTriggerLabelClasses = {
-      success: "text-sm text-emerald-500",
-      normal: "text-sm text-blue-200",
+      success: "text-base bg-zinc-600 rounded-md p-2 text-amber-200",
+      normal: "text-base bg-zinc-600 p-2 rounded-md text-amber-200",
+      container: "min-w-96 flex justify-end",
     };
     return (
       <>
         <p className={accordionClassesTriggerClasses}>{label}</p>
         {isPersonalDataFilled && (
-          <p className={accordionTriggerLabelClasses[sublabelType]}>
-            {sublabel}
-          </p>
+          <div className={accordionTriggerLabelClasses.container}>
+            <p className={accordionTriggerLabelClasses[sublabelType]}>
+              {sublabel}
+            </p>
+          </div>
         )}
       </>
     );
@@ -100,12 +103,16 @@ export default function InputAccordion() {
   ];
 
   return (
-    <Accordion type="single" collapsible>
+    <Accordion
+      type="single"
+      collapsible
+      className="flex flex-col gap-2 bg-slate-700 p-12 rounded-md"
+    >
       {accordionContent.map((accordionEntry) => (
         <AccordionItem
           key={accordionEntry.label}
           value={accordionEntry.label}
-          className={inputAccordion.accordionItem}
+          className={`${inputAccordion.accordionItem} border-b-slate-600`}
         >
           <AccordionTrigger
             className={`${inputAccordion.accordionTrigger} font-semibold`}
